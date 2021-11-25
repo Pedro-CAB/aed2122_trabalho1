@@ -1,9 +1,13 @@
+//
+// Created by Aulas FEUP on 24/11/2021.
+//
+
 #include "Plane.h"
 Plane::Plane(string LPlate){
     LPlate_str= LPlate;
     letter = LPlate.substr(1,1);
     n = 0, c = 0, max_ocupation = 0, taken_seats = 0;
-    to_do = {}, done={};
+    to_do = {}, done={}, passengers ={};
 }
 //Getters:
 string Plane::getLPlate() {return LPlate_str;}
@@ -24,13 +28,13 @@ void Plane::setToDo(queue<string> q) {}         //incomplete
 void Plane::setMaxOc(int num) {max_ocupation=num;}
 void Plane::setTakenS(int num) {taken_seats=num;}
 //Edit:
-void addPassenger(Passenger a){
+void Plane::addPassenger(Passenger a){
     passengers.push_back(a);
 }
-void addTask(Service a){
+void Plane::addTask(Service a){
     to_do.push(a);
 }
-void doNextNTasks(int n){
+void Plane::doNextNTasks(int n){
     for(n;n>0;n++){
         done.push(to_do.front());
         to_do.pop();
