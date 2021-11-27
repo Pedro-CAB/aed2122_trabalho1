@@ -1,8 +1,11 @@
+#ifndef PROJECTAED_PASSENGER_H
+#define PROJECTAED_PASSENGER_H
+
+#endif //PROJECTAED_PASSENGER_H
+
 #include <string>
 #include "Ticket.h"
 #include "Flight.h"
-#ifndef UNTITLED1_PASSENGER_H
-#define UNTITLED1_PASSENGER_H
 
 using namespace std;
 
@@ -18,6 +21,3 @@ public:
     Flight getFlight();
     bool getLuggage();
 };
-
-
-#endif //UNTITLED1_PASSENGER_H
