@@ -1,3 +1,8 @@
+#ifndef PROJECTAED_PLANE_H
+#define PROJECTAED_PLANE_H
+
+#endif //PROJECTAED_PLANE_H
+
 #include <string>
 #include <list>
 #include <queue>
@@ -22,13 +27,10 @@ public:
     queue<Service> getToDo(), getDone();
     //Setters:
     void setLPlate(string newLPlate),setN(int n),
-    setC(int c), setMaxOc(int num),setTakenS(int num),
-    setToDo(queue<string> q), setDone(queue<string> q);
+            setC(int c), setMaxOc(int num),setTakenS(int num),
+            setToDo(queue<string> q), setDone(queue<string> q);
     //Edit:
     void addPassenger(Passenger a);
     void addTask(Service a);
     void doNextNTasks(int n);
 };
-
-
-#endif //UNTITLED1_PLANE_H
