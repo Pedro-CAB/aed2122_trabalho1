@@ -1,1 +1,8 @@
+#ifndef PROJECTAED_SERVICE_H
+#define PROJECTAED_SERVICE_H
 
+#endif //PROJECTAED_SERVICE_H
+
+class Service{
+
+};
