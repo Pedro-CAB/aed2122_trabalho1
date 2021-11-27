@@ -2,7 +2,7 @@
 
 Flight::Flight(int number, float duration, string date, string origin, string destination){
     this->number = number,
-    this->duration = duration;
+            this->duration = duration;
     this->date = date;
     this->origin = origin;
     this->destination = destination;
