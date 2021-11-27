@@ -1,7 +1,7 @@
-#ifndef PROJECTAED_FLIGHT_H
-#define PROJECTAED_FLIGHT_H
+#ifndef UNTITLED1_FLIGHT_H
+#define UNTITLED1_FLIGHT_H
 
-#endif //PROJECTAED_FLIGHT_H
+#endif //UNTITLED1_FLIGHT_H
 
 #include <string>
 using namespace std;
@@ -17,9 +17,9 @@ public:
     string getDate();
     string getOrigin();
     string getDestination();
-    void setNumberFlight(int number);
+    void setNumber(int number);
     void setDuration(float duration);
-    void setDatet(string date);
+    void setDate(string date);
     void setOrigin(string origin);
     void setDestination(string destination);
 };
