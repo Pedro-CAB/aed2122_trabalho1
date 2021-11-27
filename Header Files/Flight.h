@@ -8,18 +8,18 @@ using namespace std;
 
 public class Flight{
 public:
-    int number_flight;
-    float duration_flight;
-    string date_flight, origin, destination;
+    int number;
+    float duration;
+    string date, origin, destination;
     Flight (int number, float duration, string date, string origin, string destination);
-    int getNumberFlight();
-    float getFloatDurationFlight();
-    string getDateFlight();
+    int getNumber();
+    float getFloatDuration();
+    string getDate();
     string getOrigin();
     string getDestination();
     void setNumberFlight(int number);
-    void setDurationFlight(float duration);
-    void setDateFlight(string date);
+    void setDuration(float duration);
+    void setDatet(string date);
     void setOrigin(string origin);
     void setDestination(string destination);
 };
