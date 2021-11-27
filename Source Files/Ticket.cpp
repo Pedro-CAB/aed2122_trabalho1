@@ -1,4 +1,5 @@
 #include "Ticket.h"
+
 Ticket::Ticket(Flight flight){
     this->flight = flight;
     AutoLug = false;
