@@ -8,15 +8,15 @@ Flight::Flight(int number, float duration, string date, string origin, string de
     this->destination = destination;
 }
 
-int Flight::getNumberFlight(){
+int Flight::getNumber(){
     return number;
 }
 
-float Flight::getDurationFlight(){
+float Flight::getDuration(){
     return duration;
 }
 
-string Flight::getDateFlight(){
+string Flight::getDate(){
     return date;
 }
 
@@ -28,15 +28,15 @@ string Flight::getDestination(){
     return destination;
 }
 
-void Flight::setNumberFlight(int number){
+void Flight::setNumber(int number){
     this->number = number;
 }
 
-void Flight::setDurationFlight(float duration){
+void Flight::setDuration(float duration){
     this->number = number;
 }
 
-void Flight::setDateFlight(string date){
+void Flight::setDate(string date){
     this->date = date;
 }
 
