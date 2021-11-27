@@ -6,7 +6,7 @@
 #include <string>
 using namespace std;
 
-private class Flight{
+public class Flight{
 public:
     int number_flight;
     float duration_flight;
