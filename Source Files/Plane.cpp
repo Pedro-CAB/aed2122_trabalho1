@@ -3,6 +3,7 @@
 //
 
 #include "Plane.h"
+
 Plane::Plane(string LPlate){
     LPlate_str= LPlate;
     letter = LPlate.substr(1,1);
