@@ -1,12 +1,12 @@
-#ifndef UNTITLED1_FLIGHT_H
-#define UNTITLED1_FLIGHT_H
+#ifndef PROJECTAED_FLIGHT_H
+#define PROJECTAED_FLIGHT_H
 
-#endif //UNTITLED1_FLIGHT_H
+#endif //PROJECTAED_FLIGHT_H
 
 #include <string>
 using namespace std;
 
-class Flight{
+private class Flight{
 public:
     int number;
     float duration;
