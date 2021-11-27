@@ -1,3 +1,8 @@
+#ifndef PROJECTAED_TICKET_H
+#define PROJECTAED_TICKET_H
+
+#endif //PROJECTAED_TICKET_H
+
 class Ticket {
 public:
     Flight flight;
@@ -10,6 +15,3 @@ public:
     //Setters:
     void setAutoLug(bool state);
 };
-
-
-#endif //UNTITLED1_TICKET_H
