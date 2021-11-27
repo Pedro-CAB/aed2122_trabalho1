@@ -1,1 +1,8 @@
+#ifndef PROJECTAED_AIRPORT_H
+#define PROJECTAED_AIRPORT_H
 
+#endif //PROJECTAED_AIRPORT_H
+
+class Airport{
+
+};
