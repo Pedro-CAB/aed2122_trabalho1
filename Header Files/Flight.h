@@ -13,7 +13,7 @@ public:
     string date, origin, destination;
     Flight (int number, float duration, string date, string origin, string destination);
     int getNumber();
-    float getFloatDuration();
+    float getDuration();
     string getDate();
     string getOrigin();
     string getDestination();
