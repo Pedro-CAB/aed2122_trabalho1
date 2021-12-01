@@ -1,5 +1,13 @@
 #include "Flight.h"
 
+Flight::Flight(){
+    number = -1;
+    duration = -1;
+    date = "NULL_DATE";
+    origin = "NULL_ORIGIN";
+    destination = "NULL_DESTINATION";
+}
+
 Flight::Flight(int number, float duration, string date, string origin, string destination){
     this->number = number,
     this->duration = duration;
