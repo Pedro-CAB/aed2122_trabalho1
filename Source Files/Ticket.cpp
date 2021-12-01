@@ -1,11 +1,15 @@
 #include "Ticket.h"
 
+Ticket::Ticket(){
+    flight = Flight();
+    AutoLug = false;
+}
 Ticket::Ticket(Flight flight){
     this->flight = flight;
     AutoLug = false;
 }
 //Getters:
 Flight Ticket::getFlight(){return flight;};
-bool getAutoLug();
+bool Ticket::getAutoLug(){return AutoLug;}
 //Setters:
-void setAutoLug(bool state);
+void Ticket::setAutoLug(bool state){AutoLug=state;}
