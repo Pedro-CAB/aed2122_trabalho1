@@ -1,7 +1,7 @@
 #ifndef PROJECTAED_TICKET_H
 #define PROJECTAED_TICKET_H
 
-#endif //PROJECTAED_TICKET_H
+#include "Flight.h"
 
 class Ticket {
 public:
@@ -15,3 +15,5 @@ public:
     //Setters:
     void setAutoLug(bool state);
 };
+
+#endif //PROJECTAED_TICKET_H
