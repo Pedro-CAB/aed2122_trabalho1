@@ -1,7 +1,5 @@
-#ifndef AED2122_TRABALHO1_TTRANSPORTL_H
-#define AED2122_TRABALHO1_TTRANSPORTL_H
-
-#endif //AED2122_TRABALHO1_TTRANSPORTL_H
+#ifndef PROJECTAED_TTRANSPORTL_H
+#define PROJECTAED_TTRANSPORTL_H
 
 #include <string>
 #include <vector>
@@ -21,4 +19,4 @@ public:
     float getDistance();
     vector<string> getSchedule();
 };
-
+#endif //PROJECTAED_TTRANSPORTL_H

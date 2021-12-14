@@ -1,15 +1,17 @@
-#ifndef PROJECTAED_PLANE_H
-#define PROJECTAED_PLANE_H
-
-#endif //PROJECTAED_PLANE_H
 
 #include <string>
 #include <list>
 #include <queue>
 #include "Service.h"
 #include "Passenger.h"
-#ifndef UNTITLED1_PLANE_H
-#define UNTITLED1_PLANE_H
+#ifndef PROJECTAED_PLANE_H
+#define PROJECTAED_PLANE_H
+
+#include <string>
+#include <list>
+#include <queue>
+#include "Service.h"
+#include "Passenger.h"
 
 using namespace std;
 
@@ -34,3 +36,4 @@ public:
     void addTask(Service a);
     void doNextNTasks(int n);
 };
+#endif //PROJECTAED_PLANE_H

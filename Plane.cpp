@@ -1,7 +1,3 @@
-//
-// Created by Aulas FEUP on 24/11/2021.
-//
-
 #include "Plane.h"
 
 Plane::Plane(string LPlate){

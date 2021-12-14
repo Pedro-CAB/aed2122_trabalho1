@@ -11,5 +11,5 @@ Passenger::Passenger(string name, Ticket ticket){
 //Getters:
 string Passenger::getName(){return name;}
 Ticket Passenger::getTicket(){return ticket;}
-Flight Passenger::getFlight(){};
+Flight Passenger::getFlight(){return ticket.getFlight();}
 bool getLuggage();

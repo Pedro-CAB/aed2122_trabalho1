@@ -457,4 +457,4 @@ bool iteratorBST<Comparable>::operator!= (const iteratorBST<Comparable>& it2) co
     return itrStack != it2.itrStack;
 }
 
-#endif //AED2122_TRABALHO1_BST_H
+#endif //PROJECTAED_BST_H

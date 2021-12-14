@@ -1,8 +1,6 @@
 #ifndef PROJECTAED_AIRPORT_H
 #define PROJECTAED_AIRPORT_H
 
-#endif //PROJECTAED_AIRPORT_H
-
 #include <string>
 #include "BST.h"
 #include "TTransportL.h"
@@ -24,3 +22,4 @@ public:
     //Edit:
     void addLocation(const TTLocation& location);
 };
+#endif //PROJECTAED_AIRPORT_H

@@ -1,8 +1,6 @@
 #ifndef PROJECTAED_SERVICE_H
 #define PROJECTAED_SERVICE_H
 
-#endif //PROJECTAED_SERVICE_H
-
 #include <string>
 
 using namespace std;
@@ -15,3 +13,4 @@ public:
     //Getters:
     string getType(), getDate(), getEmployee();
 };
+#endif //PROJECTAED_SERVICE_H

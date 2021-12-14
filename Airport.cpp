@@ -1,6 +1,6 @@
 #include "Airport.h"
 
-Airport::Airport(string& airportName) { //N sei se está certo. Falta implementar BST corretamente
+Airport::Airport(string& airportName) {
     this->name = airportName;
     TTLocation dummy();
     BST<TTLocation> emptyBST(dummy);
