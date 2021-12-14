@@ -11,7 +11,7 @@ class Airport{
 public:
     string name;
     BST<TTLocation> locations;
-    explicit Airport(string& airportName);
+    Airport(string& airportName, BST<TTLocation> locations);
 
     //Getters:
     string getName();

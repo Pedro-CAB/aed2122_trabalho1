@@ -30,3 +30,6 @@ float TTLocation::getDistance() {
 vector<string> TTLocation::getSchedule() {
     return schedule;
 }
+bool TTLocation::operator<(const TTLocation &t1) {
+    return (distance < t1.distance);
+}

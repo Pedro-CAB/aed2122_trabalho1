@@ -1,12 +1,9 @@
 #include "Airport.h"
 
-Airport::Airport(string& airportName) {
+Airport::Airport(string& airportName, BST<TTLocation> locations):locations(TTLocation()) {
     this->name = airportName;
-    TTLocation dummy();
-    BST<TTLocation> emptyBST(dummy);
-    this->locations = emptyBST;
+    this->locations = locations;
 }
-
 string Airport::getName() {
     return name;
 }

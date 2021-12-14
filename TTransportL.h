@@ -18,5 +18,6 @@ public:
     string getName(), getType();
     float getDistance();
     vector<string> getSchedule();
+    bool operator < (const TTLocation & t1);
 };
 #endif //PROJECTAED_TTRANSPORTL_H
