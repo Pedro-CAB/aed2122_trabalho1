@@ -1,4 +1,15 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <algorithm>
+
+#include "Airport.h"
+#include "Flight.h"
+#include "Passenger.h"
+#include "Plane.h"
+#include "Service.h"
+#include "Ticket.h"
+#include "TTransportL.h"
 
 using namespace std;
 
