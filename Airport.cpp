@@ -7,6 +7,7 @@
 Airport::Airport(string& airportName, BST<TTLocation> locations):locations(TTLocation()) {
     this->name = airportName;
     this->locations = locations;
+    this->flights = {};
 }
 string Airport::getName() {
     return name;
@@ -15,7 +16,9 @@ string Airport::getName() {
 BST<TTLocation> Airport::getLocations() {
     return locations;
 }
-
+vector<Flight> Airport::getFlights(){
+    return flights;
+}
 void Airport::setName(string& newName) {
     this->name = newName;
 }
@@ -29,4 +32,8 @@ void Airport::setLocations(BST<TTLocation> &locations) {
  */
 void Airport::addLocation(const TTLocation& location) {
     locations.insert(location);
+}
+
+void Airport::addFlight(const Flight flight){
+    flights.push_back(flight);
 }
