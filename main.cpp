@@ -13,27 +13,12 @@
 
 using namespace std;
 
-void main_menu(){
-    string choice;
-    cin>>choice;
-    if (choice == "help"){
-        cout << "This should return a list of commands for the user."<<endl;
-    }
-}
 int main() {
     ifstream i_file_planes, i_file_passengers, i_file_flight, i_file_airport;
     ofstream o_file_planes, o_file_passengers, o_file_flight, o_file_airport;
     vector<Airport> airports;
     int op;
 
-    //primeiro vamos começar por ler e guardar todas as informações de todos os ficheiros
-    /*
-    if (i_file_planes.is_open()){
-        while (!i_file_planes.eof()){
-
-        }
-
-    } */
     //O FICHEIRO DO AEROPORTO SÓ VAI TER O NOME DO AEROPORTO
     if (i_file_airport.is_open()){
         while (!i_file_airport.eof()){
@@ -41,13 +26,11 @@ int main() {
             getline(i_file_airport, name);
             Airport a(name);
             airports.push_back(a);
-            //já implementei o operador <
         }
     }
-    sort(airports.begin(), airports.end()); //ordenar o vetor por ordem alfabética
+    sort(airports.begin(), airports.end());
 
-    //decidir como é que vamos organizar os nossos ficheiros de voos, se fazemos um por cada cidade ou
-    //todos na mesma e a primeira linha de indica a cidade de cada aeroporto ou algo do género
+
     if (i_file_flight.is_open()){
         while (!i_file_flight.eof()){
             string line_flight;
@@ -66,7 +49,7 @@ int main() {
         }
     }
 
-    cout << "Bem-vindo à Agência Voa Connosco! :)" << endl;
+    cout << "Bem-vindo a Agencia Voa Connosco! :)" << endl;
 
     cout << "Escolhe um dos nossos aeroportos para poderes prosseguir: " << endl;
     //Lista de aeropotos;
@@ -86,14 +69,14 @@ int main() {
     Airport a(op_airport);
     //dependendo do aeroporto que o utilizador escolhe vamos ter ficheiros diferentes
 
-    cout << "Menu das operações:" << endl;
+    cout << "Menu das operaçoes:" << endl;
     cout << "1 - Mostrar os voos" << endl;
     cout << "2 - Comprar bilhete e registar-se como passageiro" << endl;
     cout << "3 - Registar-se como passageiro " << endl;
     cout << "4 - Mostra a lista de passageiros " << endl;
     cout << "5 - Sair" << endl;
 
-    cout << "Escolha a opção do menu que pretende " << endl;
+    cout << "Escolha a opçao do menu que pretende " << endl;
     cin >> op;
 
 
@@ -122,7 +105,7 @@ int main() {
                     Flight f(number_f, duration_f, date, origin, destination);
                     //ASSIM, JÁ NÃO É PRECISO AQUELA FUNÇÃO DE ADICIONAR VOOS
                     //PROBLEMA AQUI PORQUE TEMOS QUE CRIAR PRIMEIRO UM OBJETO DO TIPO AIRPORT
-                    a.flights.push_back(f);
+                    a.addFight(f);  //adiciona o voo ao vector de voos
 
                     cout << number_f << "   " << duration << "  " << date << "  " << origin << "    " << destination << endl;
                 }
@@ -133,9 +116,9 @@ int main() {
         //se calhar o número do voo devia ser uma string
         int op_voo;
         string name_p;
-        cout << "Por favor, coloque o seu nome para poder prosseguir com a operação" << endl;
+        cout << "Por favor, coloque o seu nome para poder prosseguir com a operaçao" << endl;
         getline(cin, name_p);
-        cout << "Escolha o número do voo para o qual pretende comprar bilhete" << endl;
+        cout << "Escolha o numero do voo para o qual pretende comprar bilhete" << endl;
         cin >> op_voo;
 
         for (auto f: a.flights) {
@@ -165,4 +148,6 @@ int main() {
 
 
 
+
+    return 0;
 }
