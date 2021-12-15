@@ -32,7 +32,7 @@ public:
             setC(int c), setMaxOc(int num),setTakenS(int num),
             setToDo(queue<string> q), setDone(queue<string> q);
     //Edit:
-    void addPassenger(Passenger a);
+    bool addPassenger(Passenger a);
     void addTask(Service a);
     void doNextNTasks(int n);
 };

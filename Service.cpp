@@ -5,7 +5,12 @@ Service::Service() {
     date = "NULL_DATE";
     employee = "NULL_EMPLOYEE";
 }
-
+/**
+ * Constrói um novo Serviço/Tarefa
+ * @param type Tipo do Serviço/Tarefa
+ * @param date Data em que o Serviço será realizado
+ * @param employee Empregado responsável pela realização do serviço
+ */
 Service::Service(string type, string date, string employee) {
     this->type = type;
     this->date = date;

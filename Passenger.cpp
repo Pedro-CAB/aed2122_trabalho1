@@ -4,6 +4,11 @@ Passenger::Passenger(Ticket ticket){
     this->ticket = ticket;
     this->name = "";
 }
+/**
+ *
+ * @param name Nome do Passageiro
+ * @param ticket Bilhete associado (objeto Ticket)
+ */
 Passenger::Passenger(string name, Ticket ticket){
     this->ticket=ticket;
     this->name = name;

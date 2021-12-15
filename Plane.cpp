@@ -25,12 +25,28 @@ void Plane::setToDo(queue<string> q) {}         //incomplete
 void Plane::setMaxOc(int num) {max_ocupation=num;}
 void Plane::setTakenS(int num) {taken_seats=num;}
 //Edit:
-void Plane::addPassenger(Passenger a){
+/**
+ * Adiciona o passageiro a à lista passengers e retorna true se a operação for bem sucedida
+ * @param a Passageiro a inserir
+ */
+bool Plane::addPassenger(Passenger a){
+    if (taken_seats == max_ocupation){
+        return false;
+    }
     passengers.push_back(a);
+    return true;
 }
+/**
+ * Adiciona a Tarefa a à fila de tarefas a realizar
+ * @param a Tarefa a inserir
+ */
 void Plane::addTask(Service a){
     to_do.push(a);
 }
+/**
+ * Remove as próximas n tarefas da fila de tarefas a realizar e insere-as na fila de tarefas efetuadas
+ * @param n Número de tarefas a realizar
+ */
 void Plane::doNextNTasks(int n){
     for(n;n>0;n++){
         done.push(to_do.front());
