@@ -69,14 +69,14 @@ int main() {
     Airport a(op_airport);
     //dependendo do aeroporto que o utilizador escolhe vamos ter ficheiros diferentes
 
-    cout << "Menu das operacoes:" << endl;
+    cout << "Menu das operaçoes:" << endl;
     cout << "1 - Mostrar os voos" << endl;
     cout << "2 - Comprar bilhete e registar-se como passageiro" << endl;
     cout << "3 - Registar-se como passageiro " << endl;
     cout << "4 - Mostra a lista de passageiros " << endl;
     cout << "5 - Sair" << endl;
 
-    cout << "Escolha a opcao do menu que pretende " << endl;
+    cout << "Escolha a opçao do menu que pretende " << endl;
     cin >> op;
 
 
@@ -116,7 +116,7 @@ int main() {
         //se calhar o número do voo devia ser uma string
         int op_voo;
         string name_p;
-        cout << "Por favor, coloque o seu nome para poder prosseguir com a operacao" << endl;
+        cout << "Por favor, coloque o seu nome para poder prosseguir com a operaçao" << endl;
         getline(cin, name_p);
         cout << "Escolha o numero do voo para o qual pretende comprar bilhete" << endl;
         cin >> op_voo;
