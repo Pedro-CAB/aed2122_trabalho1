@@ -105,7 +105,7 @@ int main() {
                     Flight f(number_f, duration_f, date, origin, destination);
                     //ASSIM, JÁ NÃO É PRECISO AQUELA FUNÇÃO DE ADICIONAR VOOS
                     //PROBLEMA AQUI PORQUE TEMOS QUE CRIAR PRIMEIRO UM OBJETO DO TIPO AIRPORT
-                    a.addFight(f);  //adiciona o voo ao vector de voos
+                    a.addFlight(f);  //adiciona o voo ao vector de voos
 
                     cout << number_f << "   " << duration << "  " << date << "  " << origin << "    " << destination << endl;
                 }
@@ -145,9 +145,5 @@ int main() {
         }
     }
 }
-
-
-
-
     return 0;
 }

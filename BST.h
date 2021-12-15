@@ -1,5 +1,9 @@
-#ifndef AED2122_TRABALHO1_BST_H
-#define AED2122_TRABALHO1_BST_H
+//
+// Created by Utilizador on 15/12/2021.
+//
+
+#ifndef PROJECTAED_BST_H
+#define PROJECTAED_BST_H
 
 #include <iostream>
 #include <stack>

@@ -1,14 +1,13 @@
+//
+// Created by Utilizador on 27/11/2021.
+//
+
 #include "Passenger.h"
 
 Passenger::Passenger(Ticket ticket){
     this->ticket = ticket;
     this->name = "";
 }
-/**
- *
- * @param name Nome do Passageiro
- * @param ticket Bilhete associado (objeto Ticket)
- */
 Passenger::Passenger(string name, Ticket ticket){
     this->ticket=ticket;
     this->name = name;
@@ -16,5 +15,5 @@ Passenger::Passenger(string name, Ticket ticket){
 //Getters:
 string Passenger::getName(){return name;}
 Ticket Passenger::getTicket(){return ticket;}
-Flight Passenger::getFlight(){return ticket.getFlight();}
+Flight Passenger::getFlight(){return ticket.getFlight();};
 bool getLuggage();

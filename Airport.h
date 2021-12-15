@@ -1,3 +1,7 @@
+//
+// Created by Utilizador on 27/11/2021.
+//
+
 #ifndef PROJECTAED_AIRPORT_H
 #define PROJECTAED_AIRPORT_H
 
@@ -13,7 +17,7 @@ class Airport{
 public:
     string name;
     BST<TTLocation> locations;
-    Airport(string& airportName, BST<TTLocation> locations);
+    Airport(string& airportName);
     vector<Flight> flights;
 
     //Getters:
@@ -26,5 +30,8 @@ public:
     //Edit:
     void addLocation(const TTLocation& location);
     void addFlight(const Flight flight);
+    bool operator < (const Airport a);
 };
+
+
 #endif //PROJECTAED_AIRPORT_H

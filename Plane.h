@@ -1,9 +1,7 @@
+//
+// Created by Utilizador on 27/11/2021.
+//
 
-#include <string>
-#include <list>
-#include <queue>
-#include "Service.h"
-#include "Passenger.h"
 #ifndef PROJECTAED_PLANE_H
 #define PROJECTAED_PLANE_H
 
@@ -12,6 +10,7 @@
 #include <queue>
 #include "Service.h"
 #include "Passenger.h"
+
 
 using namespace std;
 
@@ -32,8 +31,9 @@ public:
             setC(int c), setMaxOc(int num),setTakenS(int num),
             setToDo(queue<string> q), setDone(queue<string> q);
     //Edit:
-    bool addPassenger(Passenger a);
+    void addPassenger(Passenger a);
     void addTask(Service a);
     void doNextNTasks(int n);
 };
+
 #endif //PROJECTAED_PLANE_H

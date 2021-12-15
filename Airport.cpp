@@ -1,12 +1,11 @@
+//
+// Created by Utilizador on 27/11/2021.
+//
+
 #include "Airport.h"
-/**
- * Constrói um Aeroporto
- * @param airportName Nome do Aeroporto
- * @param locations Árvore de Locais de Transporte do Aeroporto
- */
-Airport::Airport(string& airportName, BST<TTLocation> locations):locations(TTLocation()) {
+
+Airport::Airport(string& airportName):locations(TTLocation()) {
     this->name = airportName;
-    this->locations = locations;
     this->flights = {};
 }
 string Airport::getName() {
@@ -32,6 +31,10 @@ void Airport::setLocations(BST<TTLocation> &locations) {
  */
 void Airport::addLocation(const TTLocation& location) {
     locations.insert(location);
+}
+
+bool Airport::operator<(const Airport a) {
+    return name < a.name;
 }
 
 void Airport::addFlight(const Flight flight){

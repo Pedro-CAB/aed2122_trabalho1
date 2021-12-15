@@ -1,7 +1,8 @@
+//
+// Created by Utilizador on 26/11/2021.
+//
 #include "Flight.h"
-/**
- * Constrói um voo vazio
- */
+
 Flight::Flight(){
     number = -1;
     duration = -1;
@@ -9,21 +10,15 @@ Flight::Flight(){
     origin = "NULL_ORIGIN";
     destination = "NULL_DESTINATION";
 }
-/**
- * Constrói um Voo
- * @param number Número do Voo
- * @param duration Duração do Voo em Horas
- * @param date Data do Voo em formato DD-MM-YY
- * @param origin Local de Origem
- * @param destination Local de Destino
- */
-Flight::Flight(int number, float duration, string date, string origin, string destination) {
+
+Flight::Flight(int number, float duration, string date, string origin, string destination){
     this->number = number,
-            this->duration = duration;
+    this->duration = duration;
     this->date = date;
     this->origin = origin;
     this->destination = destination;
 }
+
 int Flight::getNumber(){
     return number;
 }
@@ -42,9 +37,6 @@ string Flight::getOrigin(){
 
 string Flight::getDestination(){
     return destination;
-}
-string Flight::getSchedule() {
-    return schedule;
 }
 
 void Flight::setNumber(int number){
@@ -65,13 +57,4 @@ void Flight::setOrigin(string origin){
 
 void Flight::setDestination(string destination){
     this->destination = destination;
-}
-bool Flight::operator<(Flight flight) {
-    int h = stoi(schedule.substr(0,2)),m = stoi(schedule.substr(3,2)), h2 = stoi(flight.getSchedule().substr(0,2)), m2 = stoi(flight.getSchedule().substr(3,2));
-    if (h != h2){
-        return h<h2;
-    }
-    else{
-        return m<m2;
-    }
 }
