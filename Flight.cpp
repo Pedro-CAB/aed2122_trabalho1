@@ -55,7 +55,7 @@ void Flight::setDestination(Airport destination){
 }
 
 bool Flight::operator==(const Flight &f) const {
-    return (number==f.number && arrivalT == f.arrivalT && departureT == f.departureT && date == f.date && origin == f.origin && destination == f.destination && passengers == f.passengers);
+    return (number==f.number);
 }
 /**
  * Verifica se um passageiro está num voo

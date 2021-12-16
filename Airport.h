@@ -8,6 +8,7 @@
 #include <string>
 #include "BST.h"
 #include "TTransportL.h"
+#include "LuggageCar.h"
 #include <vector>
 #include <algorithm>
 
@@ -17,22 +18,24 @@ class Airport{
 public:
     string name,city;
     BST<TTLocation> locations;
+    LuggageCar car;
     Airport();
-    Airport(string& airportName, string& cityName);
+    Airport(string& airportName, string& cityName, int& c, int& n, int& m);
 
     //Getters:
     string getName();
     string getCity();
     BST<TTLocation> getLocations();
+    LuggageCar getCar();
 
     //Setters:
     void setName(string& newName);
     void setLocations(BST<TTLocation>& locations);
+    void setCar(int& c, int& n, int& m);
 
     //Edit:
     void addLocation(const TTLocation& location);
 
-    bool operator == (const Airport a);
 };
 
 
