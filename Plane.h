@@ -9,7 +9,6 @@
 #include <list>
 #include <queue>
 #include "Service.h"
-#include "Passenger.h"
 #include "Flight.h"
 
 
@@ -18,23 +17,26 @@ using namespace std;
 class Plane {
 public:
     Plane(string LPlate);
-    string LPlate_str, letter;
-    int n, c, max_ocupation, taken_seats;
+    string LPlate;
+    int n, c, max_ocupation;
     queue<Service> to_do, done;
     queue<Flight> flightPlan;
 
     //Getters:
-    string getLPlate(),getLPlateLetter();
-    int getLPlateNumber(), getN(), getC(), getMaxOccupation(), getTaken_Seats(), getVacantSeats();
+    string getLPlate();
+    int getN(), getC(), getMaxOccupation();
     queue<Service> getToDo(), getDone();
+
     //Setters:
     void setLPlate(string newLPlate),setN(int n),
             setC(int c), setMaxOc(int num),setTakenS(int num),
             setToDo(queue<string> q), setDone(queue<string> q);
+
     //Edit:
-    void addPassenger(Passenger a);
     void addTask(Service a);
     void doNextNTasks(int n);
+    bool hasFlights();
+    Flight nextFlight();
 };
 
 #endif //PROJECTAED_PLANE_H

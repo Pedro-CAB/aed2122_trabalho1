@@ -5,37 +5,55 @@
 #include "Plane.h"
 
 Plane::Plane(string LPlate){
-    LPlate_str= LPlate;
-    letter = LPlate.substr(1,1);
-    n = 0, c = 0, max_ocupation = 0, taken_seats = 0;
+    this->LPlate= LPlate;
+    n = 0, c = 0, max_ocupation = 0;
     to_do = {}, done={};
 }
+
 //Getters:
-string Plane::getLPlate() {return LPlate_str;}
-string Plane::getLPlateLetter() {return letter;}
+string Plane::getLPlate() {return LPlate;}
 int Plane::getN(){return n;}
 int Plane::getC() {return c;}
 int Plane::getMaxOccupation() {return max_ocupation;}
-int Plane::getTaken_Seats() {return taken_seats;}
-int Plane::getVacantSeats() {return max_ocupation-taken_seats;}
 queue<Service> Plane::getDone() {return done;}
 queue<Service> Plane::getToDo() {return to_do;}
+
+
 //Setters:
-void Plane::setLPlate(string newLPlate) {LPlate_str=newLPlate;}
+void Plane::setLPlate(string newLPlate) {LPlate=newLPlate;}
 void Plane::setC(int c) {this->c=c;}
 void Plane::setN(int n) {this->n=n;}
 void Plane::setDone(queue<string> q) {}         //incomplete
 void Plane::setToDo(queue<string> q) {}         //incomplete
 void Plane::setMaxOc(int num) {max_ocupation=num;}
-void Plane::setTakenS(int num) {taken_seats=num;}
 
 //Edit:
+/**
+ * Acrescenta uma tarefa nova a ser realizada
+ * @param a tarefa a acrescentar
+ */
 void Plane::addTask(Service a){
     to_do.push(a);
 }
+/**
+ * Passa n tarefas da fila de tarefas a realizar para a fila de tarefas realizadas
+ * @param n número de tarefas a realizar
+ */
 void Plane::doNextNTasks(int n){
     for(n;n>0;n++){
         done.push(to_do.front());
         to_do.pop();
     }
+}
+/**
+ * Verifica se o avião tem voos planeados para o futuro
+ * @return true se tiver pelo menos um voo no seu plano ou false se ão tiver nenhum
+ */
+bool Plane::hasFlights() {return flightPlan.size()>0;}
+/**
+ * Devolve o próximo voo que o avião tem no seu plano
+ * @return Próximo Voo
+ */
+Flight Plane::nextFlight() {
+    return (flightPlan.front());
 }
