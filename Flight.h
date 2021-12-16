@@ -9,28 +9,30 @@
 #include <string>
 #include <list>
 #include "Passenger.h"
+#include "Airport.h"
 
 using namespace std;
 
 class Flight{
 public:
     int number;
-    string date, origin, destination, arrivalT, departureT;
+    string date, arrivalT, departureT;
+    Airport origin, destination;
     list<Passenger> passengers;
     Flight();
-    Flight (int number, string arrivalT,string departureT, string date, string origin, string destination);
+    Flight (int number, string arrivalT,string departureT, string date, Airport origin, Airport destination);
 
     //Getters:
     int getNumber();
     string getDate();
-    string getOrigin();
-    string getDestination();
+    Airport getOrigin();
+    Airport getDestination();
 
     //Setters:
     void setNumber(int number);
     void setDate(string date);
-    void setOrigin(string origin);
-    void setDestination(string destination);
+    void setOrigin(Airport origin);
+    void setDestination(Airport destination);
 
     //Others:
     bool operator == (const Flight & f) const;

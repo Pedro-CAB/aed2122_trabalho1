@@ -5,15 +5,15 @@
 
 Flight::Flight(){
     number = -1;
-    departureT = 'NULL_TIME';
-    arrivalT = 'NULL_TIME';
+    departureT = "NULL_TIME";
+    arrivalT = "NULL_TIME";
     date = "NULL_DATE";
-    origin = "NULL_ORIGIN";
-    destination = "NULL_DESTINATION";
+    origin = Airport();
+    destination = Airport();
     passengers = {};
 }
 
-Flight::Flight(int number, string arrivalt, string departureT, string date, string origin, string destination){
+Flight::Flight(int number, string arrivalT, string departureT, string date, Airport origin, Airport destination){
     this->number = number,
     this->departureT =departureT;
     this->arrivalT = arrivalT;
@@ -30,11 +30,11 @@ string Flight::getDate(){
     return date;
 }
 
-string Flight::getOrigin(){
+Airport Flight::getOrigin(){
     return origin;
 }
 
-string Flight::getDestination(){
+Airport Flight::getDestination(){
     return destination;
 }
 
@@ -46,11 +46,11 @@ void Flight::setDate(string date){
     this->date = date;
 }
 
-void Flight::setOrigin(string origin){
+void Flight::setOrigin(Airport origin){
     this->origin = origin;
 }
 
-void Flight::setDestination(string destination){
+void Flight::setDestination(Airport destination){
     this->destination = destination;
 }
 

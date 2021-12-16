@@ -18,7 +18,7 @@ class Plane {
 public:
     Plane(string LPlate);
     string LPlate;
-    int n, c, max_ocupation;
+    int max_ocupation;
     queue<Service> to_do, done;
     queue<Flight> flightPlan;
 

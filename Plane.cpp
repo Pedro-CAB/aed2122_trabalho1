@@ -6,14 +6,13 @@
 
 Plane::Plane(string LPlate){
     this->LPlate= LPlate;
-    n = 0, c = 0, max_ocupation = 0;
+    max_ocupation = 0;
     to_do = {}, done={};
+    queue<Flight> flightPlan = {};
 }
 
 //Getters:
 string Plane::getLPlate() {return LPlate;}
-int Plane::getN(){return n;}
-int Plane::getC() {return c;}
 int Plane::getMaxOccupation() {return max_ocupation;}
 queue<Service> Plane::getDone() {return done;}
 queue<Service> Plane::getToDo() {return to_do;}
@@ -21,8 +20,6 @@ queue<Service> Plane::getToDo() {return to_do;}
 
 //Setters:
 void Plane::setLPlate(string newLPlate) {LPlate=newLPlate;}
-void Plane::setC(int c) {this->c=c;}
-void Plane::setN(int n) {this->n=n;}
 void Plane::setDone(queue<string> q) {}         //incomplete
 void Plane::setToDo(queue<string> q) {}         //incomplete
 void Plane::setMaxOc(int num) {max_ocupation=num;}
