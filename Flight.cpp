@@ -5,16 +5,18 @@
 
 Flight::Flight(){
     number = -1;
-    duration = -1;
+    departureT = 'NULL_TIME';
+    arrivalT = 'NULL_TIME';
     date = "NULL_DATE";
     origin = "NULL_ORIGIN";
     destination = "NULL_DESTINATION";
     passengers = {};
 }
 
-Flight::Flight(int number, float duration, string date, string origin, string destination){
+Flight::Flight(int number, string arrivalt, string departureT, string date, string origin, string destination){
     this->number = number,
-    this->duration = duration;
+    this->departureT =departureT;
+    this->arrivalT = arrivalT;
     this->date = date;
     this->origin = origin;
     this->destination = destination;
@@ -22,10 +24,6 @@ Flight::Flight(int number, float duration, string date, string origin, string de
 
 int Flight::getNumber(){
     return number;
-}
-
-float Flight::getDuration(){
-    return duration;
 }
 
 string Flight::getDate(){
@@ -44,10 +42,6 @@ void Flight::setNumber(int number){
     this->number = number;
 }
 
-void Flight::setDuration(float duration){
-    this->number = number;
-}
-
 void Flight::setDate(string date){
     this->date = date;
 }
@@ -61,5 +55,18 @@ void Flight::setDestination(string destination){
 }
 
 bool Flight::operator==(const Flight &f) const {
-    return (number==f.number && duration == f.duration && date == f.date && origin == f.origin && destination == f.destination && passengers == f.passengers);
+    return (number==f.number && arrivalT == f.arrivalT && departureT == f.departureT && date == f.date && origin == f.origin && destination == f.destination && passengers == f.passengers);
+}
+/**
+ * Verifica se um passageiro está num voo
+ * @param p Passageiro a procurar
+ * @return true se estiver no voo, false se não estiver
+ */
+bool Flight::isPassengerIn(Passenger p) {
+    for (auto passenger : passengers){
+        if (passenger == p){
+            return true;
+        }
+    }
+    return false;
 }
