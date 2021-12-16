@@ -5,38 +5,29 @@
 #include "Airport.h"
 
 Airport::Airport(string& airportName):locations(TTLocation()) {
-    this->name = airportName;
-    this->flights = {};
+    name = airportName;
+    departures = {};
+    arrivals = {};
+    planes = {};
 }
-string Airport::getName() {
-    return name;
-}
+string Airport::getName() {return name;}
+BST<TTLocation> Airport::getLocations() {return locations;}
+vector<Flight> Airport::getArrivals() {return arrivals;}
+vector<Flight> Airport::getDepartures() {return departures;}
+vector<Plane> Airport::getPlanes() {return planes;}
 
-BST<TTLocation> Airport::getLocations() {
-    return locations;
-}
-vector<Flight> Airport::getFlights(){
-    return flights;
-}
-void Airport::setName(string& newName) {
-    this->name = newName;
-}
-
-void Airport::setLocations(BST<TTLocation> &locations) {
-    this->locations = locations;
-}
+void Airport::setName(string& newName) {name = newName;}
+void Airport::setLocations(BST<TTLocation> &locations) {this->locations = locations;}
+void Airport::setArrivals(vector<Flight> a) {arrivals=a;}
+void Airport::setDepartures(vector<Flight> d) {departures = d;}
+void Airport::setPlanes(vector<Plane> p) {planes = p;}
 /**
  * Adiciona um Local de Transporte à BST Locations
  * @param location Local de Transporte a adicionar (objeto do tipo TTLocation)
  */
-void Airport::addLocation(const TTLocation& location) {
-    locations.insert(location);
-}
+void Airport::addLocation(const TTLocation& location) {locations.insert(location);}
+void Airport::addArrival(const Flight a) {arrivals.push_back(a);}
+void Airport::addDeparture(const Flight d) {departures.push_back(d);}
+void Airport::addPlane(const Plane p) {planes.push_back(p);}
 
-bool Airport::operator<(const Airport a) {
-    return name < a.name;
-}
-
-void Airport::addFlight(const Flight flight){
-    flights.push_back(flight);
-}
+bool Airport::operator<(const Airport a) {return name < a.name;}

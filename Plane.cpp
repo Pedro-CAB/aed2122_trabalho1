@@ -8,7 +8,7 @@ Plane::Plane(string LPlate){
     LPlate_str= LPlate;
     letter = LPlate.substr(1,1);
     n = 0, c = 0, max_ocupation = 0, taken_seats = 0;
-    to_do = {}, done={}, passengers ={};
+    to_do = {}, done={};
 }
 //Getters:
 string Plane::getLPlate() {return LPlate_str;}
@@ -28,10 +28,8 @@ void Plane::setDone(queue<string> q) {}         //incomplete
 void Plane::setToDo(queue<string> q) {}         //incomplete
 void Plane::setMaxOc(int num) {max_ocupation=num;}
 void Plane::setTakenS(int num) {taken_seats=num;}
+
 //Edit:
-void Plane::addPassenger(Passenger a){
-    passengers.push_back(a);
-}
 void Plane::addTask(Service a){
     to_do.push(a);
 }

@@ -9,6 +9,7 @@ Flight::Flight(){
     date = "NULL_DATE";
     origin = "NULL_ORIGIN";
     destination = "NULL_DESTINATION";
+    passengers = {};
 }
 
 Flight::Flight(int number, float duration, string date, string origin, string destination){
@@ -57,4 +58,8 @@ void Flight::setOrigin(string origin){
 
 void Flight::setDestination(string destination){
     this->destination = destination;
+}
+
+bool Flight::operator==(const Flight &f) const {
+    return (number==f.number && duration == f.duration && date == f.date && origin == f.origin && destination == f.destination && passengers == f.passengers);
 }

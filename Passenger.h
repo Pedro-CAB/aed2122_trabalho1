@@ -6,22 +6,21 @@
 #define PROJECTAED_PASSENGER_H
 
 #include <string>
-#include "Ticket.h"
-#include "Flight.h"
+
 
 using namespace std;
 
 class Passenger {
 public:
     string name;
-    Ticket ticket;
-    Passenger(Ticket ticket);
-    Passenger(string name, Ticket ticket);
+    Passenger();
+    Passenger(string name, int autoLug);
+    int autoLug;    // 0 se não for bagagem automática, outro valor superior se for, indicando a quantidade de malas
+
     //Getters:
     string getName();
-    Ticket getTicket();
-    Flight getFlight();
-    bool getLuggage();
+    int getLuggage();
+    bool operator == (Passenger p2) const;
 };
 
 #endif //PROJECTAED_PASSENGER_H

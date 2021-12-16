@@ -4,16 +4,18 @@
 
 #include "Passenger.h"
 
-Passenger::Passenger(Ticket ticket){
-    this->ticket = ticket;
+Passenger::Passenger(){
     this->name = "";
+    autoLug = 0;
 }
-Passenger::Passenger(string name, Ticket ticket){
-    this->ticket=ticket;
+Passenger::Passenger(string name, int autoLug){
     this->name = name;
+    this->autoLug = autoLug;
 }
 //Getters:
 string Passenger::getName(){return name;}
-Ticket Passenger::getTicket(){return ticket;}
-Flight Passenger::getFlight(){return ticket.getFlight();};
-bool getLuggage();
+int Passenger::getLuggage(){return autoLug;}
+
+bool Passenger::operator==(Passenger p2) const {
+    return (name == p2.name && autoLug == p2.autoLug);
+}

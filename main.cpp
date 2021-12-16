@@ -8,12 +8,12 @@
 #include "Passenger.h"
 #include "Plane.h"
 #include "Service.h"
-#include "Ticket.h"
 #include "TTransportL.h"
 
 using namespace std;
 
 int main() {
+    /*
     ifstream i_file_planes, i_file_passengers, i_file_flight, i_file_airport;
     ofstream o_file_planes, o_file_passengers, o_file_flight, o_file_airport;
     vector<Airport> airports;
@@ -146,4 +146,5 @@ int main() {
     }
 }
     return 0;
+     */
 }

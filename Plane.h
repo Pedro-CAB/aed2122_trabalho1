@@ -10,6 +10,7 @@
 #include <queue>
 #include "Service.h"
 #include "Passenger.h"
+#include "Flight.h"
 
 
 using namespace std;
@@ -20,7 +21,7 @@ public:
     string LPlate_str, letter;
     int n, c, max_ocupation, taken_seats;
     queue<Service> to_do, done;
-    list<Passenger> passengers;
+    queue<Flight> flightPlan;
 
     //Getters:
     string getLPlate(),getLPlateLetter();
