@@ -4,9 +4,9 @@
 
 #include "Plane.h"
 
-Plane::Plane(string LPlate){
+Plane::Plane(string LPlate, int ocupation){
     this->LPlate= LPlate;
-    max_ocupation = 0;
+    max_ocupation = ocupation;
     to_do = {}, done={};
     queue<Flight> flightPlan = {};
 }

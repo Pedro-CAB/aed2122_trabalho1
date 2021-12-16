@@ -16,7 +16,7 @@ using namespace std;
 
 class Plane {
 public:
-    Plane(string LPlate);
+    Plane(string LPlate, int ocupation);
     string LPlate;
     int max_ocupation;
     queue<Service> to_do, done;
