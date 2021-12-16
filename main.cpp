@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <vector>
 
 #include "Airport.h"
 #include "Flight.h"
@@ -12,139 +13,160 @@
 
 using namespace std;
 
+
 int main() {
-    /*
     ifstream i_file_planes, i_file_passengers, i_file_flight, i_file_airport;
     ofstream o_file_planes, o_file_passengers, o_file_flight, o_file_airport;
     vector<Airport> airports;
     int op;
 
     //O FICHEIRO DO AEROPORTO SÓ VAI TER O NOME DO AEROPORTO
+    /*
+     * Nome, sitio, Tipo, Distância ao aeroporto, Horário
+     */
     if (i_file_airport.is_open()){
         while (!i_file_airport.eof()){
-            string name;
-            getline(i_file_airport, name);
-            Airport a(name);
-            airports.push_back(a);
+            string info_airport, info_transp, info_bag;       //contém o nome, tipo, distância, horário
+            getline(i_file_airport, info_airport);
+
+            string name, city;
+            stringstream s_airport(info_airport);
+            getline(s_airport, name);
+            getline(s_airport, city);
+
+            Airport a(name, city);
+
+            stringstream s_transp(info_transp);
+
+            while (s_transp.good()){
+                string name_t, type, distance, s;
+                vector<string> schedule;
+
+                //enquanto o caracter delimitar for diferente de -
+                getline(s_transp, name_t);
+                getline(s_transp, type);
+                getline(s_transp, distance);
+                float d = stof(distance);
+                while (getline(s_transp, s, ',')){  //temos que acrescentar restrição
+
+                }
+            }
+
+
+            airports.push_back(a);  //no final de tudo adicionamos a ao vector
         }
     }
-    sort(airports.begin(), airports.end());
-
-
-    if (i_file_flight.is_open()){
-        while (!i_file_flight.eof()){
-            string line_flight;
-            getline(i_file_flight, line_flight);
-
-            stringstream s_flight(line_flight);
-            string number, duration, date, origin, destination;
-            getline(s_flight, number, ',');
-            int num = stoi(number);
-            getline(s_flight, duration, ',');
-            float d = stof(duration);
-            getline(s_flight, date, ',');
-            getline(s_flight, origin, ',');
-            getline(s_flight, destination, ',');
-            Flight f(num, d, date, origin, destination);
-        }
-    }
+    sort(airports.begin(), airports.end()); //ordenou os aeroportos por ordem alfabética
 
     cout << "Bem-vindo a Agencia Voa Connosco! :)" << endl;
 
     cout << "Escolhe um dos nossos aeroportos para poderes prosseguir: " << endl;
-    //Lista de aeropotos;
+    for (auto airport: airports)
+        cout << airport.getName() << " " << airport.getCity();  //lista todos os aeroportos que estão no ficheiro
 
-    if (i_file_airport.is_open()){
-        while (!i_file_airport.eof()){
-            string s_airport;
-            getline (i_file_airport, s_airport);
-            cout << s_airport << endl;
+    string op_airport, op_city;
+    getline(cin, op_airport);   //utilizador coloca o nome do aeroporto
+    Airport a;                          //precisamos de ter a cidade lara conseguir construir um Airport
+    for (auto airport:airports){
+        if (airport.getName() == op_airport)
+            a = airport;
+    }
+    //com o nome do aeroporto temos que criar o nome dos ficheiros dos voos e dos passageiros
+
+    //AVIÃO
+
+    /*
+     * Matrícula, Ocupação Máxima, lista de tarefas a fazer, lista de
+     * tarefas realizadas, plano de voo
+     */
+    string name_file_plane = a.getName() + "plane.txt";
+    i_file_planes.open(name_file_plane);
+
+    if (i_file_planes.is_open()){
+        while (!i_file_planes.eof()){
+            string info_plane, info_services_to_do, info_services_done, info_done, info_planes;
+            getline(i_file_planes, info_plane);
+            string matricula, ocup_max;
+            stringstream s_plane(info_plane);
+            getline(s_plane, matricula);
+            getline(s_plane, ocup_max);
+            int o_max = stoi(ocup_max);
+            Plane p(matricula, o_max);
+
+            getline(i_file_planes,info_services_to_do);
+            stringstream s_services(info_services_to_do);
+            //VER ISTO PORQUE SE CALHAR NEM É PRECISO DOIS DELIMITADORES
+            //TEMOS SÓ UM, MAS COMO SABEMOS QUANTAS VARIÁVEIS TEM, NÃO É PRECISO
+            while (getline()){   //tipo, data e empregado VER A CONDIÇÃO DE TERMINAR
+                string type, date, employee;
+                getline(s_services, type, ',');
+                getline(s_services, date, ',');
+                getline(s_services, employee, ',');
+                Service c(type, date, employee);
+                p.getToDo().push(c);
+            }
+
+            getline(i_file_planes, info_services_done);
+            stringstream s_services_done(info_services_done);
+            while (true){
+                string type, date, employee;
+                getline(s_services_done, type, ',');
+                getline(s_services_done, date, ',');
+                getline(s_services_done, employee, ',');
+                Service c(type, date, employee);
+                p.getDone().push(c);
+
+            }
+
+
         }
     }
 
-    string op_airport;
-    getline(cin, op_airport);
 
-    //TIVE DE ELIMINAR OS OUTROS PARÂMETROS PARA CONSEGUIR CRIAR O AEROPORTO
-    Airport a(op_airport);
-    //dependendo do aeroporto que o utilizador escolhe vamos ter ficheiros diferentes
+    //VOOS
+    string name_file_flight = a.getName() + "flight.txt";
+    i_file_flight.open(name_file_flight);   //tenta abrir o ficheiro
 
-    cout << "Menu das operaçoes:" << endl;
+    if (i_file_flight.is_open()){
+        while (i_file_flight.eof()){
+            string line_flight;
+            getline(i_file_flight, line_flight);
+
+
+            stringstream str_flight(line_flight);
+            string snumber, date, arrival, departure, origin, destination;
+            getline(str_flight, snumber, ',');
+            int number = stoi(snumber);
+            getline(str_flight, date, ',');
+            getline(str_flight, arrival, ',');
+            getline(str_flight, departure, ',');
+            getline(str_flight, origin, ',');
+
+            Airport a1, a2; //porque o flight recebe dois objetos airport como parametro
+            for (auto airport:airports){
+                if (airport.getCity() == origin)
+                    a1 = airport;
+                if (airport.getCity() == destination)
+                    a2 = airport;
+                break;
+            }
+
+            Flight f(number, date, arrival, departure, a1, a2);
+
+        }
+    }
+
+    cout << "Menu das operacoes:" << endl;
     cout << "1 - Mostrar os voos" << endl;
     cout << "2 - Comprar bilhete e registar-se como passageiro" << endl;
     cout << "3 - Registar-se como passageiro " << endl;
     cout << "4 - Mostra a lista de passageiros " << endl;
     cout << "5 - Sair" << endl;
 
-    cout << "Escolha a opçao do menu que pretende " << endl;
+    cout << "Escolha a opcao do menu que pretende " << endl;
     cin >> op;
 
 
-    switch (op) {
-        case 1:{    //mostra os voos do aeroporto op_airport
-            string line_flight; //só temos que mudar o nome do ficheiro para consehir distinguir os aeroportos
 
-            cout << "==================== Flight =================================" << endl;
-            //formato do ficheiro: nvoo,duration,date,origin,destination
-            if (i_file_flight.is_open()){
-                while (!i_file_flight.eof()){
-                    getline(i_file_flight, line_flight);
-
-                    //separa a linha a parte do delimitador ',' os diferentes dados presentes no ficheiro
-                    stringstream s(line_flight);
-                    string number_i, duration, date, origin, destination;
-                    getline(s, number_i, ',');
-                    int number_f = stoi(number_i);
-                    getline(s, duration, ',');
-                    float duration_f = stof(duration);
-                    getline(s, date, ',');
-                    getline(s, origin, ',');
-                    getline(s, destination, ',');
-
-                    //controi um objeto voo que vai ser adicinado ao vector de voos
-                    Flight f(number_f, duration_f, date, origin, destination);
-                    //ASSIM, JÁ NÃO É PRECISO AQUELA FUNÇÃO DE ADICIONAR VOOS
-                    //PROBLEMA AQUI PORQUE TEMOS QUE CRIAR PRIMEIRO UM OBJETO DO TIPO AIRPORT
-                    a.addFlight(f);  //adiciona o voo ao vector de voos
-
-                    cout << number_f << "   " << duration << "  " << date << "  " << origin << "    " << destination << endl;
-                }
-            }
-    }
-
-    case 2: {
-        //se calhar o número do voo devia ser uma string
-        int op_voo;
-        string name_p;
-        cout << "Por favor, coloque o seu nome para poder prosseguir com a operaçao" << endl;
-        getline(cin, name_p);
-        cout << "Escolha o numero do voo para o qual pretende comprar bilhete" << endl;
-        cin >> op_voo;
-
-        for (auto f: a.flights) {
-            if (f.getNumber() == op_voo) {
-                Ticket t(f);
-                Passenger p(name_p, t);
-                //deviamos ter agora um vector pou assim de passageiros para podermos guardar estes dados
-            }
-        }
-
-        //se o passegeiro conseguiu comprar o bilhete, temos que escrever no ficheiro o nome dele
-        //para aparecer na lista de passageiros desse voo
-
-    }
-
-    case 3: {   //mostra a lista de passageiros, decidir se é só imprime só o nome ou o bilhete também
-        cout << "===================== Passengers ===================";
-        if (i_file_passengers.is_open()){
-            while (!i_file_passengers.eof()){
-                string line_passengers;
-                getline (i_file_passengers, line_passengers);
-                cout << line_passengers << endl;
-            }
-        }
-    }
-}
     return 0;
-     */
 }
