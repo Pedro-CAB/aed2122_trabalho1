@@ -26,6 +26,7 @@ public:
     string getLPlate();
     int getN(), getC(), getMaxOccupation();
     queue<Service> getToDo(), getDone();
+    queue<Flight> getFlightPlan();
 
     //Setters:
     void setLPlate(string newLPlate),setN(int n),

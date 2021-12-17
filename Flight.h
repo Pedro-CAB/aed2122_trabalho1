@@ -19,6 +19,7 @@ public:
     string date, arrivalT, departureT;
     Airport origin, destination;
     list<Passenger> passengers;
+    LuggageCar car;
     Flight();
     Flight (int number, string arrivalT,string departureT, string date, Airport origin, Airport destination);
 

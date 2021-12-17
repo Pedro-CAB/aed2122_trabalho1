@@ -37,3 +37,7 @@ vector<string> TTLocation::getSchedule() {
 bool TTLocation::operator < (const TTLocation &t1) const {
     return (distance < t1.distance);
 }
+
+bool TTLocation::operator==(const TTLocation &t1) const {
+    return (name == t1.name && type == t1.type);
+}

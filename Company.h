@@ -34,13 +34,18 @@ public:
     void addPlane(Plane p);
     void addAirport(Airport a);
     void addFlight(Flight f);
-    void addPassengers(Passenger p);
+    void addPassenger(Passenger p);
 
     //Remove Elements from Company:
     void removePlane(string LPlate);
     void removeAirport(string name, string city);
     void removeFlight (int number);
     void removePassenger(string name);
+
+    //Filter Vectors:
+    vector<Flight> flightsByOrigin(string name, string city);
+    vector<Flight> flightsByDestination(string name, string city);
+    vector<Plane> planesByAirport(string name, string city);
 
 };
 

@@ -3,7 +3,7 @@
 //
 #include "Flight.h"
 
-Flight::Flight(){
+Flight::Flight() : car(LuggageCar(0, 0, 0)){
     number = -1;
     departureT = "NULL_TIME";
     arrivalT = "NULL_TIME";
@@ -11,15 +11,17 @@ Flight::Flight(){
     origin = Airport();
     destination = Airport();
     passengers = {};
+    car = LuggageCar(0,0,0);
 }
 
-Flight::Flight(int number, string arrivalT, string departureT, string date, Airport origin, Airport destination){
+Flight::Flight(int number, string arrivalT, string departureT, string date, Airport origin, Airport destination) : car(LuggageCar(origin.getCar().getC(), origin.getCar().getN(), origin.getCar().getM())){
     this->number = number,
     this->departureT =departureT;
     this->arrivalT = arrivalT;
     this->date = date;
     this->origin = origin;
     this->destination = destination;
+    this->car = origin.getCar();
 }
 
 int Flight::getNumber(){

@@ -15,9 +15,9 @@ public:
     vector<vector<stack<bool>>> car;
     LuggageCar(int c, int n, int m);
 
+    int getC(),getN(),getM();
     bool addLuggage ();
     bool isFull();
 };
-
 
 #endif //PROJECTAED_LUGGAGECAR_H

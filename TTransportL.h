@@ -23,6 +23,7 @@ public:
     float getDistance();
     vector<string> getSchedule();
     bool operator < (const TTLocation &t1) const;
+    bool operator == (const TTLocation &t1) const;
 };
 
 #endif //PROJECTAED_TTRANSPORTL_H

@@ -18,6 +18,7 @@ LuggageCar Airport::getCar() {return car;}
 string Airport::getCity() {return city;}
 
 void Airport::setName(string& newName) {name = newName;}
+void Airport::setCity(string &city) {this->city=city;}
 void Airport::setLocations(BST<TTLocation> &locations) {this->locations = locations;}
 void Airport::setCar(int& c, int& n, int& m) {this->car = LuggageCar(c, n, m);}
 

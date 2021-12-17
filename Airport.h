@@ -32,6 +32,7 @@ public:
     void setName(string& newName);
     void setLocations(BST<TTLocation>& locations);
     void setCar(int& c, int& n, int& m);
+    void setCity(string& city);
 
     //Edit:
     void addLocation(const TTLocation& location);

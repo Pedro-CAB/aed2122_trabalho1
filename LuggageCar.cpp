@@ -19,6 +19,12 @@ LuggageCar::LuggageCar(int c, int n, int m) {
         }
     }
 }
+
+int LuggageCar::getC() {return c;}
+
+int LuggageCar::getM() {return m;}
+
+int LuggageCar::getN() {return n;}
 /**
  * Adiciona 1 mala ao carrinho
  * @return true se a adição for bem sucedida ou false se o carrinho estiver cheio

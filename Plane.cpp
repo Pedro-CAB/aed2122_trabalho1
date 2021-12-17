@@ -17,6 +17,8 @@ int Plane::getMaxOccupation() {return max_ocupation;}
 queue<Service> Plane::getDone() {return done;}
 queue<Service> Plane::getToDo() {return to_do;}
 
+queue<Flight> Plane::getFlightPlan() {return flightPlan;};
+
 
 //Setters:
 void Plane::setLPlate(string newLPlate) {LPlate=newLPlate;}
