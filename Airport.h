@@ -35,7 +35,7 @@ public:
 
     //Edit:
     void addLocation(const TTLocation& location);
-
+    bool operator ==(const Airport &a) const;
 };
 
 

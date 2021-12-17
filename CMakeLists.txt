@@ -3,4 +3,4 @@ project(projectaed)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(projectaed main.cpp Passenger.cpp Flight.cpp Service.cpp Plane.cpp Airport.cpp TTransportL.cpp LuggageCar.cpp LuggageCar.h)
+add_executable(projectaed main.cpp Passenger.cpp Flight.cpp Service.cpp Plane.cpp Airport.cpp TTransportL.cpp LuggageCar.cpp LuggageCar.h Company.h Company.cpp)

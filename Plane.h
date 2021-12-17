@@ -37,6 +37,7 @@ public:
     void doNextNTasks(int n);
     bool hasFlights();
     Flight nextFlight();
+    bool operator ==(Plane p) const;
 };
 
 #endif //PROJECTAED_PLANE_H

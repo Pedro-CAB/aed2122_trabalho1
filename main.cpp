@@ -2,28 +2,65 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
-#include <vector>
-
-#include "Airport.h"
-#include "Flight.h"
-#include "Passenger.h"
-#include "Plane.h"
-#include "Service.h"
-#include "TTransportL.h"
+#include "Company.h"
 
 using namespace std;
+void main_menu(), go_back();
 
 
+
+void flight_menu(){
+    cout<< "<MENU DE VOOS COM OPCOES POR IMPLEMENTAR>"<<endl;
+}
+
+void main_menu(){
+    string choice;
+    cin>>choice;
+    if (choice == "A"){
+        cout << "-Selecione uma opcao:"<<endl;
+        cout << "A)Ver todos os voos da companhia"<<endl;
+        cout << "B)Ver todos os voos que partem de um aeroporto"<<endl;
+        cout << "C)Ver todos os voos que chegam a um aeroporto"<<endl;
+        flight_menu();
+    }
+    else if (choice == "B"){
+        cout << "<DEVE MOSTRAR TABELA DE TODOS OS AEROPORTOS DA COMPANHIA>"<<endl;
+        cout << "-Insira 0 para voltar ao menu principal"<<endl;
+    }
+    else if (choice == "C"){
+        cout << "<IMPLEMENTAR FUNÇÃO DE COMPRA DE BILHETES>"<<endl;
+    }
+    else if (choice == "D"){
+        cout << "<IMPLEMENTAR TABELA DE PASSAGEIROS>"<<endl;
+    }
+    else if (choice == "E"){
+        cout << "<IMPLEMENTAR TABELA DE LOCAIS DE TRANSPORTE>"<<endl;
+    }
+    else if (choice == "F"){
+        cout << "<IMPLEMENTAR TABELA DE TAREFAS A REALIZAR>"<<endl;
+    }
+    else if (choice == "G"){
+        cout << "<IMPLEMENTAR TABELA DE TAREFAS REALIZADAS>"<<endl;
+    }
+    else if (choice == "H"){
+        cout << "<IMPLEMENTAR ATUALIZAÇÃO DE VIAGEM>"<<endl;
+    }
+    else{
+        cout << "ERRO: Input Inválido. Tente novamente."<<endl;
+        main_menu();
+    }
+}
 int main() {
+    Company company = Company();
+    //TODOS OS OBJETOS CARREGADOS DEVEM SER INSERIDOS NOS VETORES DA COMPANY E DENTRO DOS OBJETOS QUE OS CONTÊM
+    /*
     ifstream i_file_planes, i_file_passengers, i_file_flight, i_file_airport;
     ofstream o_file_planes, o_file_passengers, o_file_flight, o_file_airport;
     vector<Airport> airports;
     int op;
 
     //O FICHEIRO DO AEROPORTO SÓ VAI TER O NOME DO AEROPORTO
-    /*
-     * Nome, sitio, Tipo, Distância ao aeroporto, Horário
-     */
+     Nome, sitio, Tipo, Distância ao aeroporto, Horário
     if (i_file_airport.is_open()){
         while (!i_file_airport.eof()){
             string info_airport, info_transp, info_bag;       //contém o nome, tipo, distância, horário
@@ -75,10 +112,10 @@ int main() {
 
     //AVIÃO
 
-    /*
+
      * Matrícula, Ocupação Máxima, lista de tarefas a fazer, lista de
      * tarefas realizadas, plano de voo
-     */
+
     string name_file_plane = a.getName() + "plane.txt";
     i_file_planes.open(name_file_plane);
 
@@ -168,5 +205,17 @@ int main() {
 
 
 
-    return 0;
+    return 0; */
+    cout << "====================Agência Voe Connosco====================="<<endl;
+    cout<<"-Bem vindo!"<<endl;
+    cout<<"-Selecione a operacao desejada inserindo a letra respetiva."<<endl;
+    cout<<"A)Tabelas de Voos"<<endl;
+    cout<<"B)Tabela de Aeroportos"<<endl;
+    cout<<"C)Comprar Bilhetes"<<endl;
+    cout<<"D)Listas de Passageiros"<<endl;
+    cout<<"E)Listas de Locais de Transporte Proximos"<<endl;
+    cout<<"F)Tarefas a Realizar"<<endl;
+    cout<<"G)Tarefas Realizadas"<<endl;
+    cout<<"H)Atualizar Viagem"<<endl;
+    main_menu();
 }

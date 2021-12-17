@@ -54,3 +54,7 @@ bool Plane::hasFlights() {return flightPlan.size()>0;}
 Flight Plane::nextFlight() {
     return (flightPlan.front());
 }
+
+bool Plane::operator==(Plane p) const {
+    return (LPlate == p.LPlate);
+}

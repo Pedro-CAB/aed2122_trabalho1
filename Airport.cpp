@@ -26,3 +26,6 @@ void Airport::setCar(int& c, int& n, int& m) {this->car = LuggageCar(c, n, m);}
  * @param location Local de Transporte a adicionar (objeto do tipo TTLocation)
  */
 void Airport::addLocation(const TTLocation& location) {locations.insert(location);}
+bool Airport::operator == (const Airport &a) const{
+    return (name == a.name && city == a.city);
+}
