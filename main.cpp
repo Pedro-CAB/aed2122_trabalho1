@@ -8,12 +8,35 @@ using namespace std;
 void main_menu(), go_back();
 
 
-
-void flight_menu(){
-    cout<< "<MENU DE VOOS COM OPCOES POR IMPLEMENTAR>"<<endl;
+string sizeRegularizer(string str, int n){
+    if (str.size() > n){
+        return str.substr(0,n-3) + "...";
+    }
+    else if (str.size() == n){
+        return str;
+    }
+    else{
+        while (str.size() + 2 <=n){
+            str = " " + str + " ";
+        }
+        if (str.size() < n){
+            str = str + " ";
+        }
+        return str;
+    }
+}
+void flight_menu(Company company){
+    string choice;
+    cin>>choice;
+    if (choice == "A"){
+        cout <<"||  n# ||          ||                              ||                              ||"<<endl;
+        for(auto flight : company.getFlights()){
+            cout <<"||"<< sizeRegularizer(to_string(flight.getNumber()),5)<<"||"<<flight.getDate()<<"||"<<sizeRegularizer(flight.getOrigin().getCity(),30)<<"||"<<sizeRegularizer(flight.getDestination().getCity(),30)<<"||"<<endl;
+        }
+    }
 }
 
-void main_menu(){
+void main_menu(Company company){
     string choice;
     cin>>choice;
     if (choice == "A"){
@@ -21,7 +44,7 @@ void main_menu(){
         cout << "A)Ver todos os voos da companhia"<<endl;
         cout << "B)Ver todos os voos que partem de um aeroporto"<<endl;
         cout << "C)Ver todos os voos que chegam a um aeroporto"<<endl;
-        flight_menu();
+        flight_menu(company);
     }
     else if (choice == "B"){
         cout << "<DEVE MOSTRAR TABELA DE TODOS OS AEROPORTOS DA COMPANHIA>"<<endl;
@@ -47,7 +70,7 @@ void main_menu(){
     }
     else{
         cout << "ERRO: Input Inválido. Tente novamente."<<endl;
-        main_menu();
+        main_menu(company);
     }
 }
 int main() {
@@ -259,9 +282,20 @@ int main() {
     Plane P4 = Plane("A004",400);
     Plane P5 = Plane("A005",250);
     Plane P6 = Plane("A006",300);
+    P1.addTask(s1), P1.addTask(s2);
+    P2.addTask(s3), P2.addTask(s2);
+    P3.addTask(s2), P3.addTask(s3);
+    P4.addTask(s1), P4.addTask(s3);
+    P5.addTask(s1);
+    P6.addTask(s1), P6.addTask(s2),P6.addTask(s3);
+    P1.addFlight(f1),P1.addFlight(f6),P1.addFlight(f8);
+    P2.addFlight(f3),P2.addFlight(f1);
+    P3.addFlight(f7),P3.addFlight(f2),P3.addFlight(f6);
 
-
-
+    company.addFlight(f1),company.addFlight(f2),company.addFlight(f3),company.addFlight(f4),company.addFlight(f5),company.addFlight(f6),company.addFlight(f7),company.addFlight(f8);
+    company.addPassenger(p1),company.addPassenger(p2),company.addPassenger(p3),company.addPassenger(p4),company.addPassenger(p5),company.addPassenger(p6),company.addPassenger(p7),company.addPassenger(p8),company.addPassenger(p9),company.addPassenger(p10);
+    company.addAirport(a1),company.addAirport(a2),company.addAirport(a3);
+    company.addPlane(P1),company.addPlane(P2),company.addPlane(P3),company.addPlane(P4),company.addPlane(P5),company.addPlane(P6);
 
 
     cout << "====================Agência Voe Connosco====================="<<endl;
@@ -275,5 +309,5 @@ int main() {
     cout<<"F)Tarefas a Realizar"<<endl;
     cout<<"G)Tarefas Realizadas"<<endl;
     cout<<"H)Atualizar Viagem"<<endl;
-    main_menu();
+    main_menu(company);
 }

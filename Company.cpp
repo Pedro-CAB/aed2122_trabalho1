@@ -100,3 +100,16 @@ vector<Plane> Company::planesByAirport(string name, string city) {
     }
     return filtered;
 }
+/**
+ * Retorna um vetor com os aviões operacionais
+ * @return
+ */
+vector<Plane> Company::operationalPlanes() {
+    vector<Plane> filtered = {};
+    for(auto plane : planes){
+        if (plane.getFlightPlan().size()>0){
+            filtered.push_back(plane);
+        }
+    }
+    return filtered;
+}

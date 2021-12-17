@@ -45,6 +45,7 @@ public:
     //Filter Vectors:
     vector<Flight> flightsByOrigin(string name, string city);
     vector<Flight> flightsByDestination(string name, string city);
+    vector<Plane> operationalPlanes();
     vector<Plane> planesByAirport(string name, string city);
 
 };

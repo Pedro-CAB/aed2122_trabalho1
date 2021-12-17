@@ -35,6 +35,7 @@ public:
 
     //Edit:
     void addTask(Service a);
+    void addFlight(Flight f);
     void doNextNTasks(int n);
     bool hasFlights();
     Flight nextFlight();
