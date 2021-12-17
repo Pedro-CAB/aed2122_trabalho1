@@ -37,41 +37,52 @@ void flight_menu(Company company){
 }
 
 void main_menu(Company company){
+    cout<<"-Selecione a operacao desejada inserindo a letra respetiva."<<endl;
+    cout<<"A)Tabelas de Voos"<<endl;
+    cout<<"B)Tabela de Aeroportos"<<endl;
+    cout<<"C)Comprar Bilhetes"<<endl;
+    cout<<"D)Listas de Passageiros"<<endl;
+    cout<<"E)Listas de Locais de Transporte Proximos"<<endl;
+    cout<<"F)Tarefas a Realizar"<<endl;
+    cout<<"G)Tarefas Realizadas"<<endl;
+    cout<<"H)Atualizar Viagem"<<endl;
     string choice;
     cin>>choice;
-    if (choice == "A"){
-        cout << "-Selecione uma opcao:"<<endl;
-        cout << "A)Ver todos os voos da companhia"<<endl;
-        cout << "B)Ver todos os voos que partem de um aeroporto"<<endl;
-        cout << "C)Ver todos os voos que chegam a um aeroporto"<<endl;
-        flight_menu(company);
-    }
-    else if (choice == "B"){
-        cout << "<DEVE MOSTRAR TABELA DE TODOS OS AEROPORTOS DA COMPANHIA>"<<endl;
-        cout << "-Insira 0 para voltar ao menu principal"<<endl;
-    }
-    else if (choice == "C"){
-        cout << "<IMPLEMENTAR FUNÇÃO DE COMPRA DE BILHETES>"<<endl;
-    }
-    else if (choice == "D"){
-        cout << "<IMPLEMENTAR TABELA DE PASSAGEIROS>"<<endl;
-    }
-    else if (choice == "E"){
-        cout << "<IMPLEMENTAR TABELA DE LOCAIS DE TRANSPORTE>"<<endl;
-    }
-    else if (choice == "F"){
-        cout << "<IMPLEMENTAR TABELA DE TAREFAS A REALIZAR>"<<endl;
-    }
-    else if (choice == "G"){
-        cout << "<IMPLEMENTAR TABELA DE TAREFAS REALIZADAS>"<<endl;
-    }
-    else if (choice == "H"){
-        cout << "<IMPLEMENTAR ATUALIZAÇÃO DE VIAGEM>"<<endl;
-    }
-    else{
-        cout << "ERRO: Input Inválido. Tente novamente."<<endl;
-        main_menu(company);
-    }
+    switch (choice){
+        case "A":
+            cout << "-Selecione uma opcao:"<<endl;
+            cout << "A)Ver todos os voos da companhia"<<endl;
+            cout << "B)Ver todos os voos que partem de um aeroporto"<<endl;
+            cout << "C)Ver todos os voos que chegam a um aeroporto"<<endl;
+            cout << "-Insira 0 para voltar ao menu principal"<<endl;
+            flight_menu(company);
+            break;
+        case "B":
+            cout << "<DEVE MOSTRAR TABELA DE TODOS OS AEROPORTOS DA COMPANHIA>"<<endl;
+            cout << "-Insira 0 para voltar ao menu principal"<<endl;
+            break;
+        case "C":
+            cout << "<IMPLEMENTAR FUNÇÃO DE COMPRA DE BILHETES>"<<endl;
+            break;
+        case"D":
+            cout << "<IMPLEMENTAR TABELA DE PASSAGEIROS>"<<endl;
+            break;
+        case "E":
+            cout << "<IMPLEMENTAR TABELA DE LOCAIS DE TRANSPORTE>"<<endl;
+            break;
+        case "F":
+            cout << "<IMPLEMENTAR TABELA DE TAREFAS A REALIZAR>"<<endl;
+            break;
+        case "G":
+            cout << "<IMPLEMENTAR TABELA DE TAREFAS REALIZADAS>"<<endl;
+            break;
+        case "H":
+            cout << "<IMPLEMENTAR ATUALIZAÇÃO DE VIAGEM>"<<endl;
+            break;
+        default :
+            cout << "ERRO: Input Inválido. Tente novamente."<<endl;
+            main_menu(company);
+        }
 }
 int main() {
     Company company = Company();
@@ -155,20 +166,24 @@ int main() {
 
             getline(i_file_planes,info_services_to_do);
             stringstream s_services(info_services_to_do);
+            string s_service;
             //VER ISTO PORQUE SE CALHAR NEM É PRECISO DOIS DELIMITADORES
             //TEMOS SÓ UM, MAS COMO SABEMOS QUANTAS VARIÁVEIS TEM, NÃO É PRECISO
-            while (getline()){   //tipo, data e empregado VER A CONDIÇÃO DE TERMINAR
+            while (getline(s_services, s_service, '-');){   //tipo, data e empregado VER A CONDIÇÃO DE TERMINAR
+                stringstream s(s_service);
                 string type, date, employee;
-                getline(s_services, type, ',');
-                getline(s_services, date, ',');
-                getline(s_services, employee, ',');
+                getline(s, type, ',');
+                getline(s, date, ',');
+                getline(s, employee, ',');
                 Service c(type, date, employee);
                 p.getToDo().push(c);
             }
 
             getline(i_file_planes, info_services_done);
             stringstream s_services_done(info_services_done);
-            while (true){
+            string s_service_done;
+            while (getline(s_services_done, s_service_done, '-')){
+                stringstream s(s_service_done)
                 string type, date, employee;
                 getline(s_services_done, type, ',');
                 getline(s_services_done, date, ',');
@@ -300,14 +315,5 @@ int main() {
 
     cout << "====================Agência Voe Connosco====================="<<endl;
     cout<<"-Bem vindo!"<<endl;
-    cout<<"-Selecione a operacao desejada inserindo a letra respetiva."<<endl;
-    cout<<"A)Tabelas de Voos"<<endl;
-    cout<<"B)Tabela de Aeroportos"<<endl;
-    cout<<"C)Comprar Bilhetes"<<endl;
-    cout<<"D)Listas de Passageiros"<<endl;
-    cout<<"E)Listas de Locais de Transporte Proximos"<<endl;
-    cout<<"F)Tarefas a Realizar"<<endl;
-    cout<<"G)Tarefas Realizadas"<<endl;
-    cout<<"H)Atualizar Viagem"<<endl;
     main_menu(company);
 }
