@@ -40,6 +40,14 @@ Airport Flight::getDestination(){
     return destination;
 }
 
+string Flight::getArrivalT() {
+    return arrivalT;
+}
+
+string Flight::getDepartureT() {
+    return departureT;
+}
+
 void Flight::setNumber(int number){
     this->number = number;
 }

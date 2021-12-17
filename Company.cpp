@@ -61,10 +61,10 @@ void Company::removePlane(string LPlate) {
  * @param city Cidade do Aeroporto
  * @return
  */
-vector<Flight> Company::flightsByOrigin(string name, string city) {
+vector<Flight> Company::flightsByOrigin(string name) {
     vector<Flight> filtered = {};
     for (auto flight : flights){
-        if (flight.getOrigin().getName() == name && flight.getOrigin().getCity() == city){
+        if (flight.getOrigin().getName() == name){
             filtered.push_back(flight);
         }
     }
@@ -76,10 +76,10 @@ vector<Flight> Company::flightsByOrigin(string name, string city) {
  * @param city Cidade do Aeroporto
  * @return
  */
-vector<Flight> Company::flightsByDestination(string name, string city) {
+vector<Flight> Company::flightsByDestination(string name) {
     vector<Flight> filtered = {};
     for (auto flight : flights){
-        if (flight.getDestination().getName() == name && flight.getDestination().getCity() == city){
+        if (flight.getDestination().getName() == name){
             filtered.push_back(flight);
         }
     }
@@ -112,4 +112,12 @@ vector<Plane> Company::operationalPlanes() {
         }
     }
     return filtered;
+}
+
+bool Company::airportExists(string name) {
+    for (auto airport : airports){
+        if(airport.getName()==name)
+            return true;
+    }
+    return false;
 }
