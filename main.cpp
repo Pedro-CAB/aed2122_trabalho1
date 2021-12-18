@@ -258,7 +258,11 @@ void flight_menu(Company company){
 void buy_ticket(Company company) {
     bool control = true;
     while (control) {
-        string input;
+        cout << "-Selecione uma opcao:" << endl;
+        cout << "A)Ver tabela de vôos da companhia" << endl;
+        cout << "B)Comprar bilhetes" << endl;
+        cout << "-Insira 0 para voltar ao menu principal" << endl;
+        string input, name, city;
         char choice;
         getline(cin,input);
         choice = input.at(0);
@@ -267,14 +271,29 @@ void buy_ticket(Company company) {
                 control = false;
                 break;
             case 'A':
-                cout << "||  n# ||          ||                              ||                              ||" << endl;
-                for (auto flight: company.getFlights()) {
-                    cout << "||" << sizeRegularizer(to_string(flight.getNumber()), 5) << "||" << flight.getDate()
-                         << "||" << sizeRegularizer(flight.getOrigin().getCity(), 30) << "||"
-                         << sizeRegularizer(flight.getDestination().getCity(), 30) << "||" << endl;
+            case 'a':
+                cout << "Selecione o Aeroporto de Origem:" << endl;
+                cout << "||" << sizeRegularizer("Nome", 30) << "||" << sizeRegularizer("Cidade", 20) << "||" << endl;
+                for (auto airport: company.getAirports()) {
+                    cout << "||" << sizeRegularizer(airport.getName(), 30) << "||" << sizeRegularizer(airport.getCity(), 20)
+                         << "||" << endl;
+                }
+                cout << "Insira o nome do aeroporto abaixo:"<<endl;
+                cin.clear();
+                getline(cin,name);
+                if (company.airportExists(name)) {
+                    cout << "||" << sizeRegularizer("n#", 5) << "||" << sizeRegularizer("Data", 10) << "||" << "Partida"
+                         << "||" << sizeRegularizer("Destino", 30) << "||" << endl;
+                    for (auto flight: company.flightsByOrigin(name)) {
+                        cout << "||" << sizeRegularizer(to_string(flight.getNumber()), 5) << "||" << flight.getDate()
+                             << "||"
+                             << sizeRegularizer(flight.getDepartureT(), 7) << "||"
+                             << sizeRegularizer(flight.getDestination().getCity(), 30) << "||" << endl;
+                    }
                 }
                 break;
             case 'B':
+            case'b':
                 bool exists = false;
                 cout << "Insira o numero do voo para qual quer comprar bilhetes" << endl;
                 int flightN;
@@ -353,7 +372,7 @@ void main_menu(Company company){
             cout << "A)Ver todos os voos da companhia" << endl;
             cout << "B)Ver todos os voos que partem de um aeroporto" << endl;
             cout << "C)Ver todos os voos que chegam a um aeroporto" << endl;
-            cout << "Insira 0 para voltar ao menu principal." << endl;
+            cout << "Insira 0 para voltar ao menu principal" << endl;
             flight_menu(company);
             break;
         case 'b':
@@ -368,10 +387,6 @@ void main_menu(Company company){
             break;
         case 'c':
         case 'C':
-            cout << "-Selecione uma opcao:" << endl;
-            cout << "A)Ver todos os voos da companhia" << endl;
-            cout << "B)Comprar bilhetes" << endl;
-            cout << "-Insira 0 para voltar ao menu principal" << endl;
             buy_ticket(company);
             break;
         case 'd':
