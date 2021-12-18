@@ -6,6 +6,106 @@
 
 using namespace std;
 void main_menu(Company company), go_back(Company company);
+string sizeRegularizer(string str, int n);
+
+void DoneList(Company company){
+    string LPlate;
+    cin.clear();
+    getline(cin,LPlate);
+    Plane p = Plane("0000",0);
+    for (auto plane : company.getPlanes()){
+        if (LPlate==plane.getLPlate()){
+            p = plane;
+            break;
+        }
+    }
+    queue<Service> todo = p.getDone();
+    cout << "||"<< sizeRegularizer("Tarefa",15)<<"||"<<sizeRegularizer("Data",10)<<"||"<<sizeRegularizer("Funcionário",20)<<endl;
+    while (todo.size()>0){
+        cout << "||"<<sizeRegularizer(todo.front().getType(),15)<<"||"<<todo.front().getDate()<<"||"<<sizeRegularizer(todo.front().getEmployee(),20)<<endl;
+        todo.pop();
+    }
+    cout << "Insira 0 para voltar ao menu principal"<<endl;
+    go_back(company);
+}
+
+void ToDoList(Company company){
+    string LPlate;
+    cin.clear();
+    getline(cin,LPlate);
+    Plane p = Plane("0000",0);
+    for (auto plane : company.getPlanes()){
+        if (LPlate==plane.getLPlate()){
+            p = plane;
+            break;
+        }
+    }
+    queue<Service> todo = p.getToDo();
+    cout << "||"<< sizeRegularizer("Tarefa",15)<<"||"<<sizeRegularizer("Data",10)<<"||"<<sizeRegularizer("Funcionário",20)<<endl;
+    while (todo.size()>0){
+        cout << "||"<<sizeRegularizer(todo.front().getType(),15)<<"||"<<todo.front().getDate()<<"||"<<sizeRegularizer(todo.front().getEmployee(),20)<<endl;
+        todo.pop();
+    }
+    cout << "Insira 0 para voltar ao menu principal"<<endl;
+    go_back(company);
+}
+
+void ListFLightPassengers(Company company){
+    string number;
+    Flight f;
+    cin.clear();
+    getline(cin,number);
+    int num = stoi(number);
+    for (auto flight : company.getFlights()){
+        if (flight.getNumber() == num){
+            f = flight;
+            break;
+        }
+        else if (f.getNumber()!= num && f.getNumber()== company.getFlights().size()){
+            cout << "ERRO: Voo não existe. Por favor tente novamente.";
+            ListFLightPassengers(company);
+        }
+    }
+    cout <<"||"<<sizeRegularizer("Nome",20)<<"||Bagagem Automatica?||"<<endl;
+    for (auto passenger : f.getPassengers()){
+        if (passenger.getLuggage()>0)
+            cout << "||"<<sizeRegularizer(passenger.getName(),20)<<"||"<<sizeRegularizer("Sim",19)<<"||"<<endl;
+        else
+            cout << "||"<<sizeRegularizer(passenger.getName(),20)<<"||"<<sizeRegularizer("Nao",19)<<"||"<<endl;
+    }
+    cout << "Insira 0 para voltar ao menu principal."<<endl;
+    go_back(company);
+}
+void ListAllPassengers(Company company){
+    cout <<"||"<<sizeRegularizer("Nome",20)<<"||Bagagem Automatica?||"<<endl;
+    for (auto passenger : company.getPassengers()){
+        if (passenger.getLuggage()>0)
+            cout << "||"<<sizeRegularizer(passenger.getName(),20)<<"||"<<sizeRegularizer("Sim",19)<<"||"<<endl;
+        else
+            cout << "||"<<sizeRegularizer(passenger.getName(),20)<<"||"<<sizeRegularizer("Nao",19)<<"||"<<endl;
+    }
+    cout << "Insira 0 para voltar ao menu principal."<<endl;
+    go_back(company);
+}
+void ListPassengers (Company company){
+    cout<<"Selecione uma opcao abaixo:"<<endl;
+    cout<<"A)Listar todos os passageiros da companhia"<<endl;
+    cout<<"B)Listar todos os passageiros de um voo"<<endl;
+    string choice;
+    cin.clear();
+    getline(cin,choice);
+    if (choice == "A"){
+        ListAllPassengers(company);
+    }
+    else if (choice == "B"){
+        cout << "Selecione o Voo:"<<endl;
+        cout <<"||"<< sizeRegularizer("n#",5)<<"||"<< sizeRegularizer("Data",10)<<"||"<<sizeRegularizer("Origem",30)<<"||"<<sizeRegularizer("Destino",30)<<"||"<<endl;
+        for(auto flight : company.getFlights()){
+            cout <<"||"<< sizeRegularizer(to_string(flight.getNumber()),5)<<"||"<<flight.getDate()<<"||"<<sizeRegularizer(flight.getOrigin().getCity(),30)<<"||"<<sizeRegularizer(flight.getDestination().getCity(),30)<<"||"<<endl;
+        }
+        ListFLightPassengers(company);
+    }
+}
 
 void go_back(Company company){
     string choice;
@@ -63,7 +163,7 @@ void flightByDestination(Company company){
         go_back(company);
     }
     else{
-        cout << "ERRO: Input Inválido. Tente novamente."<<endl;
+        cout << "ERRO: O aeroporto inserido não existe. Tente novamente."<<endl;
         flightByDestination(company);
     }
 }
@@ -145,16 +245,32 @@ void main_menu(Company company){
         cout << "<IMPLEMENTAR FUNÇÃO DE COMPRA DE BILHETES>"<<endl;
     }
     else if (choice == "D"){
-        cout << "<IMPLEMENTAR TABELA DE PASSAGEIROS>"<<endl;
+        ListPassengers(company);
     }
     else if (choice == "E"){
         cout << "<IMPLEMENTAR TABELA DE LOCAIS DE TRANSPORTE>"<<endl;
     }
     else if (choice == "F"){
-        cout << "<IMPLEMENTAR TABELA DE TAREFAS A REALIZAR>"<<endl;
+        cout << "Selecione o aviao cujas tarefas deseja consultar:"<<endl;
+        cout << "||Aviao||Lugares||"<<sizeRegularizer("Localizacao Atual",30)<<"||"<<endl;
+        for (auto plane : company.getPlanes()){
+            if(plane.getFlightPlan().size()>0)
+                cout<<"||"<<sizeRegularizer(plane.getLPlate(),9)<<"||"<<sizeRegularizer(to_string(plane.getMaxOccupation()),7)<<"||"<<sizeRegularizer(plane.getFlightPlan().front().getOrigin().getName(),30)<<"||"<<endl;
+            else
+                cout<<"||"<<sizeRegularizer(plane.getLPlate(),9)<<"||"<<sizeRegularizer(to_string(plane.getMaxOccupation()),7)<<"||"<<sizeRegularizer("Nao Operacional",30)<<"||"<<endl;
+        }
+        ToDoList(company);
     }
     else if (choice == "G"){
-        cout << "<IMPLEMENTAR TABELA DE TAREFAS REALIZADAS>"<<endl;
+        cout << "Selecione o aviao cujas tarefas deseja consultar:"<<endl;
+        cout << "||Aviao||Lugares||"<<sizeRegularizer("Localizacao Atual",30)<<"||"<<endl;
+        for (auto plane : company.getPlanes()){
+            if(plane.getFlightPlan().size()>0)
+                cout<<"||"<<sizeRegularizer(plane.getLPlate(),9)<<"||"<<sizeRegularizer(to_string(plane.getMaxOccupation()),7)<<"||"<<sizeRegularizer(plane.getFlightPlan().front().getOrigin().getName(),30)<<"||"<<endl;
+            else
+                cout<<"||"<<sizeRegularizer(plane.getLPlate(),9)<<"||"<<sizeRegularizer(to_string(plane.getMaxOccupation()),7)<<"||"<<sizeRegularizer("Nao Operacional",30)<<"||"<<endl;
+        }
+        DoneList(company);
     }
     else if (choice == "H"){
         cout << "<IMPLEMENTAR ATUALIZAÇÃO DE VIAGEM>"<<endl;
@@ -348,6 +464,9 @@ int main() {
     P4.addTask(s1), P4.addTask(s3);
     P5.addTask(s1);
     P6.addTask(s1), P6.addTask(s2),P6.addTask(s3);
+    f1.addPassenger(p1),f1.addPassenger(p2),f1.addPassenger(p3),
+            f2.addPassenger(p2),f2.addPassenger(p3),f2.addPassenger(p4),
+            f3.addPassenger(p3),f3.addPassenger(p4),f3.addPassenger(p5);
     P1.addFlight(f1),P1.addFlight(f6),P1.addFlight(f8);
     P2.addFlight(f3),P2.addFlight(f1);
     P3.addFlight(f7),P3.addFlight(f2),P3.addFlight(f6);

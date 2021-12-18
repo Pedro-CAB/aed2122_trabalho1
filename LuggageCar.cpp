@@ -41,16 +41,3 @@ bool LuggageCar::addLuggage() {
     }
     return false;
 }
-/**
- * Verifica se o carrinho está cheio
- * @return True se está cheio ou False se houver pelo menos um espaço no carrinho
- */
-bool LuggageCar::isFull() {
-    for (auto wagon : car){
-        for (auto pile : wagon){
-            if (pile.size() != m)
-                return false;
-        }
-    }
-    return true;
-}

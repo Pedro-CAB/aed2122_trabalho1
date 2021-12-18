@@ -17,7 +17,6 @@ public:
 
     int getC(),getN(),getM();
     bool addLuggage ();
-    bool isFull();
 };
 
 #endif //PROJECTAED_LUGGAGECAR_H

@@ -30,6 +30,7 @@ public:
     Airport getDestination();
     string getArrivalT();
     string getDepartureT();
+    list<Passenger> getPassengers();
 
     //Setters:
     void setNumber(int number);
@@ -40,6 +41,7 @@ public:
     //Others:
     bool operator == (const Flight & f) const;
     bool isPassengerIn(Passenger p);
+    void addPassenger(Passenger p);
 };
 
 #endif //PROJECTAED_FLIGHT_H
