@@ -48,6 +48,10 @@ string Flight::getDepartureT() {
     return departureT;
 }
 
+list<Passenger> Flight::getPassengers() {
+    return passengers;
+}
+
 void Flight::setNumber(int number){
     this->number = number;
 }
@@ -79,4 +83,7 @@ bool Flight::isPassengerIn(Passenger p) {
         }
     }
     return false;
+}
+void Flight::addPassenger(Passenger p) {
+    passengers.push_back(p);
 }

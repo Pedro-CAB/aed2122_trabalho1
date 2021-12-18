@@ -42,9 +42,12 @@ public:
     void removeFlight (int number);
     void removePassenger(string name);
 
+    //Check Elements:
+    bool airportExists(string name);
+
     //Filter Vectors:
-    vector<Flight> flightsByOrigin(string name, string city);
-    vector<Flight> flightsByDestination(string name, string city);
+    vector<Flight> flightsByOrigin(string name);
+    vector<Flight> flightsByDestination(string name);
     vector<Plane> operationalPlanes();
     vector<Plane> planesByAirport(string name, string city);
 

@@ -30,8 +30,8 @@ int LuggageCar::getN() {return n;}
  * @return true se a adição for bem sucedida ou false se o carrinho estiver cheio
  */
 bool LuggageCar::addLuggage() {
-    for (auto wagon : car){
-        for (auto pile : wagon) {
+    for (auto wagon: car) {
+        for (auto pile: wagon) {
             if (pile.size() == m)
                 continue;
             else
