@@ -28,6 +28,8 @@ public:
     string getDate();
     Airport getOrigin();
     Airport getDestination();
+    string getArrivalT();
+    string getDepartureT();
 
     //Setters:
     void setNumber(int number);

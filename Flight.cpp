@@ -16,7 +16,7 @@ Flight::Flight() : car(LuggageCar(0, 0, 0)){
 
 Flight::Flight(int number, string arrivalT, string departureT, string date, Airport origin, Airport destination) : car(LuggageCar(origin.getCar().getC(), origin.getCar().getN(), origin.getCar().getM())){
     this->number = number,
-    this->departureT =departureT;
+            this->departureT =departureT;
     this->arrivalT = arrivalT;
     this->date = date;
     this->origin = origin;
@@ -38,6 +38,14 @@ Airport Flight::getOrigin(){
 
 Airport Flight::getDestination(){
     return destination;
+}
+
+string Flight::getArrivalT() {
+    return arrivalT;
+}
+
+string Flight::getDepartureT() {
+    return departureT;
 }
 
 void Flight::setNumber(int number){
