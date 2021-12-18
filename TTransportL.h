@@ -13,14 +13,14 @@ using namespace std;
 class TTLocation {
 public:
     string name, type;
-    float distance;
+    string distance;
     vector<string> schedule;
 
     TTLocation();
-    TTLocation(string name, string type, float distance, vector<string> &schedule);
+    TTLocation(string name, string type, string distance, vector<string> &schedule);
 
     string getName(), getType();
-    float getDistance();
+    string getDistance();
     vector<string> getSchedule();
     bool operator < (const TTLocation &t1) const;
     bool operator == (const TTLocation &t1) const;

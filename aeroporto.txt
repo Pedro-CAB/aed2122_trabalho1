@@ -1,0 +1,9 @@
+Aeroporto Sa Carneiro;Porto
+3;3;3
+Estacao de Sa Carneiro;Metro;0.5;10h30;11h;13h20-Paragem de Sa Carneiro;Autocarro;0.2;15h30;16h;17h40-Paragem de Sa Carneiro;Taxi;0.2;10h;11h;12h;14h;15h
+Aeroporto Humberto Delgado;Lisboa
+2;4;5
+Estacao Humberto Delgado;Metro;0.5;14h;16h30;19h-Praca de Humberto Delgado;Autocarro;0.2;16h;19h40-Paragem de Humberto Delgago;Taxi;0.2;9h;11h;15h;16h
+Aeroporto Cristiano Ronaldo;Funchal
+2;2;5
+Paragem CR7;Autocarro;0.2;11h20;12h40;14h10;16h-Praca do Funchal;Taxi;0.2;10h;12h;14;16;18h

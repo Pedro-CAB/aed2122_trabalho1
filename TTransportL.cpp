@@ -12,7 +12,7 @@ TTLocation::TTLocation(){
     schedule = emptyVector;
 };
 
-TTLocation::TTLocation(string name, string type, float distance, vector<string>& schedule) {
+TTLocation::TTLocation(string name, string type, string distance, vector<string>& schedule) {
     this->name = name;
     this->type = type;
     this->distance = distance;
@@ -27,7 +27,7 @@ string TTLocation::getType() {
     return type;
 }
 
-float TTLocation::getDistance() {
+string TTLocation::getDistance() {
     return distance;
 }
 

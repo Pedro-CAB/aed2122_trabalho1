@@ -1,0 +1,16 @@
+A001;250
+Limpeza;22/12/2021;Joao Pereira-Bilheteira;23/12/2021;Carlos Silva
+Manutencao;22/12/2021;Miguel Sousa-Vistoria;22/12/2021;Marta Lima
+1;20:00;22:00;22;22/12/2021;Porto;Liboa+Carlos Campos;2+Luis Miguel;1+Simao Ferreira;3+Ana Marques;2
+2;10:00;12:00;22/12/2021;Porto;Lisboa+Guilherme Moreira;1+Antonio Marques;3+Jose Nunes;1+Margaridade Pereira;2
+3;14:00;17:00;22/12/2021;Porto;Funchal+Lucia Teixeira;3+Carla Rodrigues;2+Fernanda Paiva;1
+A002;300
+Manutencao;22/12/2021;Mario Felix-Manutencao;22/12/2021;Pedro Goncalves-Bilheteira;22/12/2021;Teresa Silva
+Limpeza;22/12/2021;Ana Sousa-Limpeza;22/12/2021;Catarina Avezedo
+4;00:30;2:00;22/12/2021;Lisboa,Porto+Ines Ramos;1+Joana Fernandes;2+Alberto Gomes;2+Luisa Santos;1+Bruno Moreira;2
+5;08:00;10:30,22/12/2021;Lisboa;Funchal+Daniel Mendes;1+Tomas Neves;2+Tiago Novais;1+Cristina Vieira;1
+A003;320
+Limpeza;23/12/2021;Andre Carvalho-Limpeza;23/12/2021;Luis Aruajo-Bilheteira;23/12/2021;Nuno Gaspar
+Manutencao;23/12/2021;Diana Veloso-Manutencao;23/12/2021;Rui Sa
+6;16:00;17:30;Funchal;Porto+Maria Pinto;3+Antonio Coelho;2+Gabriel Ramos;2
+7:14:40;17:00;Funchal;Lisboa+Beatriz Santos;2+Jose Rodrigues;1+Rodrigo Correia;1+Carla Mendes;3
