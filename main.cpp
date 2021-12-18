@@ -5,8 +5,6 @@
 #include "Company.h"
 
 using namespace std;
-void main_menu(), go_back();
-
 
 string sizeRegularizer(string str, int n){
     if (str.size() > n){
@@ -36,6 +34,93 @@ void flight_menu(Company company){
     }
 }
 
+void buy_ticket(Company company) {
+    bool control = true;
+    while (control) {
+        cout << "-Selecione uma opcao:" << endl;
+        cout << "A)Ver todos os voos da companhia" << endl;
+        cout << "B)Comprar bilhetes" << endl;
+        cout << "-Insira 0 para voltar ao menu principal" << endl;
+        char choice;
+        cin >> choice;
+        switch (choice) {
+            case '0':
+                control = false;
+                break;
+            case 'A':
+                cout << "||  n# ||          ||                              ||                              ||" << endl;
+                for (auto flight: company.getFlights()) {
+                    cout << "||" << sizeRegularizer(to_string(flight.getNumber()), 5) << "||" << flight.getDate()
+                         << "||" << sizeRegularizer(flight.getOrigin().getCity(), 30) << "||"
+                         << sizeRegularizer(flight.getDestination().getCity(), 30) << "||" << endl;
+                }
+                break;
+            case 'B':
+                bool exists = false;
+                cout << "Insira o número do voo para qual quer comprar bilhetes" << endl;
+                int flightN;
+                auto itFlight = company.flights.begin();
+                cin >> flightN;
+                while (!exists) {
+                    for (auto it = company.flights.begin(); it != company.flights.end(); it++) {
+                        if (it == company.flights.end()) {
+                            cout << "Vôo de número não existente" << endl;
+                            cout << "Por favor introduza outro número de vôo ou 0 para voltar ao menu anterior" << endl;
+                            cin >> flightN;
+                        } else if (it->getNumber() == flightN) {
+                            itFlight = it;
+                            exists = true;
+                        }
+                        if (flightN == 0)
+                            exists = true;
+                    }
+                }
+                if (flightN != 0) {
+                    try {
+                        Plane plane = company.getPLane(flightN);
+
+                        if (company.isFull(*itFlight, plane)) {
+                            cout << "Infelizmente o vôo número(" << flightN << ") não tem mais lugares disponivéis"
+                                 << endl;
+                        } else {
+                            cout << "Introduza o número de bilhetes que deseja comprar:" << endl;
+                            int ticketN;
+                            cin >> ticketN;
+                            if (ticketN > company.emptySeats(*itFlight, plane)) {
+                                cout << "Infelizmente o vôo número(" << flightN << ") só tem mais "
+                                     << company.emptySeats(*itFlight, plane) << " lugares disponivéis" << endl;
+                            } else {
+                                for (int i = 0; i < ticketN; ++i) {
+                                    string nome;
+                                    char autoL;
+                                    bool autoLug = false;
+                                    cout << "Introduza o nome para o " << i + 1 << "º bilhete:" << endl;
+                                    getline(cin, nome);
+                                    getline(cin, nome);
+                                    cout<< "Vai desejar utilizar o serviço de bagagem automática. Introduza uma das seguintes opções: Y) sim; N) não;" << endl;  //Por enquanto está a assumir q o carrinho já tem conteu
+                                    cin >> autoL;                                                                                                                //Ainda não decidimos como implementar o carrinho
+                                    if (autoL == 'Y') {
+                                        if (!itFlight->getOrigin().getCar().addLuggage()) {
+                                            cout
+                                                    << "Infelizmente o serviço de bagagem automática já não se encontra disponivel. Terá que processar a sua bagagem manualmente"
+                                                    << endl;
+                                        } else
+                                            autoLug = true;
+                                    }
+                                    itFlight->passengers.push_back(Passenger(nome, autoLug));
+                                }
+                                cout << "Obrigado por viajar com a Voe Connosco!" <<endl;
+                            }
+                        }
+                    } catch (const char* msg) {
+                        cerr << msg << endl;
+                    }
+                }
+                break;
+        }
+    }
+}
+
 void main_menu(Company company){
     cout<<"-Selecione a operacao desejada inserindo a letra respetiva."<<endl;
     cout<<"A)Tabelas de Voos"<<endl;
@@ -46,10 +131,11 @@ void main_menu(Company company){
     cout<<"F)Tarefas a Realizar"<<endl;
     cout<<"G)Tarefas Realizadas"<<endl;
     cout<<"H)Atualizar Viagem"<<endl;
-    string choice;
+    char choice;
     cin>>choice;
+
     switch (choice){
-        case "A":
+        case 'A':
             cout << "-Selecione uma opcao:"<<endl;
             cout << "A)Ver todos os voos da companhia"<<endl;
             cout << "B)Ver todos os voos que partem de um aeroporto"<<endl;
@@ -57,26 +143,29 @@ void main_menu(Company company){
             cout << "-Insira 0 para voltar ao menu principal"<<endl;
             flight_menu(company);
             break;
-        case "B":
-            cout << "<DEVE MOSTRAR TABELA DE TODOS OS AEROPORTOS DA COMPANHIA>"<<endl;
+        case 'B':
+            cout << "-Selecione uma opcao:"<<endl;
+            cout << "A)Ver todos os voos da companhia"<<endl;
+            cout << "B)Comprar bilhetes"<<endl;
             cout << "-Insira 0 para voltar ao menu principal"<<endl;
+
             break;
-        case "C":
-            cout << "<IMPLEMENTAR FUNÇÃO DE COMPRA DE BILHETES>"<<endl;
+        case 'C':
+            buy_ticket(company);
             break;
-        case"D":
+        case'D':
             cout << "<IMPLEMENTAR TABELA DE PASSAGEIROS>"<<endl;
             break;
-        case "E":
+        case 'E':
             cout << "<IMPLEMENTAR TABELA DE LOCAIS DE TRANSPORTE>"<<endl;
             break;
-        case "F":
+        case 'F':
             cout << "<IMPLEMENTAR TABELA DE TAREFAS A REALIZAR>"<<endl;
             break;
-        case "G":
+        case 'G':
             cout << "<IMPLEMENTAR TABELA DE TAREFAS REALIZADAS>"<<endl;
             break;
-        case "H":
+        case 'H':
             cout << "<IMPLEMENTAR ATUALIZAÇÃO DE VIAGEM>"<<endl;
             break;
         default :

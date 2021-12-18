@@ -48,6 +48,10 @@ public:
     vector<Plane> operationalPlanes();
     vector<Plane> planesByAirport(string name, string city);
 
+    //Other
+    Plane getPLane(int flightN); //Returns the plane containing the flight whose number is equal to flightN
+    bool isFull(Flight flight, Plane plane); //Returns true if the size of flight.passengers is equal to plane.max_ocupation
+    int emptySeats(Flight flight, Plane plane); //Returns the number of empty seats in a flight
 };
 
 
