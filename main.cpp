@@ -185,8 +185,7 @@ void DoneList(Company company){
         cout << "||"<<sizeRegularizer(todo.front().getType(),15)<<"||"<<todo.front().getDate()<<"||"<<sizeRegularizer(todo.front().getEmployee(),20)<<endl;
         todo.pop();
     }
-    cout << "Insira 0 para voltar ao menu principal"<<endl;
-    go_back(company);
+    main_menu(company);
 }
 
 void ToDoList(Company company){
@@ -206,8 +205,7 @@ void ToDoList(Company company){
         cout << "||"<<sizeRegularizer(todo.front().getType(),15)<<"||"<<todo.front().getDate()<<"||"<<sizeRegularizer(todo.front().getEmployee(),20)<<endl;
         todo.pop();
     }
-    cout << "Insira 0 para voltar ao menu principal"<<endl;
-    go_back(company);
+    main_menu(company);
 }
 
 void ListFLightPassengers(Company company){
@@ -233,8 +231,7 @@ void ListFLightPassengers(Company company){
         else
             cout << "||"<<sizeRegularizer(passenger.getName(),20)<<"||"<<sizeRegularizer("Nao",19)<<"||"<<endl;
     }
-    cout << "Insira 0 para voltar ao menu principal."<<endl;
-    go_back(company);
+    main_menu(company);
 }
 void ListAllPassengers(Company company){
     cout <<"||"<<sizeRegularizer("Nome",20)<<"||Bagagem Automatica?||"<<endl;
@@ -244,8 +241,7 @@ void ListAllPassengers(Company company){
         else
             cout << "||"<<sizeRegularizer(passenger.getName(),20)<<"||"<<sizeRegularizer("Nao",19)<<"||"<<endl;
     }
-    cout << "Insira 0 para voltar ao menu principal."<<endl;
-    go_back(company);
+    main_menu(company);
 }
 void ListPassengers (Company company){
     string input;
@@ -275,7 +271,7 @@ void ListPassengers (Company company){
     }
 }
 
-void go_back(Company company) {
+/*void go_back(Company company) {
     string input;
     char choice;
     cin.clear();
@@ -294,13 +290,14 @@ void go_back(Company company) {
             cout << "F)Tarefas a Realizar" << endl;
             cout << "G)Tarefas Realizadas" << endl;
             cout << "H)Atualizar Viagem" << endl;
+            cout << "0)Exit" << endl;
             main_menu(company);
             break;
         default:
             cout << "ERRO: Input Invalido. Tente novamente." << endl;
             go_back(company);
     }
-}
+}*/
 string sizeRegularizer(string str, int n){
     if (str.size() > n){
         return str.substr(0,n-3) + "...";
@@ -330,8 +327,7 @@ void flightByDestination(Company company){
                  << sizeRegularizer(flight.getOrigin().getCity(), 30) << "||"
                  << sizeRegularizer(flight.getArrivalT(), 7) << "||" << endl;
         }
-        cout<< "Insira 0 para voltar ao menu principal."<<endl;
-        go_back(company);
+        main_menu(company);
     }
     else{
         cout << "ERRO: O aeroporto inserido nao existe. Tente novamente."<<endl;
@@ -350,8 +346,7 @@ void flightByOrigin(Company company){
                  << sizeRegularizer(flight.getDepartureT(), 7) << "||"
                  << sizeRegularizer(flight.getDestination().getCity(), 30) << "||" << endl;
         }
-        cout<<"Insira 0 para voltar ao menu principal."<<endl;
-        go_back(company);
+        main_menu(company);
     }
     else{
         cout << "ERRO: Input Invalido. Tente novamente."<<endl;
@@ -374,8 +369,7 @@ void flight_menu(Company company){
                      << sizeRegularizer(flight.getOrigin().getCity(), 30) << "||"
                      << sizeRegularizer(flight.getDestination().getCity(), 30) << "||" << endl;
             }
-            cout << "Insira 0 para voltar ao menu principal." << endl;
-            go_back(company);
+            main_menu(company);
             break;
         case 'B':
         case 'b':
@@ -424,12 +418,11 @@ void buy_ticket(Company company) {
         cout << "-Insira 0 para voltar ao menu principal" << endl;
         string input, name, city;
         char choice;
+        bool exists = false;
+        auto itFlight = company.flights.begin();
         getline(cin,input);
         choice = input.at(0);
         switch (choice) {
-            case '0':
-                control = false;
-                break;
             case 'A':
             case 'a':
                 cout << "Selecione o Aeroporto de Origem:" << endl;
@@ -454,10 +447,9 @@ void buy_ticket(Company company) {
                 break;
             case 'B':
             case'b':
-                bool exists = false;
+
                 cout << "Insira o numero do voo para qual quer comprar bilhetes" << endl;
                 int flightN;
-                auto itFlight = company.flights.begin();
                 cin >> flightN;
                 while (!exists) {
                     for (auto it = company.flights.begin(); it != company.flights.end(); it++) {
@@ -476,7 +468,6 @@ void buy_ticket(Company company) {
                 if (flightN != 0) {
                     try {
                         Plane plane = company.getPLane(flightN);
-
                         if (company.isFull(*itFlight, plane)) {
                             cout << "Infelizmente o voo numero(" << flightN << ") nao tem mais lugares disponiveis"
                                  << endl;
@@ -514,6 +505,9 @@ void buy_ticket(Company company) {
                         cerr << msg << endl;
                     }
                 }
+                break;
+            default:
+                control = false;
                 break;
         }
     }
@@ -580,6 +574,17 @@ void update_tasks(Company company){
 }
 */
 void main_menu(Company company){
+    cout << "====================Agencia Voe Connosco====================="<<endl;
+    cout<<"-Bem vindo!"<<endl;
+    cout<<"-Selecione a operacao desejada inserindo a letra respetiva."<<endl;
+    cout<<"A)Tabelas de Voos"<<endl;
+    cout<<"B)Tabela de Aeroportos"<<endl;
+    cout<<"C)Comprar Bilhetes"<<endl;
+    cout<<"D)Listas de Passageiros"<<endl;
+    cout<<"E)Listas de Locais de Transporte Proximos"<<endl;
+    cout<<"F)Tarefas a Realizar"<<endl;
+    cout<<"G)Tarefas Realizadas"<<endl;
+    cout<<"H)Atualizar Viagem"<<endl;
     char choice;
     string input;
     getline(cin,input);
@@ -602,8 +607,7 @@ void main_menu(Company company){
                 cout << "||" << sizeRegularizer(airport.getName(), 30) << "||"
                      << sizeRegularizer(airport.getCity(), 20) << "||" << endl;
             }
-            cout << "-Insira 0 para voltar ao menu principal" << endl;
-            go_back(company);
+            main_menu(company);
             break;
         case 'c':
         case 'C':
@@ -626,7 +630,7 @@ void main_menu(Company company){
                 while (!itr.isAtEnd()){
                     cout << itr.retrieve().name << " " << itr.retrieve().type << " " <<
                     itr.retrieve().distance << " ";
-                    for (auto v:itr.retrieve().schedule){
+                    for (auto const& v:itr.retrieve().schedule){
                         cout << v << " ";
                     }
                     cout << endl;
@@ -677,6 +681,8 @@ void main_menu(Company company){
         case 'I':
             cout << "<IMPLEMENTAR ATUALIZACAO DE TAREFAS"<<endl;
             cout << "Qual é o avião que deseja alterar? " << endl;
+            break;
+        case '0':
             break;
         default :
             cout << "ERRO: Input Invalido. Tente novamente." << endl;
@@ -733,17 +739,6 @@ int main() {
         cout << passenger.getName() << " " << passenger.getLuggage();
     } */
 
-    cout << "====================Agencia Voe Connosco====================="<<endl;
-    cout<<"-Bem vindo!"<<endl;
-    cout<<"-Selecione a operacao desejada inserindo a letra respetiva."<<endl;
-    cout<<"A)Tabelas de Voos"<<endl;
-    cout<<"B)Tabela de Aeroportos"<<endl;
-    cout<<"C)Comprar Bilhetes"<<endl;
-    cout<<"D)Listas de Passageiros"<<endl;
-    cout<<"E)Listas de Locais de Transporte Proximos"<<endl;
-    cout<<"F)Tarefas a Realizar"<<endl;
-    cout<<"G)Tarefas Realizadas"<<endl;
-    cout<<"H)Atualizar Viagem"<<endl;
     main_menu(company);
 
     return 0;
