@@ -57,7 +57,17 @@ Flight Plane::nextFlight() {
     return (flightPlan.front());
 }
 void Plane::addFlight(Flight f) {
-    flightPlan.push(f);
+    queue<Flight> auxPlan;
+    while (flightPlan.front() < f && !flightPlan.empty()) {
+        auxPlan.push(flightPlan.front());
+        flightPlan.pop();
+    }
+    auxPlan.push(f);
+    while(!flightPlan.empty()){
+        auxPlan.push(flightPlan.front());
+        flightPlan.pop();
+    }
+    flightPlan = auxPlan;
 }
 
 bool Plane::operator==(Plane p) const {

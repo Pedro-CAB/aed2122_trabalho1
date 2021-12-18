@@ -41,6 +41,7 @@ public:
 
     //Others:
     bool operator == (const Flight & f) const;
+    bool operator < (const Flight& f) const;
     bool isPassengerIn(Passenger p);
     void addPassenger(Passenger p);
 };

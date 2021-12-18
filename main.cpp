@@ -415,12 +415,11 @@ void flight_menu(Company company){
             flight_menu(company);
     }
 }
-
 void buy_ticket(Company company) {
     bool control = true;
     while (control) {
         cout << "-Selecione uma opcao:" << endl;
-        cout << "A)Ver tabela de vôos da companhia" << endl;
+        cout << "A)Ver tabela de voos da companhia" << endl;
         cout << "B)Comprar bilhetes" << endl;
         cout << "-Insira 0 para voltar ao menu principal" << endl;
         string input, name, city;
@@ -464,7 +463,7 @@ void buy_ticket(Company company) {
                     for (auto it = company.flights.begin(); it != company.flights.end(); it++) {
                         if (it == company.flights.end()) {
                             cout << "Voo de numero nao existente" << endl;
-                            cout << "Por favor introduza outro numero de vôo ou 0 para voltar ao menu anterior" << endl;
+                            cout << "Por favor introduza outro numero de voo ou 0 para voltar ao menu anterior" << endl;
                             cin >> flightN;
                         } else if (it->getNumber() == flightN) {
                             itFlight = it;
@@ -519,8 +518,44 @@ void buy_ticket(Company company) {
         }
     }
 }
+void update_flight(Company company) {
+    bool exists = false;
+    cout << "||" << sizeRegularizer("n#", 5) << "||" << sizeRegularizer("Data", 10) << "||" << "Partida"
+         << "||" << sizeRegularizer("Destino", 30) << "||" << endl;
+    for (auto plane : company.getPlanes()){
+        Flight nextFlight = plane.nextFlight();
+        cout << "||" << sizeRegularizer(to_string(nextFlight.getNumber()), 5) << "||" << nextFlight.getDate()
+             << "||"
+             << sizeRegularizer(nextFlight.getDepartureT(), 7) << "||"
+             << sizeRegularizer(nextFlight.getDestination().getCity(), 30) << "||" << endl;
+    }
+    cout << "Insira o numero do voo que quer realizar:" << endl;
+    int flightN;
+    auto itFlight = company.flights.begin();
+    cin >> flightN;
+    while (!exists) {
+        for (auto it = company.flights.begin(); it != company.flights.end(); it++) {
+            if (it == company.flights.end()) {
+                cout << "Voo de numero nao existente" << endl;
+                cout << "Por favor introduza outro numero de voo ou 0 para voltar ao menu anterior" << endl;
+                cin >> flightN;
+            } else if (it->getNumber() == flightN) {
+                itFlight = it;
+                exists = true;
+            }
+            if (flightN == 0)
+                exists = true;
+        }
+    }
+    if (flightN != 0){
+        company.getPLane(flightN).getFlightPlan().pop();
+        company.getFlights().erase(itFlight);
+        cout << "voo realizado com sucesso" << endl;
+    }
+}
+
 /*
-void updatetasks(Company company){
+void update_tasks(Company company){
     string name;
     cout << "Insira o aeroporto que pretende" << endl;
     getline(cin, name);
@@ -635,7 +670,8 @@ void main_menu(Company company){
             break;
         case 'h':
         case 'H':
-            cout << "<IMPLEMENTAR ATUALIZACAO DE VIAGEM>" << endl;
+            cout << "Escolha qual o voo que deseja realizar" << endl;
+            update_flight(company);
             break;
         case 'i':
         case 'I':
