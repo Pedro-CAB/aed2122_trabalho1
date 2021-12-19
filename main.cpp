@@ -859,21 +859,10 @@ void main_menu(Company& company){
                 break;
             case 'e':
             case 'E':
-                cout << "<IMPLEMENTAR TABELA DE LOCAIS DE TRANSPORTE>" << endl;
-                //VER SE ESTÁ BEM
+                cout << "Mostra os locais mais próximos do aeroporto que escolher" << endl;
+                viewtransport(company);
 
-                for (auto airport: company.getAirports()) {
-                    BSTItrIn<TTLocation> itr(airport.getLocations());
-                    while (!itr.isAtEnd()) {
-                        cout << itr.retrieve().name << " " << itr.retrieve().type << " " <<
-                             itr.retrieve().distance << " ";
-                        for (auto const &v: itr.retrieve().schedule) {
-                            cout << v << " ";
-                        }
-                        cout << endl;
-                        itr.advance();
-                    }
-                }
+                
                 break;
             case 'f':
             case 'F':
