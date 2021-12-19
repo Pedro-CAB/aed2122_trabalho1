@@ -303,17 +303,43 @@ void ListFLightPassengers(Company company){
         else
             cout << "||"<<sizeRegularizer(passenger.getName(),20)<<"||"<<sizeRegularizer("Nao",19)<<"||"<<endl;
     }
-    main_menu(company);
-}
-void ListAllPassengers(Company company){
-    cout <<"||"<<sizeRegularizer("Nome",20)<<"||Bagagem Automatica?||"<<endl;
-    for (auto passenger : company.getPassengers()){
-        if (passenger.getLuggage()>0)
-            cout << "||"<<sizeRegularizer(passenger.getName(),20)<<"||"<<sizeRegularizer("Sim",19)<<"||"<<endl;
+    cout << "Insira 0 para voltar ao menu principal."<<endl;
+    string str;
+    cin.clear();
+    getline(cin,str);
+    while (true) {
+        if (str == "0"){
+            main_menu(company);
+            break;
+        }
         else
-            cout << "||"<<sizeRegularizer(passenger.getName(),20)<<"||"<<sizeRegularizer("Nao",19)<<"||"<<endl;
+            cout<< "ERRO: Input Invalido. Tente novamente."<<endl;
+        main_menu(company);
     }
+}
+void ListAllPassengers(Company company) {
+    cout << "||" << sizeRegularizer("Nome", 20) << "||Bagagem Automatica?||" << endl;
+    for (auto passenger: company.getPassengers()) {
+        if (passenger.getLuggage() > 0)
+            cout << "||" << sizeRegularizer(passenger.getName(), 20) << "||" << sizeRegularizer("Sim", 19) << "||"
+                 << endl;
+        else
+            cout << "||" << sizeRegularizer(passenger.getName(), 20) << "||" << sizeRegularizer("Nao", 19) << "||"
+                 << endl;
+    }
+    cout << "Insira 0 para voltar ao menu principal."<<endl;
+    string str;
+    cin.clear();
+    getline(cin,str);
+    while (true) {
+        if (str == "0"){
+            main_menu(company);
+            break;
+        }
+        else
+            cout<< "ERRO: Input Invalido. Tente novamente."<<endl;
     main_menu(company);
+    }
 }
 void ListPassengers (Company company){
     string input;
