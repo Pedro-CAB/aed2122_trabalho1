@@ -16,7 +16,7 @@ public:
     vector<string> schedule;
 
     TTLocation();
-    TTLocation(string name, string type, string distance, vector<string> &schedule);
+    TTLocation(string name, string type, int distance, vector<string> &schedule);
 
     string getName(), getType();
     string getDistance();
