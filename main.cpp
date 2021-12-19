@@ -236,9 +236,20 @@ void DoneList(Company &company){
     }
     queue<Service> todo = p.getDone();
     cout << "||"<< sizeRegularizer( "Servico",15)<<"||"<<sizeRegularizer("Data",10)<<"||"<<sizeRegularizer("Funcionario",20)<<endl;
-    while (todo.empty()){
+    while (!todo.empty()){
         cout << "||"<<sizeRegularizer(todo.front().getType(),15)<<"||"<<todo.front().getDate()<<"||"<<sizeRegularizer(todo.front().getEmployee(),20)<<endl;
         todo.pop();
+    }
+    cout << "Insira 0 para voltar ao menu principal."<<endl;
+    string str;
+    cin.clear();
+    getline(cin,str);
+    while (true) {
+        if (str == "0"){
+            break;
+        }
+        else
+            cout<< "ERRO: Input Invalido. Tente novamente."<<endl;
     }
 }
 
@@ -258,6 +269,17 @@ void ToDoList(Company &company){
     while (!todo.empty()){
         cout << "||"<<sizeRegularizer(todo.front().getType(),15)<<"||"<<todo.front().getDate()<<"||"<<sizeRegularizer(todo.front().getEmployee(),20)<<endl;
         todo.pop();
+    }
+    cout << "Insira 0 para voltar ao menu principal."<<endl;
+    string str;
+    cin.clear();
+    getline(cin,str);
+    while (true) {
+        if (str == "0"){
+            break;
+        }
+        else
+            cout<< "ERRO: Input Invalido. Tente novamente."<<endl;
     }
 }
 
@@ -798,21 +820,7 @@ void main_menu(Company& company) {
                 break;
             case 'e':
             case 'E':
-                cout << "<IMPLEMENTAR TABELA DE LOCAIS DE TRANSPORTE>" << endl;
-                //VER SE ESTÁ BEM
-
-                for (auto airport: company.getAirports()) {
-                    BSTItrIn<TTLocation> itr(airport.getLocations());
-                    while (!itr.isAtEnd()) {
-                        cout << itr.retrieve().name << " " << itr.retrieve().type << " " <<
-                             itr.retrieve().distance << " ";
-                        for (auto const &v: itr.retrieve().schedule) {
-                            cout << v << " ";
-                        }
-                        cout << endl;
-                        itr.advance();
-                    }
-                }
+                viewtransport(company);
                 break;
             case 'f':
             case 'F':
@@ -836,7 +844,7 @@ void main_menu(Company& company) {
                 cout << "Selecione o aviao cujos servicos deseja consultar:" << endl;
                 cout << "||Aviao||Lugares||" << sizeRegularizer("Localizacao Atual", 30) << "||" << endl;
                 for (auto plane: company.getPlanes()) {
-                    if (plane.getFlightPlan().empty())
+                    if (!plane.getFlightPlan().empty())
                         cout << "||" << sizeRegularizer(plane.getLPlate(), 9) << "||"
                              << sizeRegularizer(to_string(plane.getMaxOccupation()), 7) << "||"
                              << sizeRegularizer(plane.getFlightPlan().front().getOrigin().getName(), 30) << "||"
