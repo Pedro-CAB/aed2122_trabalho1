@@ -31,6 +31,7 @@ public:
     string getArrivalT();
     string getDepartureT();
     list<Passenger> getPassengers();
+    vector<vector<stack<bool>>> getCar();
 
 
     //Setters:
@@ -44,6 +45,7 @@ public:
     bool operator < (const Flight& f) const;
     bool isPassengerIn(Passenger p);
     void addPassenger(Passenger p);
+    int getCarCapacity();
 };
 
 #endif //PROJECTAED_FLIGHT_H

@@ -132,3 +132,44 @@ bool Company::airportExists(string name) {
     }
     return false;
 }
+
+bool Company::flightExists(int num) {
+    for (auto flight : flights){
+        if(flight.getNumber()==num)
+            return true;
+    }
+    return false;
+}
+/**
+ * Verifica se algum aviao faz o voo fornecido
+ * @param num numero do voo
+ * @return
+ */
+bool Company::flightIsAssigned(int num) {
+    for (auto plane : planes){
+        queue<Flight> fp = plane.getFlightPlan();
+        while (!fp.empty()){
+            if (fp.front().getNumber() == num){
+                return true;
+            }
+            fp.pop();
+        }
+    }
+    return false;
+}
+/**
+ * Retorna o aviao que realiza determinado voo
+ * @param num numero do voo
+ * @return
+ */
+Plane Company::getPlaneForFlight(int num) {
+    for (auto plane : planes){
+        queue<Flight> fp = plane.getFlightPlan();
+        while (!fp.empty()){
+            if (fp.front().getNumber() == num){
+                return plane;
+            }
+            fp.pop();
+        }
+    }
+}

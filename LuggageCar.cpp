@@ -42,3 +42,7 @@ bool LuggageCar::addLuggage() {
     }
     return false;
 }
+
+vector<vector<stack<bool>>> LuggageCar::getCar() {
+    return car;
+}

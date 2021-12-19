@@ -100,3 +100,17 @@ void Flight::addPassenger(Passenger p) {
         lug--;
     }
 }
+
+int Flight::getCarCapacity() {
+    int count = 0;
+    for (vector<stack<bool>> a : car.getCar()){
+        for (stack<bool> b : a){
+            count += car.getM() - b.size();
+        }
+    }
+    return count;
+}
+
+vector<vector<stack<bool>>> Flight::getCar() {
+    return car.getCar();
+}

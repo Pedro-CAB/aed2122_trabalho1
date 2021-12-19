@@ -17,6 +17,7 @@ public:
 
     int getC(),getN(),getM();
     bool addLuggage ();
+    vector<vector<stack<bool>>> getCar();
 };
 
 #endif //PROJECTAED_LUGGAGECAR_H

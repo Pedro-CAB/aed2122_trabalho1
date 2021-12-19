@@ -44,6 +44,8 @@ public:
 
     //Check Elements:
     bool airportExists(string name);
+    bool flightExists(int num);
+    bool flightIsAssigned(int num);
 
     //Filter Vectors:
     vector<Flight> flightsByOrigin(string name);
@@ -54,6 +56,7 @@ public:
     //Other
     bool isFull(Flight flight, Plane plane); //Returns true if the size of flight.passengers is equal to plane.max_ocupation
     int emptySeats(Flight flight, Plane plane); //Returns the number of empty seats in a flight
+    Plane getPlaneForFlight(int num);
 };
 
 
