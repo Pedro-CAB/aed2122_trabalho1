@@ -27,7 +27,7 @@ string TTLocation::getType() {
     return type;
 }
 
-string TTLocation::getDistance() {
+int TTLocation::getDistance() {
     return distance;
 }
 

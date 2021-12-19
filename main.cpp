@@ -497,7 +497,7 @@ void buy_ticket(Company& company) {
         getline(cin, airportOpt);
         if (company.airportExists(airportOpt)) {
             Airport chosenAP;
-            for (auto airport: company.getAirports()) {
+            for (auto airport: company.airports) {
                 if (airport.getName() == airportOpt) {
                     chosenAP = airport;
                     break;
@@ -516,18 +516,17 @@ void buy_ticket(Company& company) {
                 cin.clear();
                 getline(cin, flightOpt);
                 if (company.flightExists(stoi(flightOpt))) {
-                    Flight chosenFlight;
-                    for (auto flight: company.getFlights()) {
-                        if (flight.getNumber() == stoi(flightOpt)) {
-                            chosenFlight = flight;
+                    auto chosenFlight = company.flights.begin();
+                    for (chosenFlight = company.flights.begin(); chosenFlight != company.flights.end();++chosenFlight) {
+                        if (chosenFlight->getNumber() == stoi(flightOpt)) {
                             break;
                         }
                     }
-                    Plane flightPlane = company.getPlaneForFlight(chosenFlight.getNumber());
-                    if (flightPlane.getMaxOccupation() == chosenFlight.getPassengers().size()) {
+                    Plane flightPlane = company.getPlaneForFlight(chosenFlight->getNumber());
+                    if (flightPlane.getMaxOccupation() == chosenFlight->getPassengers().size()) {
                         cout << "Este voo está cheio. Por favor, selecione outro." << endl;
                     } else {
-                        int available = flightPlane.getMaxOccupation() - chosenFlight.getPassengers().size();
+                        int available = flightPlane.getMaxOccupation() - chosenFlight->getPassengers().size();
                         cout << "Este voo tem " << available << " lugares disponiveis." << endl;
                         cout << "Quantos bilhetes deseja comprar?" << endl;
                         cin.clear();
@@ -542,7 +541,7 @@ void buy_ticket(Company& company) {
                                     cout << "Insira o nome do passageiro para este bilhete." << endl;
                                     cin.clear();
                                     getline(cin, name);
-                                    int capacity = chosenFlight.getCarCapacity();
+                                    int capacity = chosenFlight->getCarCapacity();
                                     cout << "Insira quantas malas levara para o servico de bagagem automatica." << endl;
                                     cout << "(insira 0 se nao desejar usar o servico de bagagem automatica)" << endl;
                                     cout << "Espaco disponivel: " << capacity << " malas." << endl;
@@ -552,12 +551,8 @@ void buy_ticket(Company& company) {
                                         int lug = stoi(lugOpt);
                                         if (lug <= capacity) {
                                             Passenger p(name, lug);
-                                            for (auto flight: company.flights) {
-                                                if (flight.getNumber() == chosenFlight.getNumber()) {
-                                                    flight.addPassenger(p);
-                                                    company.addPassenger(p);
-                                                }
-                                            }
+                                            chosenFlight->addPassenger(p);
+                                            company.passengers.push_back(p);
                                             break;
                                         } else {
                                             cout
@@ -591,18 +586,9 @@ void buy_ticket(Company& company) {
     }
     cout << "Obrigado pela sua compra!"<<endl;
     cout << "Insira 0 para voltar ao menu principal." << endl;
-    while(true) {
-        string choice;
-        cin.clear();
-        getline(cin, choice);
-        switch (choice.at(0)) {
-            case '0':
-                main_menu(company);
-                break;
-            default:
-                cout << "ERRO: Input Invalido" << endl;
-        }
-    }
+    cin.clear();
+    string input;
+    getline(cin, input);
 }
 void update_flight(Company& company) {
     string input;
@@ -738,31 +724,6 @@ void update_service(Company& company){
     getline(cin, input);
 }
 
-/*
-void update_tasks(Company company){
-    string name;
-    cout << "Insira o aeroporto que pretende" << endl;
-    getline(cin, name);
-    if (company.airportExists(name)) {
-        Airport a1;
-        cout << "||" << sizeRegularizer("n#", 5) << "||" << sizeRegularizer("Data", 10) <<"||"<<"Partida"<< "||" << sizeRegularizer("Destino", 30) << "||" << endl;
-        for (auto airport:company.getAirports()){
-            if (airport.getName() == name)
-                a1 = airport;
-        }
-
-        BSTItrIn<TTLocation>itr(a1.getLocations());
-        while (!itr.isAtEnd()){     //mostra os atributos de transportes
-            cout << '||' << sizeRegularizer(itr.retrieve().name, 30) << "||" << sizeRegularizer(itr.retrieve().type, 20) << " " <<
-            sizeRegularizer(to_string(itr.retrieve().distance), 5) << " ";
-            for (auto v:itr.retrieve().schedule){
-                cout << v << " ";
-            }
-            cout << endl;
-        }
-    }
-}
-*/
 
 void viewtransport(Company& company){
     string name, input;
@@ -779,7 +740,7 @@ void viewtransport(Company& company){
         BSTItrIn<TTLocation>itr(a1.getLocations());
         while (!itr.isAtEnd()){     //mostra os atributos de transportes
             cout << "||" << sizeRegularizer(itr.retrieve().name, 30) << "||" << sizeRegularizer(itr.retrieve().type, 20) << " " <<
-            sizeRegularizer((itr.retrieve().distance), 5) << " ";
+            sizeRegularizer(i(itr.retrieve().distance), 5) << " ";
             for (auto v:itr.retrieve().schedule){
                 cout << v << " ";
             }
