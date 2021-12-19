@@ -93,4 +93,10 @@ bool Flight::isPassengerIn(Passenger p) {
 }
 void Flight::addPassenger(Passenger p) {
     passengers.push_back(p);
+    int lug = p.getLuggage();
+    bool result;
+    while (lug>0){
+        result  = car.addLuggage();
+        lug--;
+    }
 }

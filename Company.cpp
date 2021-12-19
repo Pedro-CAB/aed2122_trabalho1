@@ -114,19 +114,6 @@ vector<Plane> Company::operationalPlanes() {
     return filtered;
 }
 
-Plane Company::getPLane(int flightN) {
-    for (auto plane: planes) {
-        queue<Flight> flightPlan = plane.getFlightPlan();
-        while (!flightPlan.empty()) {
-            if (flightPlan.front().getNumber() == flightN)
-                return plane;
-            else
-                flightPlan.pop();
-        }
-    }
-    throw "flightN not in planes!";
-}
-
 bool Company::isFull(Flight flight, Plane plane) {
     if (flight.passengers.size() == plane.max_ocupation)
         return true;
