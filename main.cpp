@@ -731,30 +731,32 @@ void update_service(Company& company){
 void viewtransport(Company& company){
     string name;
     cout << "Insira o aeroporto que pretende" << endl;
-    getline(cin, name);
-    if (company.airportExists(name)) {
-        Airport a1;
-        cout << "||" << sizeRegularizer("n#", 5) << "||" << sizeRegularizer("Data", 10) <<"||"<<"Partida"<< "||" << sizeRegularizer("Destino", 30) << "||" << endl;
-        for (auto airport:company.getAirports()){
-            if (airport.getName() == name)
-                a1 = airport;
-        }
-
-        BSTItrIn<TTLocation>itr(a1.getLocations());
-        while (!itr.isAtEnd()){     //mostra os atributos de transportes
-            cout << "||" << sizeRegularizer(itr.retrieve().name, 30) << "||" << sizeRegularizer(itr.retrieve().type, 20) << " " <<
-                 sizeRegularizer(to_string(itr.retrieve().distance), 5) << " ";
-            for (auto v:itr.retrieve().schedule){
-                cout << v << " ";
+    while(true) {
+        getline(cin, name);
+        if (company.airportExists(name)) {
+            Airport a1;
+            cout << "||" << sizeRegularizer("n#", 5) << "||" << sizeRegularizer("Data", 10) << "||" << "Partida" << "||"
+                 << sizeRegularizer("Destino", 30) << "||" << endl;
+            for (auto airport: company.getAirports()) {
+                if (airport.getName() == name)
+                    a1 = airport;
             }
-            cout << endl;
-            itr.advance();
-        }
-    }
 
-    else{
-        cout << "ERRO: Input Invalido. Tente novamente."<<endl;
-        viewtransport(company);
+            BSTItrIn<TTLocation> itr(a1.getLocations());
+            while (!itr.isAtEnd()) {     //mostra os atributos de transportes
+                cout << "||" << sizeRegularizer(itr.retrieve().name, 30) << "||"
+                     << sizeRegularizer(itr.retrieve().type, 20) << " " <<
+                     sizeRegularizer(to_string(itr.retrieve().distance), 5) << " ";
+                for (auto v: itr.retrieve().schedule) {
+                    cout << v << " ";
+                }
+                cout << endl;
+                itr.advance();
+            }
+            break;
+        } else {
+            cout << "ERRO: Input Invalido. Tente novamente." << endl;
+        }
     }
 }
 
