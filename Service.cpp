@@ -27,3 +27,7 @@ string Service::getDate() {
 string Service::getEmployee() {
     return employee;
 }
+
+bool Service::operator<(const Service &s) const {
+    return this->date < s.date;
+}

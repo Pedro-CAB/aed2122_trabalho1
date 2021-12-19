@@ -16,6 +16,7 @@ public:
     Service(string type, string date, string employee);
     //Getters:
     string getType(), getDate(), getEmployee();
+    bool operator<(const Service& s) const;
 };
 
 #endif //PROJECTAED_SERVICE_H

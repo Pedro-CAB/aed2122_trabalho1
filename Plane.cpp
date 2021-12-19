@@ -22,8 +22,6 @@ queue<Flight> Plane::getFlightPlan() {return flightPlan;};
 
 //Setters:
 void Plane::setLPlate(string newLPlate) {LPlate=newLPlate;}
-void Plane::setDone(queue<string> q) {}         //incomplete
-void Plane::setToDo(queue<string> q) {}         //incomplete
 void Plane::setMaxOc(int num) {max_ocupation=num;}
 
 //Edit:
@@ -31,9 +29,31 @@ void Plane::setMaxOc(int num) {max_ocupation=num;}
  * Acrescenta uma tarefa nova a ser realizada
  * @param a tarefa a acrescentar
  */
-void Plane::addTask(Service a){
-    to_do.push(a);
+void Plane::addTask_to_do(Service a){
+    queue<Service> auxTo_do;
+    while (to_do.front() < a && !to_do.empty()) { auxTo_do.push(to_do.front());
+        to_do.pop();
+    } auxTo_do.push(a);
+    while(!to_do.empty()){ auxTo_do.push(to_do.front());
+        to_do.pop();
+    }
+    to_do = auxTo_do;
 }
+
+void Plane::addTask_done(Service a){
+    queue<Service> auxDone;
+    while (done.front() < a && !done.empty()) {
+        auxDone.push(done.front());
+        done.pop();
+    }
+    auxDone.push(a);
+    while(!done.empty()){
+        auxDone.push(done.front());
+        done.pop();
+    }
+    done = auxDone;
+}
+
 /**
  * Passa n tarefas da fila de tarefas a realizar para a fila de tarefas realizadas
  * @param n número de tarefas a realizar

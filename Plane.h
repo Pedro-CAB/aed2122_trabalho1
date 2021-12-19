@@ -30,11 +30,11 @@ public:
 
     //Setters:
     void setLPlate(string newLPlate),setN(int n),
-            setC(int c), setMaxOc(int num),setTakenS(int num),
-            setToDo(queue<string> q), setDone(queue<string> q);
+            setC(int c), setMaxOc(int num),setTakenS(int num);
 
     //Edit:
-    void addTask(Service a);
+    void addTask_to_do(Service a);
+    void addTask_done(Service a);
     void addFlight(Flight f);
     void doNextNTasks(int n);
     bool hasFlights();
