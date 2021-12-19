@@ -12,7 +12,8 @@ using namespace std;
 
 class TTLocation {
 public:
-    string name, type, distance;
+    string name, type;
+    int distance;
     vector<string> schedule;
 
     TTLocation();

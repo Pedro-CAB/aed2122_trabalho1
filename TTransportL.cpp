@@ -28,7 +28,7 @@ string TTLocation::getType() {
 }
 
 string TTLocation::getDistance() {
-    return distance;
+    return to_string(distance);
 }
 
 vector<string> TTLocation::getSchedule() {

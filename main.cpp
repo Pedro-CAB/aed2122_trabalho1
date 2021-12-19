@@ -831,7 +831,7 @@ void main_menu(Company company){
     cin.clear();
     getline(cin,input);
     choice = input.at(0);
-
+    string b;
     switch (choice) {
         case 'a':
         case 'A':
@@ -849,7 +849,17 @@ void main_menu(Company company){
                 cout << "||" << sizeRegularizer(airport.getName(), 30) << "||"
                      << sizeRegularizer(airport.getCity(), 20) << "||" << endl;
             }
-            main_menu(company);
+            cout << "Insira 0 para voltar ao menu principal."<<endl;
+            while(true){
+                getline(cin,b);
+                if (b == "0") {
+                    main_menu(company);
+                    break;
+                }
+                else{
+                    cout << "ERRO: Input Invalido. Tente novamente." << endl;
+                }
+            }
             break;
         case 'c':
         case 'C':
@@ -864,8 +874,21 @@ void main_menu(Company company){
             break;
         case 'e':
         case 'E':
-            cout << "Mostra os locais perto do aeroporto que escolheu" << endl;
-            viewtransport(company);
+            cout << "<IMPLEMENTAR TABELA DE LOCAIS DE TRANSPORTE>" << endl;
+            //VER SE ESTÁ BEM
+
+            for (auto airport:company.getAirports()){
+                BSTItrIn<TTLocation> itr(airport.getLocations());
+                while (!itr.isAtEnd()){
+                    cout << itr.retrieve().name << " " << itr.retrieve().type << " " <<
+                    itr.retrieve().distance << " ";
+                    for (auto const& v:itr.retrieve().schedule){
+                        cout << v << " ";
+                    }
+                    cout << endl;
+                    itr.advance();
+                }
+            }
             break;
         case 'f':
         case 'F':
@@ -939,14 +962,14 @@ int main() {
 
 
     vector<string> schedule = {"08:00","22:00"};
-    TTLocation t1 = TTLocation("Estacao de Sa Carneiro","Metro",50,schedule);
-    TTLocation t2 = TTLocation("Paragem de Sa Carneiro","Autocarro",20,schedule);
-    TTLocation t3 = TTLocation("Paragem de Sa Carneiro","Taxi",20,schedule);
-    TTLocation t4 = TTLocation("Estacao de Humberto Delgado","Metro",50,schedule);
-    TTLocation t5 = TTLocation("Paragem de Humberto Delgado","Autocarro",20,schedule);
-    TTLocation t6 = TTLocation("Praca de Humberto Delgado","Taxi",20,schedule);
-    TTLocation t7 = TTLocation("Paragem CR7","Autocarro",20,schedule);
-    TTLocation t8 = TTLocation("Praca do Funchal","Taxi",20,schedule);
+    TTLocation t1 = TTLocation("Estacao de Sa Carneiro","Metro",0.5,schedule);
+    TTLocation t2 = TTLocation("Paragem de Sa Carneiro","Autocarro",0.2,schedule);
+    TTLocation t3 = TTLocation("Paragem de Sa Carneiro","Taxi",0.2,schedule);
+    TTLocation t4 = TTLocation("Estacao de Humberto Delgado","Metro",0.5,schedule);
+    TTLocation t5 = TTLocation("Paragem de Humberto Delgado","Autocarro",0.2,schedule);
+    TTLocation t6 = TTLocation("Praca de Humberto Delgado","Taxi",0.2,schedule);
+    TTLocation t7 = TTLocation("Paragem CR7","Autocarro",0.2,schedule);
+    TTLocation t8 = TTLocation("Praca do Funchal","Taxi",0.2,schedule);
     string name = "Aeroporto Sa Carneiro", city = "Porto";
     int c = 3, n = 3, m = 3;
     Airport a1 = Airport(name,city,c,n,m);
