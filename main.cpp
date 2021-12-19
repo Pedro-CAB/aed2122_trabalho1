@@ -485,132 +485,122 @@ void flight_menu(Company& company){
     getline(cin, input);
 }
 void buy_ticket(Company& company) {
-    bool notOver = true;
-    string input;
-    while (notOver) {
-        cout << "-Selecione uma opcao:" << endl;
-        cout << "A)Ver tabela de voos da companhia" << endl;
-        cout << "B)Comprar bilhetes" << endl;
-        cout << "0)Voltar ao menu principal" << endl;
-        string name, city;
-        char choice;
-        bool exists = false;
-        auto it = company.flights.begin();
-        auto itFlight = company.flights.begin();
+    cout << "Selecione o aeroporto de origem:"<<endl;
+    cout << "||" << sizeRegularizer("Nome", 30) << "||" << sizeRegularizer("Cidade", 20) << "||" << endl;
+    for (auto airport: company.getAirports()) {
+        cout << "||" << sizeRegularizer(airport.getName(), 30) << "||"
+             << sizeRegularizer(airport.getCity(), 20) << "||" << endl;
+    }
+    string airportOpt;
+    while(true) {
         cin.clear();
-        getline(cin,input);
-        choice = input.at(0);
-        switch (choice) {
-            case 'A':
-            case 'a':
-                cout << "Selecione o Aeroporto de Origem:" << endl;
-                cout << "||" << sizeRegularizer("Nome", 30) << "||" << sizeRegularizer("Cidade", 20) << "||" << endl;
-                for (auto airport: company.getAirports()) {
-                    cout << "||" << sizeRegularizer(airport.getName(), 30) << "||" << sizeRegularizer(airport.getCity(), 20)
-                         << "||" << endl;
+        getline(cin, airportOpt);
+        if (company.airportExists(airportOpt)) {
+            Airport chosenAP;
+            for (auto airport: company.getAirports()) {
+                if (airport.getName() == airportOpt) {
+                    chosenAP = airport;
+                    break;
                 }
-                cout << "Insira o nome do aeroporto abaixo:"<<endl;
+            }
+            cout << "Selecione o voo para o qual deseja comprar bilhetes:" << endl;
+            cout << "||" << sizeRegularizer("n#", 5) << "||" << sizeRegularizer("Data", 10) << "||" << sizeRegularizer("Partida",30) << "||"
+                 << sizeRegularizer("Destino", 30) << "||" << endl;
+            for (auto flight: company.flightsByOrigin(airportOpt)) {
+                cout << "||" << sizeRegularizer(to_string(flight.getNumber()), 5) << "||" << flight.getDate() << "||"
+                     << sizeRegularizer(flight.getOrigin().getCity(), 30) << "||"
+                     << sizeRegularizer(flight.getDestination().getCity(), 30) << "||" << endl;
+            }
+            string flightOpt;
+            while (true) {
                 cin.clear();
-                getline(cin,name);
-                if (company.airportExists(name)) {
-                    cout << "||" << sizeRegularizer("n#", 5) << "||" << sizeRegularizer("Data", 10) << "||" << "Partida"
-                         << "||" << sizeRegularizer("Destino", 30) << "||" << endl;
-                    for (auto flight: company.flightsByOrigin(name)) {
-                        cout << "||" << sizeRegularizer(to_string(flight.getNumber()), 5) << "||" << flight.getDate()
-                             << "||"
-                             << sizeRegularizer(flight.getDepartureT(), 7) << "||"
-                             << sizeRegularizer(flight.getDestination().getCity(), 30) << "||" << endl;
-                    }
-                }
-                cout<<"Insira 0 para voltar ao menu anterior"<<endl;
-                cin.clear();
-                getline(cin, input);
-                break;
-            case 'B':
-            case'b':
-                cout << "Insira o numero do voo para qual quer comprar bilhetes" << endl;
-                int flightN;
-                cin.clear();
-                getline(cin, input);
-                flightN = stoi(input);
-                while (!exists) {
-                    for (it = company.flights.begin(); it != company.flights.end(); it++) {
-                        if (it->getNumber() == flightN) {
-                            itFlight = it;
-                            exists = true;
+                getline(cin, flightOpt);
+                if (company.flightExists(stoi(flightOpt))) {
+                    Flight chosenFlight;
+                    for (auto flight: company.getFlights()) {
+                        if (flight.getNumber() == stoi(flightOpt)) {
+                            chosenFlight = flight;
                             break;
                         }
                     }
-                    if (it == company.flights.end()) {
-                        cout << "Voo de numero nao existente" << endl;
-                        cout << "Por favor introduza outro numero de voo ou insira 0 para voltar ao menu anterior" << endl;
+                    Plane flightPlane = company.getPlaneForFlight(chosenFlight.getNumber());
+                    if (flightPlane.getMaxOccupation() == chosenFlight.getPassengers().size()) {
+                        cout << "Este voo está cheio. Por favor, selecione outro." << endl;
+                    } else {
+                        int available = flightPlane.getMaxOccupation() - chosenFlight.getPassengers().size();
+                        cout << "Este voo tem " << available << " lugares disponiveis." << endl;
+                        cout << "Quantos bilhetes deseja comprar?" << endl;
                         cin.clear();
-                        getline(cin, input);
-                        flightN = stoi(input);
-                    }
-                    if (flightN == 0)
-                        exists = true;
-                }
-                if (flightN != 0) {
-                    try {
-                        auto plane = company.planes.begin();
-                        for (auto itPlane = company.planes.begin(); itPlane != company.planes.end(); ++itPlane) {
-                            queue<Flight> flightPlan = itPlane->getFlightPlan();
-                            while (!flightPlan.empty()) {
-                                if (flightPlan.front().getNumber() == flightN) {
-                                    plane = itPlane;
-                                    break;
-                                } else
-                                    flightPlan.pop();
-                            }
-                        }
-                        if (company.isFull(*itFlight, *plane)) {
-                            cout << "Infelizmente o voo numero(" << flightN << ") nao tem mais lugares disponiveis"
-                                 << endl;
-                        } else {
-                            cout << "Introduza o numero de bilhetes que deseja comprar:" << endl;
-                            int ticketN;
-                            cin.clear();
-                            getline(cin, input);
-                            ticketN = stoi(input);
-                            if (ticketN > company.emptySeats(*itFlight, *plane)) {
-                                cout << "Infelizmente o voo numero(" << flightN << ") só tem mais "
-                                     << company.emptySeats(*itFlight, *plane) << " lugares disponiveis" << endl;
-                            } else {
-                                for (int i = 0; i < ticketN; ++i) {
-                                    string nome;
-                                    char autoL;
-                                    int autoLug = 0;
-                                    cout << "Introduza o nome do titular deste bilhete(" << i +1 << "/" << ticketN<< "):" << endl;
+                        string amount;
+                        while (true) {
+                            getline(cin, amount);
+                            int a = stoi(amount);
+                            if (a <= available) {
+                                while (a > 0) {
+                                    cout << "Bilhete " << stoi(amount) - a + 1 << " :" << endl;
+                                    string name, lugOpt;
+                                    cout << "Insira o nome do passageiro para este bilhete." << endl;
                                     cin.clear();
-                                    getline(cin, nome);
-                                    cout<< "Vai desejar utilizar o servico de bagagem automatica? Introduza uma das seguintes opcoes:"<<endl<<"Y)Sim"<<endl<<"N)Nao;" << endl;  //Por enquanto está a assumir q o carrinho já tem conteu
-                                    cin.clear();
-                                    getline(cin, input);
-                                    autoL= input.at(0);                                                                                                                //Ainda não decidimos como implementar o carrinho
-                                    if (autoL == 'Y') {
-                                        if (!itFlight->car.addLuggage()) {
-                                            cout<<"Infelizmente o servico de bagagem automatica ja nao se encontra disponivel. Tera que processar a sua bagagem manualmente"<< endl;
-                                        } else
-                                            autoLug = 1;
+                                    getline(cin, name);
+                                    int capacity = chosenFlight.getCarCapacity();
+                                    cout << "Insira quantas malas levara para o servico de bagagem automatica." << endl;
+                                    cout << "(insira 0 se nao desejar usar o servico de bagagem automatica)" << endl;
+                                    cout << "Espaco disponivel: " << capacity << " malas." << endl;
+                                    while (true) {
+                                        cin.clear();
+                                        getline(cin, lugOpt);
+                                        int lug = stoi(lugOpt);
+                                        if (lug <= capacity) {
+                                            Passenger p(name, lug);
+                                            for (auto flight: company.flights) {
+                                                if (flight.getNumber() == chosenFlight.getNumber()) {
+                                                    flight.addPassenger(p);
+                                                    company.addPassenger(p);
+                                                }
+                                            }
+                                            break;
+                                        } else {
+                                            cout
+                                                    << "ERRO:Nao existe espaco suficiente para levar tantas malas. Por favor tente novamente."
+                                                    << endl;
+                                            cout
+                                                    << "(insira 0 se deseja cancelar o servico de bagagem automatica no seu bilhete)"
+                                                    << endl;
+                                        }
                                     }
-                                    itFlight->passengers.push_back(Passenger(nome, autoLug));
+                                    a--;
                                 }
-                                cout << "Obrigado por viajar com a Voe Connosco!" <<endl;
-                                cout<<"Insira 0 para voltar ao menu anterior"<<endl;
-                                cin.clear();
-                                getline(cin, input);
+                                break;
+                            } else {
+                                cout << "ERRO:Temos " << available
+                                     << " bilhetes disponiveis. Por favor insira um numero igual ou inferior a esse."
+                                     << endl;
                             }
                         }
-                    } catch (const char* msg) {
-                        cerr << msg << endl;
+                        break;
                     }
-                }else
-                    notOver = false;
+                    break;
+                } else {
+                    cout << "ERRO: O voo inserido nao existe. Tente novamente." << endl;
+                }
+            }
+            break;
+        } else {
+            cout << "ERRO: Aeroporto inserido nao existe. Tente novamente." << endl;
+        }
+    }
+    cout << "Obrigado pela sua compra!"<<endl;
+    cout << "Insira 0 para voltar ao menu principal." << endl;
+    while(true) {
+        string choice;
+        cin.clear();
+        getline(cin, choice);
+        switch (choice.at(0)) {
+            case '0':
+                main_menu(company);
                 break;
             default:
-                notOver = false;
-                break;
+                cout << "ERRO: Input Invalido" << endl;
         }
     }
 }
