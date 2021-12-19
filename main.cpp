@@ -16,21 +16,21 @@ void readAirports(Company &company, string name_file) {
 
             // Trata da primeira linha -> separa a o nome da cidade
             string name, city;
-            getline(i_file_airport, name, ';'); cout << "Name: " << name << endl;
-            getline(i_file_airport, city); cout << "City: " << city << endl;
+            getline(i_file_airport, name, ';'); //cout << "Name: " << name << endl;
+            getline(i_file_airport, city); //cout << "City: " << city << endl;
 
             // Trata da segunda linha -> separa os 3 números
             string s_n, s_c, s_m;
             getline(i_file_airport, s_n, ';');
             getline(i_file_airport, s_c, ';');
             getline(i_file_airport, s_m);
-            int n=3;
-            int c=3;
-            int m=3;
+            int c=stoi(s_c);
+            int n= stoi(s_n);
+            int m= stoi(s_m);
             //cout << "N1: " << n << " N2: " << c << " N3: " << m << endl;
 
             // Constroi o objecto
-            Airport a(name, city, n, c, m);
+            Airport a(name, city, c, n, m);
 
             string infotransports, transport;
             getline(i_file_airport, infotransports);
@@ -44,7 +44,7 @@ void readAirports(Company &company, string name_file) {
                 getline(t, type, ';');
                 getline(t, distance, ';');
                 getline(t, hour);
-                cout << "Nome: " << name << " type: " << type << " distance: " << distance << " all hours: " << hour << endl;
+                //cout << "Nome: " << name << " type: " << type << " distance: " << distance << " all hours: " << hour << endl;
 
                 stringstream h(hour);
                 string r;
@@ -54,11 +54,10 @@ void readAirports(Company &company, string name_file) {
                 }
 
                 for (int i = 0; i < hours.size(); i++){
-                    cout << hours.at(i) << " ";
+                    //cout << hours.at(i) << " ";
                 }
-                cout << endl;
+                //cout << endl;
 
-                //float d = 0.2;
                 TTLocation ttl(name, type, distance, hours);
                 a.addLocation(ttl);
             }
@@ -752,19 +751,24 @@ void main_menu(Company company){
 int main() {
 
     Company company;
-
+    /*
     //AEROPORTO
     string file_airport = "../aeroporto.txt";
     readAirports(company, file_airport);
 
-    cout << company.getAirports().size() << endl;
-    cout << "Bem-vindo a Agencia Voa Connosco! :)" << endl;
-
-    /*cout << "Escolhe um dos nossos aeroportos para poderes prosseguir: " << endl;
+    cout << "Quantidade de Aeroportos = " << company.getAirports().size() << endl;
 
     for (auto airport: company.getAirports()){
-        cout << airport.getName() << " " << airport.getCity();  //lista todos os aeroportos que estão no ficheiro
-        cout << endl;
+        cout << airport.getName() << " " << airport.getCity()<<endl;
+        cout << "Carrinho : c=" << airport.getCar().getC()<<", n="<<airport.getCar().getN()<<", m="<<airport.getCar().getM()<<endl;
+        cout << "Localizacoes de Transporte:"<<endl;
+        BSTItrIn<TTLocation> itr(airport.getLocations());
+        while(!itr.isAtEnd()) {
+            cout << itr.retrieve().name << ";" << itr.retrieve().type << ";" <<
+                 itr.retrieve().distance << ";" << itr.retrieve().schedule.size();
+            cout << endl;
+            itr.advance();
+        }
     }
 
     string op_airport, op_city;
