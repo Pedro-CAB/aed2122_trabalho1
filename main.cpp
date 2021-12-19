@@ -796,8 +796,8 @@ void viewtransport(Company company){
 
         BSTItrIn<TTLocation>itr(a1.getLocations());
         while (!itr.isAtEnd()){     //mostra os atributos de transportes
-            cout << "||" << sizeRegularizer(itr.retrieve().name, 30) << "||" << sizeRegularizer(itr.retrieve().type, 20) << " " <<
-            sizeRegularizer((itr.retrieve().distance), 5) << " ";
+            cout << '||' << sizeRegularizer(itr.retrieve().name, 30) << "||" << sizeRegularizer(itr.retrieve().type, 20) << " " <<
+            sizeRegularizer(to_string(itr.retrieve().distance), 5) << " ";
             for (auto v:itr.retrieve().schedule){
                 cout << v << " ";
             }
@@ -864,21 +864,8 @@ void main_menu(Company company){
             break;
         case 'e':
         case 'E':
-            cout << "<IMPLEMENTAR TABELA DE LOCAIS DE TRANSPORTE>" << endl;
-            //VER SE ESTÁ BEM
-
-            for (auto airport:company.getAirports()){
-                BSTItrIn<TTLocation> itr(airport.getLocations());
-                while (!itr.isAtEnd()){
-                    cout << itr.retrieve().name << " " << itr.retrieve().type << " " <<
-                    itr.retrieve().distance << " ";
-                    for (auto const& v:itr.retrieve().schedule){
-                        cout << v << " ";
-                    }
-                    cout << endl;
-                    itr.advance();
-                }
-            }
+            cout << "Mostra os locais perto do aeroporto que escolheu" << endl;
+            viewtransport(company);
             break;
         case 'f':
         case 'F':
