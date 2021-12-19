@@ -31,6 +31,7 @@ int TTLocation::getDistance() {
     return distance;
 }
 
+
 vector<string> TTLocation::getSchedule() {
     return schedule;
 }
