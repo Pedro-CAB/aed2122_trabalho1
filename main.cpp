@@ -939,14 +939,14 @@ int main() {
 
 
     vector<string> schedule = {"08:00","22:00"};
-    TTLocation t1 = TTLocation("Estacao de Sa Carneiro","Metro",0.5,schedule);
-    TTLocation t2 = TTLocation("Paragem de Sa Carneiro","Autocarro",0.2,schedule);
-    TTLocation t3 = TTLocation("Paragem de Sa Carneiro","Taxi",0.2,schedule);
-    TTLocation t4 = TTLocation("Estacao de Humberto Delgado","Metro",0.5,schedule);
-    TTLocation t5 = TTLocation("Paragem de Humberto Delgado","Autocarro",0.2,schedule);
-    TTLocation t6 = TTLocation("Praca de Humberto Delgado","Taxi",0.2,schedule);
-    TTLocation t7 = TTLocation("Paragem CR7","Autocarro",0.2,schedule);
-    TTLocation t8 = TTLocation("Praca do Funchal","Taxi",0.2,schedule);
+    TTLocation t1 = TTLocation("Estacao de Sa Carneiro","Metro",50,schedule);
+    TTLocation t2 = TTLocation("Paragem de Sa Carneiro","Autocarro",20,schedule);
+    TTLocation t3 = TTLocation("Paragem de Sa Carneiro","Taxi",20,schedule);
+    TTLocation t4 = TTLocation("Estacao de Humberto Delgado","Metro",50,schedule);
+    TTLocation t5 = TTLocation("Paragem de Humberto Delgado","Autocarro",20,schedule);
+    TTLocation t6 = TTLocation("Praca de Humberto Delgado","Taxi",20,schedule);
+    TTLocation t7 = TTLocation("Paragem CR7","Autocarro",20,schedule);
+    TTLocation t8 = TTLocation("Praca do Funchal","Taxi",20,schedule);
     string name = "Aeroporto Sa Carneiro", city = "Porto";
     int c = 3, n = 3, m = 3;
     Airport a1 = Airport(name,city,c,n,m);
