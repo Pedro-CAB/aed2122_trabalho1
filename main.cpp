@@ -542,7 +542,7 @@ void buy_ticket(Company& company) {
                                             for (auto flight: company.flights) {
                                                 if (flight.getNumber() == chosenFlight.getNumber()) {
                                                     flight.addPassenger(p);
-                                               
+                                                    
                                                 }
                                             }
                                             break;
