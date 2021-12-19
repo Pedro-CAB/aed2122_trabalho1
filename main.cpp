@@ -503,18 +503,17 @@ void buy_ticket(Company& company) {
                 cin.clear();
                 getline(cin, flightOpt);
                 if (company.flightExists(stoi(flightOpt))) {
-                    Flight chosenFlight;
-                    for (auto flight: company.getFlights()) {
-                        if (flight.getNumber() == stoi(flightOpt)) {
-                            chosenFlight = flight;
+                    auto itFlight = company.flights.begin();
+                    for ( itFlight = company.flights.begin(); itFlight != company.flights.begin(); ++itFlight) {
+                        if (itFlight->getNumber() == stoi(flightOpt)) {
                             break;
                         }
                     }
-                    Plane flightPlane = company.getPlaneForFlight(chosenFlight.getNumber());
-                    if (flightPlane.getMaxOccupation() == chosenFlight.getPassengers().size()) {
+                    Plane flightPlane = company.getPlaneForFlight(itFlight->getNumber());
+                    if (flightPlane.getMaxOccupation() == itFlight->getPassengers().size()) {
                         cout << "Este voo está cheio. Por favor, selecione outro." << endl;
                     } else {
-                        int available = flightPlane.getMaxOccupation() - chosenFlight.getPassengers().size();
+                        int available = flightPlane.getMaxOccupation() - itFlight->getPassengers().size();
                         cout << "Este voo tem " << available << " lugares disponiveis." << endl;
                         cout << "Quantos bilhetes deseja comprar?" << endl;
                         cin.clear();
@@ -529,7 +528,7 @@ void buy_ticket(Company& company) {
                                     cout << "Insira o nome do passageiro para este bilhete." << endl;
                                     cin.clear();
                                     getline(cin, name);
-                                    int capacity = chosenFlight.getCarCapacity();
+                                    int capacity = itFlight->getCarCapacity();
                                     cout << "Insira quantas malas levara para o servico de bagagem automatica." << endl;
                                     cout << "(insira 0 se nao desejar usar o servico de bagagem automatica)" << endl;
                                     cout << "Espaco disponivel: " << capacity << " malas." << endl;
@@ -539,12 +538,8 @@ void buy_ticket(Company& company) {
                                         int lug = stoi(lugOpt);
                                         if (lug <= capacity) {
                                             Passenger p(name, lug);
-                                            for (auto flight: company.flights) {
-                                                if (flight.getNumber() == chosenFlight.getNumber()) {
-                                                    flight.addPassenger(p);
-                                                    
-                                                }
-                                            }
+                                            itFlight->addPassenger(p);
+                                            company.passengers.push_back(p);
                                             break;
                                         } else {
                                             cout
