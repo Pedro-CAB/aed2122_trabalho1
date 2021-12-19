@@ -34,9 +34,10 @@ bool LuggageCar::addLuggage() {
         for (auto pile: wagon) {
             if (pile.size() == m)
                 continue;
-            else
+            else {
                 pile.push(true);
-            return true;
+                return true;
+            }
         }
     }
     return false;
