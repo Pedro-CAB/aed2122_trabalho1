@@ -861,8 +861,6 @@ void main_menu(Company& company){
             case 'E':
                 cout << "Mostra os locais mais próximos do aeroporto que escolher" << endl;
                 viewtransport(company);
-
-                
                 break;
             case 'f':
             case 'F':
