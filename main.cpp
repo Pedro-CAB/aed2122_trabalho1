@@ -4,7 +4,81 @@
 #include "Company.h"
 
 using namespace std;
+void main_menu(Company company), go_back(Company company);
+string sizeRegularizer(string str, int n);
 
+
+
+void povoar(Company company){
+    Service s1 = Service("Limpeza", "22-12-2021","Joao Pereira");
+    Service s2 = Service("Manutencao", "22-12-2021","Miguel Sousa");
+    Service s3 = Service("Vistoria", "22-12-2021","Marta Lima");
+
+    Passenger p1 = Passenger("Carlos Silva",2);
+    Passenger p2 = Passenger("Luis Miguel",1);
+    Passenger p3 = Passenger("Simao Rodrigues",3);
+    Passenger p4 = Passenger("Ana Marques",2);
+    Passenger p5 = Passenger("Guilherme Moreira",1);
+    Passenger p6 = Passenger("Antonio Marques",3);
+    Passenger p7 = Passenger("Jose Nunes",1);
+    Passenger p8 = Passenger("Lucia Pereira",3);
+    Passenger p9 = Passenger("Carla Ferreira",2);
+    Passenger p10 = Passenger("Fernanda Paiva",1);
+
+
+    vector<string> schedule = {"08:00","22:00"};
+    TTLocation t1 = TTLocation("Estacao de Sa Carneiro","Metro",100,schedule);
+    TTLocation t2 = TTLocation("Paragem de Sa Carneiro","Autocarro",200,schedule);
+    TTLocation t3 = TTLocation("Paragem de Sa Carneiro","Taxi",200,schedule);
+    TTLocation t4 = TTLocation("Estacao de Humberto Delgado","Metro",500,schedule);
+    TTLocation t5 = TTLocation("Paragem de Humberto Delgado","Autocarro",200,schedule);
+    TTLocation t6 = TTLocation("Praca de Humberto Delgado","Taxi",200,schedule);
+    TTLocation t7 = TTLocation("Paragem CR7","Autocarro",200,schedule);
+    TTLocation t8 = TTLocation("Praca do Funchal","Taxi",200,schedule);
+    string name = "Aeroporto Sa Carneiro", city = "Porto";
+    int c = 3, n = 3, m = 3;
+    Airport a1 = Airport(name,city,c,n,m);
+    name = "Aeroporto Humberto Delgado", city = "Lisboa";
+    c = 4, n = 3, m = 2;
+    Airport a2 = Airport(name,city,c,n,m);
+    name = "Aeroporto Cristiano Ronaldo",city="Funchal";
+    c = 2, n= 2, m = 5;
+    Airport a3 = Airport(name,city,c,n,m);
+
+
+    Flight f1 = Flight(1,"22:00","20:00","22-12-2021",a1,a2);
+    Flight f2 = Flight(2,"12:00","10:00","22-12-2021",a1,a2);
+    Flight f3 = Flight(3,"00:30","22:30","22-12-2021",a2,a1);
+    Flight f4 = Flight(4,"14:30","12:30","22-12-2021",a2,a1);
+    Flight f5 = Flight(5,"00:00","20:00","22-12-2021",a1,a3);
+    Flight f6 = Flight(6,"14:00","10:00","22-12-2021",a2,a3);
+    Flight f7 = Flight(7,"00:00","20:00","22-12-2021",a3,a1);
+    Flight f8 = Flight(8,"14:00","10:00","22-12-2021",a3,a1);
+
+    Plane P1 = Plane("A001",250);
+    Plane P2 = Plane("A002",300);
+    Plane P3 = Plane("A003",320);
+    Plane P4 = Plane("A004",400);
+    Plane P5 = Plane("A005",250);
+    Plane P6 = Plane("A006",300);
+    P1.addTask_to_do(s1), P1.addTask_to_do(s2);
+    P2.addTask_to_do(s3), P2.addTask_to_do(s2);
+    P3.addTask_to_do(s2), P3.addTask_to_do(s3);
+    P4.addTask_to_do(s1), P4.addTask_to_do(s3);
+    P5.addTask_to_do(s1);
+    P6.addTask_to_do(s1), P6.addTask_to_do(s2),P6.addTask_to_do(s3);
+    f1.addPassenger(p1),f1.addPassenger(p2),f1.addPassenger(p3),
+            f2.addPassenger(p2),f2.addPassenger(p3),f2.addPassenger(p4),
+            f3.addPassenger(p3),f3.addPassenger(p4),f3.addPassenger(p5);
+    P1.addFlight(f1),P1.addFlight(f6),P1.addFlight(f8);
+    P2.addFlight(f3),P2.addFlight(f1);
+    P3.addFlight(f7),P3.addFlight(f2),P3.addFlight(f6);
+    company.addFlight(f1),company.addFlight(f2),company.addFlight(f3),company.addFlight(f4),company.addFlight(f5),company.addFlight(f6),company.addFlight(f7),company.addFlight(f8);
+    company.addPassenger(p1),company.addPassenger(p2),company.addPassenger(p3),company.addPassenger(p4),company.addPassenger(p5),company.addPassenger(p6),company.addPassenger(p7),company.addPassenger(p8),company.addPassenger(p9),company.addPassenger(p10);
+    company.addAirport(a1),company.addAirport(a2),company.addAirport(a3);
+    company.addPlane(P1),company.addPlane(P2),company.addPlane(P3),company.addPlane(P4),company.addPlane(P5),company.addPlane(P6);
+    main_menu(company);
+}
 void readAirports(Company &company, string name_file) {
 
     ifstream i_file_airport;
@@ -39,10 +113,12 @@ void readAirports(Company &company, string name_file) {
             // Lê a terceira linha completa
             while (getline(trans, transport, '-')) { // separa pelos '-'
                 stringstream t(transport);
-                string name, type, distance, hour;
+                string name, type, dist, hour;
+                int distance;
                 getline(t, name, ';');
                 getline(t, type, ';');
-                getline(t, distance, ';');
+                getline(t, dist, ';');
+                distance = stoi(dist);
                 getline(t, hour);
                 //cout << "Nome: " << name << " type: " << type << " distance: " << distance << " all hours: " << hour << endl;
 
@@ -163,9 +239,6 @@ void readPlanes(Company &company, string name_file){
     }
 
 } */
-
-void main_menu(Company company), go_back(Company company);
-string sizeRegularizer(string str, int n);
 
 void DoneList(Company company){
     string LPlate;
@@ -749,59 +822,8 @@ void main_menu(Company company){
 }
 
 int main() {
-
     Company company;
-    /*
-    //AEROPORTO
-    string file_airport = "../aeroporto.txt";
-    readAirports(company, file_airport);
-
-    cout << "Quantidade de Aeroportos = " << company.getAirports().size() << endl;
-
-    for (auto airport: company.getAirports()){
-        cout << airport.getName() << " " << airport.getCity()<<endl;
-        cout << "Carrinho : c=" << airport.getCar().getC()<<", n="<<airport.getCar().getN()<<", m="<<airport.getCar().getM()<<endl;
-        cout << "Localizacoes de Transporte:"<<endl;
-        BSTItrIn<TTLocation> itr(airport.getLocations());
-        while(!itr.isAtEnd()) {
-            cout << itr.retrieve().name << ";" << itr.retrieve().type << ";" <<
-                 itr.retrieve().distance << ";" << itr.retrieve().schedule.size();
-            cout << endl;
-            itr.advance();
-        }
-    }
-
-    string op_airport, op_city;
-    getline(cin, op_airport);
-
-    Airport a1;
-    for (auto airport:company.getAirports()){
-        if (airport.getName() == op_airport)
-            a1 = airport;
-    }*/
-
-    //AVIÃO
-    /*
-    string name_file_plane = a1.getCity() + "plane.txt";
-    readPlanes(company, name_file_plane);
-
-    for (auto airport:company.getAirports()){
-        cout << airport.getName() << " " << airport.getCity();
-    }
-
-    for (auto plane:company.getPlanes()){
-        cout << plane.getLPlate() << " " << plane.getMaxOccupation();
-    }
-
-    for (auto flight:company.getFlights()){
-        cout << flight.getNumber() << " " << flight.getDate();
-    }
-
-    for (auto passenger:company.getPassengers()){
-        cout << passenger.getName() << " " << passenger.getLuggage();
-    } */
-
-    main_menu(company);
-
+    povoar(company);
+    //main_menu(company);
     return 0;
 }
