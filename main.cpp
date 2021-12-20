@@ -863,7 +863,7 @@ void main_menu(Company& company) {
             case 'g':
             case 'G':
                 cout << "Selecione o aviao cujos servicos deseja consultar:" << endl;
-                cout << "||Aviao||Lugares||" << sizeRegularizer("Localizacao Atual", 30) << "||" << endl;
+                cout << "||"<<sizeRegularizer("Aviao",9)<<"||Lugares||" << sizeRegularizer("Localizacao Atual", 30) << "||" << endl;
                 for (auto plane: company.getPlanes()) {
                     if (!plane.getFlightPlan().empty())
                         cout << "||" << sizeRegularizer(plane.getLPlate(), 9) << "||"
