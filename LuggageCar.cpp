@@ -2,6 +2,7 @@
 // Created by Aulas FEUP on 16/12/2021.
 //
 
+
 #include "LuggageCar.h"
 LuggageCar::LuggageCar(int c, int n, int m) {
     this->c = c;
@@ -29,12 +30,10 @@ int LuggageCar::getN() {return n;}
  * @return true se a adição for bem sucedida ou false se o carrinho estiver cheio
  */
 bool LuggageCar::addLuggage() {
-    for (auto wagon: car) {
-        for (auto pile: wagon) {
-            if (pile.size() == m)
-                continue;
-            else {
-                pile.push(true);
+    for (auto wagon= car.begin(); wagon != car.end(); ++wagon) {
+        for (auto pile = wagon->begin();pile != wagon->end(); ++pile) {
+            if (pile->size() != m){
+                pile->push(true);
                 return true;
             }
         }

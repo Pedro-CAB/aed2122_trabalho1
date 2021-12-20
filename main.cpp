@@ -956,9 +956,9 @@ int main() {
     P4.addTask_to_do(s1), P4.addTask_to_do(s3);
     P5.addTask_to_do(s1);
     P6.addTask_to_do(s1), P6.addTask_to_do(s2),P6.addTask_to_do(s3);
-    f1.addPassenger(p1),f1.addPassenger(p2),f1.addPassenger(p3),
+      f1.addPassenger(p1),f1.addPassenger(p2),f1.addPassenger(p3),
             f2.addPassenger(p2),f2.addPassenger(p3),f2.addPassenger(p4),
-            f3.addPassenger(p3),f3.addPassenger(p4),f3.addPassenger(p5);
+           f3.addPassenger(p3),f3.addPassenger(p4),f3.addPassenger(p5);
     P1.addFlight(f1),P1.addFlight(f5),P1.addFlight(f8);
     P2.addFlight(f3),P2.addFlight(f4);
     P3.addFlight(f7),P3.addFlight(f2),P3.addFlight(f6);
@@ -1018,7 +1018,7 @@ int main() {
 
     main_menu(company);
 
-
+    //cout << f1.car.addLuggage() << endl;
     //povoar(company);
     //main_menu(company);
 
