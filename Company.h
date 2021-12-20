@@ -46,6 +46,7 @@ public:
     bool airportExists(string name);
     bool flightExists(int num);
     bool flightIsAssigned(int num);
+    bool planeExists(string LPlate);
 
     //Filter Vectors:
     vector<Flight> flightsByOrigin(string name);

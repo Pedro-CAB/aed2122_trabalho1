@@ -173,3 +173,12 @@ Plane Company::getPlaneForFlight(int num) {
         }
     }
 }
+
+bool Company::planeExists(string LPlate) {
+    for (auto plane : planes){
+        if(LPlate==plane.getLPlate()){
+            return true;
+        }
+    }
+    return false;
+}
