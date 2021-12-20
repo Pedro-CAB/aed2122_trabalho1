@@ -403,13 +403,7 @@ void flightByDestination(Company& company) {
             cin.clear();
             string a;
             getline(cin, a);
-            while (true) {
-                if (a == "0") {
-                    break;
-                } else {
-                    cout << "ERRO: Input Invalido. Tente novamente." << endl;
-                }
-            }
+            break;
         } else {
             cout << "ERRO: O aeroporto inserido nao existe. Tente novamente." << endl;
             flightByDestination(company);
@@ -433,13 +427,7 @@ void flightByOrigin(Company& company){
             cin.clear();
             string a;
             getline(cin, a);
-            while (true) {
-                if (a == "0") {
-                    break;
-                } else {
-                    cout << "ERRO: Input Invalido. Tente novamente." << endl;
-                }
-            }
+            break;
         } else {
             cout << "ERRO: O aeroporto inserido nao existe. Tente novamente." << endl;
         }
@@ -497,13 +485,14 @@ void flight_menu(Company& company){
             flightByDestination(company);
             break;
         case '0':
+            break;
         default:
             cout << "ERRO: Input Invalido. Tente novamente" << endl;
             flight_menu(company);
     }
 }
 void buy_ticket(Company& company) {
-    cout << "Selecione o aeroporto de origem:"<<endl;
+    cout << "Selecione o aeroporto de origem ou isira 0 para voltar ao menu anterior:"<<endl;
     cout << "||" << sizeRegularizer("Nome", 30) << "||" << sizeRegularizer("Cidade", 20) << "||" << endl;
     for (auto airport: company.getAirports()) {
         cout << "||" << sizeRegularizer(airport.getName(), 30) << "||"
@@ -513,7 +502,9 @@ void buy_ticket(Company& company) {
     while(true) {
         cin.clear();
         getline(cin, airportOpt);
-        if (company.airportExists(airportOpt)) {
+        if (airportOpt == "0")
+            break;
+        else if (company.airportExists(airportOpt)) {
             Airport chosenAP;
             for (auto airport: company.getAirports()) {
                 if (airport.getName() == airportOpt) {
@@ -603,11 +594,13 @@ void buy_ticket(Company& company) {
             cout << "ERRO: Aeroporto inserido nao existe. Tente novamente." << endl;
         }
     }
-    cout << "Obrigado pela sua compra!"<<endl;
-    cout << "Insira 0 para voltar ao menu principal." << endl;
-    string choice;
-    cin.clear();
-    getline(cin, choice);
+    if(airportOpt != "0") {
+        cout << "Obrigado pela sua compra!" << endl;
+        cout << "Insira 0 para voltar ao menu principal." << endl;
+        string choice;
+        cin.clear();
+        getline(cin, choice);
+    }
 }
 void update_flight(Company& company) {
     string input;
@@ -778,7 +771,7 @@ void viewtransport(Company& company){
         cin.clear();
         getline(cin,choice);
         if (choice == "0"){
-            main_menu(company);
+            break;
         }
         else{
             cout << "ERRO: Input Invalido. Tente novamente."<<endl;
@@ -1026,7 +1019,7 @@ int main() {
     main_menu(company);
 
 
-    povoar(company);
+    //povoar(company);
     //main_menu(company);
 
     return 0;
