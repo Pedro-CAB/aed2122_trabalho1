@@ -526,8 +526,9 @@ void buy_ticket(Company& company) {
                 getline(cin, flightOpt);
                 if (company.flightExists(stoi(flightOpt))) {
                     auto itFlight = company.flights.begin();
-                    for ( itFlight = company.flights.begin(); itFlight != company.flights.begin(); ++itFlight) {
+                    for ( itFlight = company.flights.begin(); itFlight != company.flights.end(); ++itFlight) {
                         if (itFlight->getNumber() == stoi(flightOpt)) {
+                            cout << itFlight->getNumber()<<endl;
                             break;
                         }
                     }
@@ -730,31 +731,49 @@ void update_service(Company& company){
 
 void viewtransport(Company& company){
     string name;
-    cout << "Insira o aeroporto que pretende" << endl;
-    getline(cin, name);
-    if (company.airportExists(name)) {
-        Airport a1;
-        cout << "||" << sizeRegularizer("n#", 5) << "||" << sizeRegularizer("Data", 10) <<"||"<<"Partida"<< "||" << sizeRegularizer("Destino", 30) << "||" << endl;
-        for (auto airport:company.getAirports()){
-            if (airport.getName() == name)
-                a1 = airport;
-        }
-
-        BSTItrIn<TTLocation>itr(a1.getLocations());
-        while (!itr.isAtEnd()){     //mostra os atributos de transportes
-            cout << "||" << sizeRegularizer(itr.retrieve().name, 30) << "||" << sizeRegularizer(itr.retrieve().type, 20) << " " <<
-                 sizeRegularizer(to_string(itr.retrieve().distance), 5) << " ";
-            for (auto v:itr.retrieve().schedule){
-                cout << v << " ";
+    cout << "Insira o aeroporto que pretende consultar:" << endl;
+    cout << "||" << sizeRegularizer("Nome", 30) << "||" << sizeRegularizer("Cidade", 20) << "||" << endl;
+    for (auto airport: company.getAirports()) {
+        cout << "||" << sizeRegularizer(airport.getName(), 30) << "||"
+             << sizeRegularizer(airport.getCity(), 20) << "||" << endl;
+    }
+    while(true) {
+        getline(cin, name);
+        if (company.airportExists(name)) {
+            Airport a1;
+            cout << "||" << sizeRegularizer("n#", 5) << "||" << sizeRegularizer("Data", 10) << "||" << "Partida" << "||"
+                 << sizeRegularizer("Destino", 30) << "||" << endl;
+            for (auto airport: company.getAirports()) {
+                if (airport.getName() == name)
+                    a1 = airport;
             }
-            cout << endl;
-            itr.advance();
+            BSTItrIn<TTLocation> itr(a1.getLocations());
+            while (!itr.isAtEnd()) {     //mostra os atributos de transportes
+                cout << "||" << sizeRegularizer(itr.retrieve().name, 30) << "||"
+                     << sizeRegularizer(itr.retrieve().type, 20) << " " <<
+                     sizeRegularizer(to_string(itr.retrieve().distance), 5) << " ";
+                for (auto v: itr.retrieve().schedule) {
+                    cout << v << " ";
+                }
+                cout << endl;
+                itr.advance();
+            }
+            break;
+        } else {
+            cout << "ERRO: Input Invalido. Tente novamente." << endl;
         }
     }
-
-    else{
-        cout << "ERRO: Input Invalido. Tente novamente."<<endl;
-        viewtransport(company);
+    cout << "Insira 0 para voltar ao menu principal."<<endl;
+    string choice;
+    while(true){
+        cin.clear();
+        getline(cin,choice);
+        if (choice == "0"){
+            main_menu(company);
+        }
+        else{
+            cout << "ERRO: Input Invalido. Tente novamente."<<endl;
+        }
     }
 }
 

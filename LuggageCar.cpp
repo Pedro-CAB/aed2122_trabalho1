@@ -7,17 +7,16 @@ LuggageCar::LuggageCar(int c, int n, int m) {
     this->c = c;
     this->n = n;
     this->m = m;
-    car = {};
-    while (car.size()<c){
-        vector<stack<bool>> empty_vec = {};
-        car.push_back(empty_vec);
-    }
-    for (vector<stack<bool>> wagon:car){
-        while (wagon.size()<n){
-            stack<bool> emptyPile = {};
-            wagon.push_back(emptyPile);
+    vector<vector<stack<bool>>> a;
+    for (int i = 0; i <c; i++){
+        vector<stack<bool>> b;
+        for (int j = 0; j < n; j++){
+            stack<bool> c;
+            b.push_back(c);
         }
+        a.push_back(b);
     }
+    car = a;
 }
 
 int LuggageCar::getC() {return c;}

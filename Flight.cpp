@@ -16,12 +16,14 @@ Flight::Flight() : car(LuggageCar(0, 0, 0)){
 
 Flight::Flight(int number, string arrivalT, string departureT, string date, Airport origin, Airport destination) : car(LuggageCar(origin.getCar().getC(), origin.getCar().getN(), origin.getCar().getM())){
     this->number = number,
-            this->departureT =departureT;
+    this->departureT =departureT;
     this->arrivalT = arrivalT;
     this->date = date;
     this->origin = origin;
     this->destination = destination;
     this->car = origin.getCar();
+    list<Passenger> a;
+    this->passengers = a;
 }
 
 int Flight::getNumber(){
@@ -103,8 +105,8 @@ void Flight::addPassenger(Passenger p) {
 
 int Flight::getCarCapacity() {
     int count = 0;
-    for (vector<stack<bool>> a : car.getCar()){
-        for (stack<bool> b : a){
+    for (auto a : car.getCar()){
+        for (auto b : a){
             count += car.getM() - b.size();
         }
     }
