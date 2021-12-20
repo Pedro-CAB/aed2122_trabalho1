@@ -255,31 +255,40 @@ void DoneList(Company &company){
 
 void ToDoList(Company &company){
     string LPlate;
-    cin.clear();
-    getline(cin,LPlate);
-    Plane p = Plane("0000",0);
-    for (auto plane : company.getPlanes()){
-        if (LPlate==plane.getLPlate()){
-            p = plane;
+    while(true) {
+        cin.clear();
+        getline(cin, LPlate);
+        if (company.planeExists(LPlate)) {
+            Plane p = Plane("0000", 0);
+            for (auto plane: company.getPlanes()) {
+                if (LPlate == plane.getLPlate()) {
+                    p = plane;
+                    break;
+                }
+            }
+            queue<Service> todo = p.getToDo();
+            cout << "||" << sizeRegularizer("Servico", 15) << "||" << sizeRegularizer("Data", 10) << "||"
+                 << sizeRegularizer("Funcionario", 20) << endl;
+            while (!todo.empty()) {
+                cout << "||" << sizeRegularizer(todo.front().getType(), 15) << "||" << todo.front().getDate() << "||"
+                     << sizeRegularizer(todo.front().getEmployee(), 20) << endl;
+                todo.pop();
+            }
             break;
         }
+        else{
+            cout<<"ERRO: O aviao inserido nao existe. Tente novamente."<<endl;
+        }
     }
-    queue<Service> todo = p.getToDo();
-    cout << "||"<< sizeRegularizer( "Servico",15)<<"||"<<sizeRegularizer("Data",10)<<"||"<<sizeRegularizer("Funcionario",20)<<endl;
-    while (!todo.empty()){
-        cout << "||"<<sizeRegularizer(todo.front().getType(),15)<<"||"<<todo.front().getDate()<<"||"<<sizeRegularizer(todo.front().getEmployee(),20)<<endl;
-        todo.pop();
-    }
-    cout << "Insira 0 para voltar ao menu principal."<<endl;
+    cout << "Insira 0 para voltar ao menu principal." << endl;
     string str;
     cin.clear();
-    getline(cin,str);
+    getline(cin, str);
     while (true) {
-        if (str == "0"){
+        if (str == "0") {
             break;
-        }
-        else
-            cout<< "ERRO: Input Invalido. Tente novamente."<<endl;
+        } else
+            cout << "ERRO: Input Invalido. Tente novamente." << endl;
     }
 }
 
@@ -307,10 +316,10 @@ void ListFLightPassengers(Company& company){
             cout << "||"<<sizeRegularizer(passenger.getName(),20)<<"||"<<sizeRegularizer("Nao",19)<<"||"<<endl;
     }
     cout << "Insira 0 para voltar ao menu principal."<<endl;
-    string str;
-    cin.clear();
-    getline(cin,str);
     while (true) {
+        string str;
+        cin.clear();
+        getline(cin,str);
         if (str == "0"){
             break;
         }
@@ -847,12 +856,12 @@ void main_menu(Company& company) {
                 cout << "||Aviao||Lugares||" << sizeRegularizer("Localizacao Atual", 30) << "||" << endl;
                 for (auto plane: company.getPlanes()) {
                     if (!plane.getFlightPlan().empty())
-                        cout << "||" << sizeRegularizer(plane.getLPlate(), 9) << "||"
+                        cout << "||" << sizeRegularizer(plane.getLPlate(), 5) << "||"
                              << sizeRegularizer(to_string(plane.getMaxOccupation()), 7) << "||"
                              << sizeRegularizer(plane.getFlightPlan().front().getOrigin().getName(), 30) << "||"
                              << endl;
                     else
-                        cout << "||" << sizeRegularizer(plane.getLPlate(), 9) << "||"
+                        cout << "||" << sizeRegularizer(plane.getLPlate(), 5) << "||"
                              << sizeRegularizer(to_string(plane.getMaxOccupation()), 7) << "||"
                              << sizeRegularizer("Nao Operacional", 30) << "||" << endl;
                 }
@@ -941,7 +950,6 @@ int main() {
     Flight f6 = Flight(6,"14:00","10:00","22-12-2021",a2,a3);
     Flight f7 = Flight(7,"00:00","20:00","22-12-2021",a3,a1);
     Flight f8 = Flight(8,"14:00","10:00","22-12-2021",a3,a1);
-    cout << f1.car.getC()<< endl<< f1.car.getM()<< endl<< f1.car.getN()<<endl;
 
     Plane P1 = Plane("A001",250);
     Plane P2 = Plane("A002",300);
