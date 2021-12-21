@@ -8,7 +8,7 @@ void main_menu(Company& company), go_back(Company company);
 string sizeRegularizer(string str, int n);
 
 
-void readAirports(Company &company, string name_file) {
+/*void readAirports(Company &company, string name_file) {
 
     ifstream i_file_airport;
     i_file_airport.open(name_file);
@@ -72,7 +72,7 @@ void readAirports(Company &company, string name_file) {
     }
     i_file_airport.close();
 }
-/*
+
 void readPlanes(Company &company, string name_file){
     ifstream i_file_planes;
     i_file_planes.open(name_file);
