@@ -8,76 +8,6 @@ void main_menu(Company& company), go_back(Company company);
 string sizeRegularizer(string str, int n);
 
 
-
-void povoar(Company& company){
-    Service s1 = Service("Limpeza", "22-12-2021","Joao Pereira");
-    Service s2 = Service("Manutencao", "22-12-2021","Miguel Sousa");
-    Service s3 = Service("Vistoria", "22-12-2021","Marta Lima");
-
-    Passenger p1 = Passenger("Carlos Silva",2);
-    Passenger p2 = Passenger("Luis Miguel",1);
-    Passenger p3 = Passenger("Simao Rodrigues",3);
-    Passenger p4 = Passenger("Ana Marques",2);
-    Passenger p5 = Passenger("Guilherme Moreira",1);
-    Passenger p6 = Passenger("Antonio Marques",3);
-    Passenger p7 = Passenger("Jose Nunes",1);
-    Passenger p8 = Passenger("Lucia Pereira",3);
-    Passenger p9 = Passenger("Carla Ferreira",2);
-    Passenger p10 = Passenger("Fernanda Paiva",1);
-
-
-    vector<string> schedule = {"08:00","22:00"};
-    TTLocation t1 = TTLocation("Estacao de Sa Carneiro","Metro",100,schedule);
-    TTLocation t2 = TTLocation("Paragem de Sa Carneiro","Autocarro",200,schedule);
-    TTLocation t3 = TTLocation("Paragem de Sa Carneiro","Taxi",200,schedule);
-    TTLocation t4 = TTLocation("Estacao de Humberto Delgado","Metro",500,schedule);
-    TTLocation t5 = TTLocation("Paragem de Humberto Delgado","Autocarro",200,schedule);
-    TTLocation t6 = TTLocation("Praca de Humberto Delgado","Taxi",200,schedule);
-    TTLocation t7 = TTLocation("Paragem CR7","Autocarro",200,schedule);
-    TTLocation t8 = TTLocation("Praca do Funchal","Taxi",200,schedule);
-    string name = "Aeroporto Sa Carneiro", city = "Porto";
-    int c = 3, n = 3, m = 3;
-    Airport a1 = Airport(name,city,c,n,m);
-    name = "Aeroporto Humberto Delgado", city = "Lisboa";
-    c = 4, n = 3, m = 2;
-    Airport a2 = Airport(name,city,c,n,m);
-    name = "Aeroporto Cristiano Ronaldo",city="Funchal";
-    c = 2, n= 2, m = 5;
-    Airport a3 = Airport(name,city,c,n,m);
-
-
-    Flight f1 = Flight(1,"22:00","20:00","22-12-2021",a1,a2);
-    Flight f2 = Flight(2,"12:00","10:00","22-12-2021",a1,a2);
-    Flight f3 = Flight(3,"00:30","22:30","22-12-2021",a2,a1);
-    Flight f4 = Flight(4,"14:30","12:30","22-12-2021",a2,a1);
-    Flight f5 = Flight(5,"00:00","20:00","22-12-2021",a1,a3);
-    Flight f6 = Flight(6,"14:00","10:00","22-12-2021",a2,a3);
-    Flight f7 = Flight(7,"00:00","20:00","22-12-2021",a3,a1);
-    Flight f8 = Flight(8,"14:00","10:00","22-12-2021",a3,a1);
-
-    Plane P1 = Plane("A001",250);
-    Plane P2 = Plane("A002",300);
-    Plane P3 = Plane("A003",320);
-    Plane P4 = Plane("A004",400);
-    Plane P5 = Plane("A005",250);
-    Plane P6 = Plane("A006",300);
-    P1.addTask_to_do(s1), P1.addTask_to_do(s2);
-    P2.addTask_to_do(s3), P2.addTask_to_do(s2);
-    P3.addTask_to_do(s2), P3.addTask_to_do(s3);
-    P4.addTask_to_do(s1), P4.addTask_to_do(s3);
-    P5.addTask_to_do(s1);
-    P6.addTask_to_do(s1), P6.addTask_to_do(s2),P6.addTask_to_do(s3);
-    f1.addPassenger(p1),f1.addPassenger(p2),f1.addPassenger(p3),
-            f2.addPassenger(p2),f2.addPassenger(p3),f2.addPassenger(p4),
-            f3.addPassenger(p3),f3.addPassenger(p4),f3.addPassenger(p5);
-    P1.addFlight(f1),P1.addFlight(f6),P1.addFlight(f8);
-    P2.addFlight(f3),P2.addFlight(f1);
-    P3.addFlight(f7),P3.addFlight(f2),P3.addFlight(f6);
-    company.addFlight(f1),company.addFlight(f2),company.addFlight(f3),company.addFlight(f4),company.addFlight(f5),company.addFlight(f6),company.addFlight(f7),company.addFlight(f8);
-    company.addPassenger(p1),company.addPassenger(p2),company.addPassenger(p3),company.addPassenger(p4),company.addPassenger(p5),company.addPassenger(p6),company.addPassenger(p7),company.addPassenger(p8),company.addPassenger(p9),company.addPassenger(p10);
-    company.addAirport(a1),company.addAirport(a2),company.addAirport(a3);
-    company.addPlane(P1),company.addPlane(P2),company.addPlane(P3),company.addPlane(P4),company.addPlane(P5),company.addPlane(P6);
-}
 void readAirports(Company &company, string name_file) {
 
     ifstream i_file_airport;
@@ -743,19 +673,20 @@ void viewtransport(Company& company){
         getline(cin, name);
         if (company.airportExists(name)) {
             Airport a1;
-            cout << "||" << sizeRegularizer("n#", 5) << "||" << sizeRegularizer("Data", 10) << "||" << "Partida" << "||"
-                 << sizeRegularizer("Destino", 30) << "||" << endl;
+            cout << "||" << sizeRegularizer("Nome", 40) << "||" << sizeRegularizer("Tipo", 20) << "||" << sizeRegularizer("Distancia aeroporto", 24) << "||"
+                 << sizeRegularizer("Horario", 20) << endl;
             for (auto airport: company.getAirports()) {
                 if (airport.getName() == name)
                     a1 = airport;
             }
-            BSTItrIn<TTLocation> itr(a1.getLocations());
-            while (!itr.isAtEnd()) {     //mostra os atributos de transportes
-                cout << "||" << sizeRegularizer(itr.retrieve().name, 30) << "||"
-                     << sizeRegularizer(itr.retrieve().type, 20) << " " <<
-                     sizeRegularizer(to_string(itr.retrieve().distance), 5) << " ";
-                for (auto v: itr.retrieve().schedule) {
-                    cout << v << " ";
+            BSTItrIn<TTLocation> itr(a1.locations);
+            while (!itr.isAtEnd()){     //mostra os atributos de transportes
+                cout << "||" << sizeRegularizer(itr.retrieve().name, 40) << "||" << sizeRegularizer(itr.retrieve().type, 20) << "||" <<
+                     sizeRegularizer(to_string(itr.retrieve().distance), 24) << "||" << sizeRegularizer(" ", 5);
+                auto v=itr.retrieve().schedule.begin();
+                cout << *v;
+                for (v=++itr.retrieve().schedule.begin();v!=itr.retrieve().schedule.end(); ++v){
+                    cout <<  "/" << *v;
                 }
                 cout << endl;
                 itr.advance();
@@ -916,24 +847,32 @@ int main() {
 
 
     vector<string> schedule = {"08:00","22:00"};
-    TTLocation t1 = TTLocation("Estacao de Sa Carneiro","Metro",0.5,schedule);
-    TTLocation t2 = TTLocation("Paragem de Sa Carneiro","Autocarro",0.2,schedule);
-    TTLocation t3 = TTLocation("Paragem de Sa Carneiro","Taxi",0.2,schedule);
-    TTLocation t4 = TTLocation("Estacao de Humberto Delgado","Metro",0.5,schedule);
-    TTLocation t5 = TTLocation("Paragem de Humberto Delgado","Autocarro",0.2,schedule);
-    TTLocation t6 = TTLocation("Praca de Humberto Delgado","Taxi",0.2,schedule);
-    TTLocation t7 = TTLocation("Paragem CR7","Autocarro",0.2,schedule);
-    TTLocation t8 = TTLocation("Praca do Funchal","Taxi",0.2,schedule);
+    TTLocation t1 = TTLocation("Estacao de Sa Carneiro","Metro",0,schedule);
+    TTLocation t2 = TTLocation("Paragem de Sa Carneiro","Autocarro",2,schedule);
+    TTLocation t3 = TTLocation("Paragem de Sa Carneiro","Taxi",3,schedule);
+    TTLocation t4 = TTLocation("Estacao de Humberto Delgado","Metro",1,schedule);
+    TTLocation t5 = TTLocation("Paragem de Humberto Delgado","Autocarro",12,schedule);
+    TTLocation t6 = TTLocation("Praca de Humberto Delgado","Taxi",7,schedule);
+    TTLocation t7 = TTLocation("Paragem CR7","Autocarro",4,schedule);
+    TTLocation t8 = TTLocation("Praca do Funchal","Taxi",12,schedule);
     string name = "Aeroporto Sa Carneiro", city = "Porto";
     int c = 3, n = 3, m = 3;
     Airport a1 = Airport(name,city,c,n,m);
+    a1.addLocation(t1);;
+    a1.addLocation(t2);
+    a1.addLocation(t3);
+
     name = "Aeroporto Humberto Delgado", city = "Lisboa";
     c = 4, n = 3, m = 2;
     Airport a2 = Airport(name,city,c,n,m);
+    a2.addLocation(t4);
+    a2.addLocation(t5);
+    a2.addLocation(t6);
     name = "Aeroporto Cristiano Ronaldo",city="Funchal";
     c = 2, n= 2, m = 5;
     Airport a3 = Airport(name,city,c,n,m);
-
+    a3.addLocation(t7);
+    a3.addLocation(t8);
 
     Flight f1 = Flight(1,"22:00","20:00","22-12-2021",a1,a2);
     Flight f2 = Flight(2,"12:00","10:00","22-12-2021",a1,a2);
@@ -1017,10 +956,6 @@ int main() {
     } */
 
     main_menu(company);
-
-    //cout << f1.car.addLuggage() << endl;
-    //povoar(company);
-    //main_menu(company);
 
     return 0;
 }
