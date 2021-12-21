@@ -4,14 +4,157 @@
 #include "Company.h"
 
 using namespace std;
-void main_menu(Company& company), go_back(Company company);
+void main_menu(Company& company);
 string sizeRegularizer(string str, int n);
 
+
+void povoar(Company& company){
+    Service s1 = Service("Limpeza", "05-10-2021","Joao Pereira");
+    Service s2 = Service("Manutencao", "22-12-2021","Miguel Sousa");
+    Service s3 = Service("Vistoria", "11-02-2021","Marta Lima");
+
+    Passenger p1 = Passenger("Carlos Silva",2);
+    Passenger p2 = Passenger("Luis Miguel",1);
+    Passenger p3 = Passenger("Simao Rodrigues",3);
+    Passenger p4 = Passenger("Ana Marques",2);
+    Passenger p5 = Passenger("Guilherme Moreira",1);
+    Passenger p6 = Passenger("Antonio Marques",3);
+    Passenger p7 = Passenger("Jose Nunes",1);
+    Passenger p8 = Passenger("Lucia Pereira",3);
+    Passenger p9 = Passenger("Carla Ferreira",2);
+    Passenger p10 = Passenger("Fernanda Paiva",1);
+
+    vector<string> schedule1 = {"10:00","17:30","19:45"};
+    vector<string> schedule2 = {"09:20","17:30","20:00"};
+    vector<string> schedule3 = {"19:45","22:00"};
+    vector<string> schedule4 = {"09:00","10:00","17:30"};
+    vector<string> schedule5 = {"09:00","20:00"};
+    TTLocation t1 = TTLocation("Estacao de Sa Carneiro","Metro",100,schedule1);
+    TTLocation t2 = TTLocation("Paragem de Sa Carneiro","Autocarro",200,schedule2);
+    TTLocation t3 = TTLocation("Paragem de Sa Carneiro","Taxi",200,schedule3);
+    TTLocation t4 = TTLocation("Estacao de Humberto Delgado","Metro",500,schedule1);
+    TTLocation t5 = TTLocation("Paragem de Humberto Delgado","Autocarro",200,schedule4);
+    TTLocation t6 = TTLocation("Praca de Humberto Delgado","Taxi",200,schedule4);
+    TTLocation t7 = TTLocation("Paragem CR7","Autocarro",200,schedule2);
+    TTLocation t8 = TTLocation("Praca do Funchal","Taxi",200,schedule5);
+    string name = "Aeroporto Sa Carneiro", city = "Porto";
+    int c = 3, n = 3, m = 3;
+    Airport a1 = Airport(name,city,c,n,m);
+    a1.addLocation(t1);;
+    a1.addLocation(t2);
+    a1.addLocation(t3);
+    name = "Aeroporto Humberto Delgado", city = "Lisboa";
+    c = 4, n = 3, m = 2;
+    Airport a2 = Airport(name,city,c,n,m);
+    a2.addLocation(t4);
+    a2.addLocation(t5);
+    a2.addLocation(t6);
+    name = "Aeroporto Cristiano Ronaldo",city="Funchal";
+    c = 2, n= 2, m = 5;
+    Airport a3 = Airport(name,city,c,n,m);
+    a3.addLocation(t7);
+    a3.addLocation(t8);
+
+    Flight f1 = Flight(1,"22:00","20:00","2021-12-01",a1,a2);
+    Flight f2 = Flight(2,"12:00","10:00","2021-07-01",a1,a2);
+    Flight f3 = Flight(3,"00:30","22:30","2021-11-21",a2,a1);
+    Flight f4 = Flight(4,"14:30","12:30","2021-12-01",a2,a1);
+    Flight f5 = Flight(5,"00:00","20:00","2021-18-05",a1,a3);
+    Flight f6 = Flight(6,"14:00","10:00","2021-01-01",a2,a3);
+    Flight f7 = Flight(7,"00:00","20:00","2021-12-12",a3,a1);
+    Flight f8 = Flight(8,"14:00","10:00","2021-12-01",a3,a1);
+
+    Plane P1 = Plane("A001",250);
+    Plane P2 = Plane("A002",30);
+    Plane P3 = Plane("A003",320);
+    Plane P4 = Plane("A004",400);
+    Plane P5 = Plane("A005",250);
+    Plane P6 = Plane("A006",300);
+    P1.addTask_to_do(s1), P1.addTask_to_do(s2);
+    P2.addTask_to_do(s3), P2.addTask_to_do(s2);
+    P3.addTask_to_do(s2), P3.addTask_to_do(s3);
+    P4.addTask_to_do(s1), P4.addTask_to_do(s3);
+    P5.addTask_to_do(s1);
+    P6.addTask_to_do(s1), P6.addTask_to_do(s2),P6.addTask_to_do(s3);
+    f1.addPassenger(p1),f1.addPassenger(p2),f1.addPassenger(p3),
+            f2.addPassenger(p2),f2.addPassenger(p3),f2.addPassenger(p4),
+            f3.addPassenger(p3),f3.addPassenger(p4),f3.addPassenger(p5);
+    P1.addFlight(f1),P1.addFlight(f6),P1.addFlight(f8);
+    P2.addFlight(f3),P2.addFlight(f4);
+    P3.addFlight(f7),P3.addFlight(f2),P3.addFlight(f5);
+    company.addFlight(f1),company.addFlight(f2),company.addFlight(f3),company.addFlight(f4),company.addFlight(f5),company.addFlight(f6),company.addFlight(f7),company.addFlight(f8);
+    company.addPassenger(p1),company.addPassenger(p2),company.addPassenger(p3),company.addPassenger(p4),company.addPassenger(p5),company.addPassenger(p6),company.addPassenger(p7),company.addPassenger(p8),company.addPassenger(p9),company.addPassenger(p10);
+    company.addAirport(a1),company.addAirport(a2),company.addAirport(a3);
+    company.addPlane(P1),company.addPlane(P2),company.addPlane(P3),company.addPlane(P4),company.addPlane(P5),company.addPlane(P6);
+}
+
+void write_airport(Company company){
+    ofstream o_file_airport;
+    Airport a = company.getAirports()[-1];  //o último a ser adicionado é o que tem que entrar no ficheiro
+
+    string name_file = "../aeroporto.txt";
+    o_file_airport.open(name_file);
+    o_file_airport << a.getName() << ";" << a.getCity() << endl;
+    o_file_airport << a.getCar().getC() << ";" << a.getCar().getN() << ";" << a.getCar().getM();
+
+    BSTItrIn<TTLocation> itr(a.getLocations());
+    while(!itr.isAtEnd()){
+        o_file_airport << itr.retrieve().name << ";" << itr.retrieve().type << ";" <<
+                       itr.retrieve().distance << ";";
+
+        for (auto v:itr.retrieve().schedule){
+            o_file_airport << v << ";";
+        }
+
+        itr.advance();
+        o_file_airport << "-";
+    }
+}
+
+void updateplanes(Company company){
+    ofstream o_file_plane;
+    Plane p = company.getPlanes()[-1];  //o vetor do último avião tem que ser pertencer ao último aeroporto
+    string name_file = "../" + company.getAirports().at(-1).getCity() + "plane.txt";
+
+    o_file_plane.open(name_file);
+    o_file_plane << p.getLPlate() << ";" << p.getMaxOccupation() << endl;
+
+    queue<Service> copy_service_done = p.getDone();
+
+    while (!copy_service_done.empty()){
+        Service s = copy_service_done.front();
+        o_file_plane << s.getType() << ";" << s.getDate() << ";" << s.getEmployee() << "-";
+        copy_service_done.pop();
+    }
+    o_file_plane << endl;
+
+    queue<Service> copy_service_to_done = p.getToDo();
+
+    while (!copy_service_to_done.empty()){
+        Service s = copy_service_to_done.front();
+        o_file_plane << s.getType() << ";" << s.getType() << ";" << s.getEmployee();
+        copy_service_to_done.pop();
+    }
+    o_file_plane << endl;
+
+    queue<Flight> copy_flight_plan = p.getFlightPlan();
+
+    while (!copy_flight_plan.empty()){
+        Flight f = copy_flight_plan.front();
+        o_file_plane << f.getNumber() << ";" << f.getDate() << ";" << f.getArrivalT() << ";" <<
+                     f.getDepartureT() << "+";
+
+        for (auto passenger:f.getPassengers()){
+            o_file_plane << passenger.getName() << ";" << passenger.getLuggage() << "+";
+        }   //separa os passageiros do voo
+        o_file_plane << "-";    //separa os voos com um traço
+    }
+}
 
 /*void readAirports(Company &company, string name_file) {
 
     ifstream i_file_airport;
-    i_file_airport.open(name_file);
+    i_file_airport.open("../aeroporto.txt");
 
     if (i_file_airport.is_open()){
 
@@ -75,7 +218,7 @@ string sizeRegularizer(string str, int n);
 
 void readPlanes(Company &company, string name_file){
     ifstream i_file_planes;
-    i_file_planes.open(name_file);
+    i_file_planes.open("../plane.txt");
     if (i_file_planes.is_open()){
         while (!i_file_planes.eof()){
             string info_plane, info_services_to_do, info_services_done, info_done, info_planes;
@@ -133,7 +276,7 @@ void readPlanes(Company &company, string name_file){
                         a2 = airport;
                     break;
                 }
-                Flight flight1(number, date, arrival, departure, a1, a2);
+                Flight flight1(number, arrival, departure, date, a1, a2);
                 string passenger;
                 while (getline(f, passenger, '+')){
                     stringstream pas(passenger);
@@ -151,8 +294,8 @@ void readPlanes(Company &company, string name_file){
             company.addPlane(p);
         }
     }
-} */
-
+}
+*/
 void DoneList(Company &company){
     string LPlate;
     cin.clear();
@@ -167,7 +310,7 @@ void DoneList(Company &company){
     queue<Service> todo = p.getDone();
     cout << "||"<< sizeRegularizer( "Servico",15)<<"||"<<sizeRegularizer("Data",10)<<"||"<<sizeRegularizer("Funcionario",20)<<endl;
     while (!todo.empty()){
-        cout << "||"<<sizeRegularizer(todo.front().getType(),15)<<"||"<<todo.front().getDate()<<"||"<<sizeRegularizer(todo.front().getEmployee(),20)<<endl;
+        cout << "||"<<sizeRegularizer(todo.front().getType(),15)<<"||"<<todo.front().getDate()<<"||"<<sizeRegularizer(todo.front().getEmployee(),20)<<"||"<<endl;
         todo.pop();
     }
     cout << "Insira 0 para voltar ao menu principal."<<endl;
@@ -257,6 +400,7 @@ void ListFLightPassengers(Company& company){
             cout<< "ERRO: Input Invalido. Tente novamente."<<endl;
     }
 }
+
 void ListAllPassengers(Company& company) {
     cout << "||" << sizeRegularizer("Nome", 20) << "||Bagagem Automatica?||" << endl;
     for (auto passenger: company.getPassengers()) {
@@ -272,6 +416,7 @@ void ListAllPassengers(Company& company) {
     cin.clear();
     getline(cin,str);
 }
+
 void ListPassengers (Company& company){
     string input;
     char choice;
@@ -317,6 +462,7 @@ string sizeRegularizer(string str, int n){
         return str;
     }
 }
+
 void flightByDestination(Company& company) {
     while (true) {
         string name, city;
@@ -340,6 +486,7 @@ void flightByDestination(Company& company) {
         }
     }
 }
+
 void flightByOrigin(Company& company){
     while(true) {
         string name, city;
@@ -363,6 +510,7 @@ void flightByOrigin(Company& company){
         }
     }
 }
+
 void flight_menu(Company& company){
     string input;
     char choice;
@@ -421,6 +569,7 @@ void flight_menu(Company& company){
             flight_menu(company);
     }
 }
+
 void buy_ticket(Company& company) {
     cout << "Selecione o aeroporto de origem ou isira 0 para voltar ao menu anterior:"<<endl;
     cout << "||" << sizeRegularizer("Nome", 30) << "||" << sizeRegularizer("Cidade", 20) << "||" << endl;
@@ -532,6 +681,7 @@ void buy_ticket(Company& company) {
         getline(cin, choice);
     }
 }
+
 void update_flight(Company& company) {
     string input;
     if(!company.flights.empty()) {
@@ -570,15 +720,12 @@ void update_flight(Company& company) {
             if (flightN == 0)
                 exists = true;
         }
-        cout << itFlight->getNumber() << endl;
         if (flightN != 0) {
             for (auto itPlane = company.planes.begin(); itPlane != company.planes.end(); ++itPlane) {
                 queue<Flight> flightPlan = itPlane->getFlightPlan();
                 while (!flightPlan.empty()) {
                     if (flightPlan.front().getNumber() == flightN) {
-                        cout << itPlane->flightPlan.front().number << endl;
                         itPlane->flightPlan.pop();
-                        cout << itPlane->flightPlan.front().number << endl;
                         break;
                     } else
                         flightPlan.pop();
@@ -593,6 +740,9 @@ void update_flight(Company& company) {
         cin.clear();
         getline(cin, input);
     }
+    cout << "Insira 0 para voltar ao menu principal." << endl;
+    cin.clear();
+    getline(cin, input);
 }
 
 void update_service(Company& company){
@@ -604,7 +754,7 @@ void update_service(Company& company){
     queue<Service> itService;
     while (notOver) {
         cout << "Selecione o aviao cujos servicos deseja consultar:" << endl;
-        cout << "||Aviao||Lugares||" << sizeRegularizer("Localizacao Atual", 30) << "||" << endl;
+        cout << "||"<<sizeRegularizer("Aviao", 9)<<"||"<<sizeRegularizer("Lugares", 7)<<"||" << sizeRegularizer("Localizacao Atual", 30) << "||" << endl;
         for (auto itPlane = company.planes.begin(); itPlane != company.planes.end(); ++itPlane) {
             if (!itPlane->getFlightPlan().empty())
                 cout << "||" << sizeRegularizer(itPlane->getLPlate(), 9) << "||"
@@ -659,7 +809,6 @@ void update_service(Company& company){
             notOver = false;
     }
 }
-
 
 void viewtransport(Company& company){
     string name;
@@ -822,140 +971,13 @@ void main_menu(Company& company) {
                 break;
             default :
                 cout << "ERRO: Input Invalido. Tente novamente." << endl;
-
         }
     }
 }
 
 int main() {
     Company company;
-
-    Service s1 = Service("Limpeza", "22-12-2021","Joao Pereira");
-    Service s2 = Service("Manutencao", "22-12-2021","Miguel Sousa");
-    Service s3 = Service("Vistoria", "22-12-2021","Marta Lima");
-
-    Passenger p1 = Passenger("Carlos Silva",2);
-    Passenger p2 = Passenger("Luis Miguel",1);
-    Passenger p3 = Passenger("Simao Rodrigues",3);
-    Passenger p4 = Passenger("Ana Marques",2);
-    Passenger p5 = Passenger("Guilherme Moreira",1);
-    Passenger p6 = Passenger("Antonio Marques",3);
-    Passenger p7 = Passenger("Jose Nunes",1);
-    Passenger p8 = Passenger("Lucia Pereira",3);
-    Passenger p9 = Passenger("Carla Ferreira",2);
-    Passenger p10 = Passenger("Fernanda Paiva",1);
-
-
-    vector<string> schedule = {"08:00","22:00"};
-    TTLocation t1 = TTLocation("Estacao de Sa Carneiro","Metro",0,schedule);
-    TTLocation t2 = TTLocation("Paragem de Sa Carneiro","Autocarro",2,schedule);
-    TTLocation t3 = TTLocation("Paragem de Sa Carneiro","Taxi",3,schedule);
-    TTLocation t4 = TTLocation("Estacao de Humberto Delgado","Metro",1,schedule);
-    TTLocation t5 = TTLocation("Paragem de Humberto Delgado","Autocarro",12,schedule);
-    TTLocation t6 = TTLocation("Praca de Humberto Delgado","Taxi",7,schedule);
-    TTLocation t7 = TTLocation("Paragem CR7","Autocarro",4,schedule);
-    TTLocation t8 = TTLocation("Praca do Funchal","Taxi",12,schedule);
-    string name = "Aeroporto Sa Carneiro", city = "Porto";
-    int c = 3, n = 3, m = 3;
-    Airport a1 = Airport(name,city,c,n,m);
-    a1.addLocation(t1);;
-    a1.addLocation(t2);
-    a1.addLocation(t3);
-
-    name = "Aeroporto Humberto Delgado", city = "Lisboa";
-    c = 4, n = 3, m = 2;
-    Airport a2 = Airport(name,city,c,n,m);
-    a2.addLocation(t4);
-    a2.addLocation(t5);
-    a2.addLocation(t6);
-    name = "Aeroporto Cristiano Ronaldo",city="Funchal";
-    c = 2, n= 2, m = 5;
-    Airport a3 = Airport(name,city,c,n,m);
-    a3.addLocation(t7);
-    a3.addLocation(t8);
-
-    Flight f1 = Flight(1,"22:00","20:00","22-12-2021",a1,a2);
-    Flight f2 = Flight(2,"12:00","10:00","22-12-2021",a1,a2);
-    Flight f3 = Flight(3,"00:30","22:30","22-12-2021",a2,a1);
-    Flight f4 = Flight(4,"14:30","12:30","22-12-2021",a2,a1);
-    Flight f5 = Flight(5,"00:00","20:00","22-12-2021",a1,a3);
-    Flight f6 = Flight(6,"14:00","10:00","22-12-2021",a2,a3);
-    Flight f7 = Flight(7,"00:00","20:00","22-12-2021",a3,a1);
-    Flight f8 = Flight(8,"14:00","10:00","22-12-2021",a3,a1);
-
-    Plane P1 = Plane("A001",250);
-    Plane P2 = Plane("A002",300);
-    Plane P3 = Plane("A003",320);
-    Plane P4 = Plane("A004",400);
-    Plane P5 = Plane("A005",250);
-    Plane P6 = Plane("A006",300);
-    P1.addTask_to_do(s1), P1.addTask_to_do(s2);
-    P2.addTask_to_do(s3), P2.addTask_to_do(s2);
-    P3.addTask_to_do(s2), P3.addTask_to_do(s3);
-    P4.addTask_to_do(s1), P4.addTask_to_do(s3);
-    P5.addTask_to_do(s1);
-    P6.addTask_to_do(s1), P6.addTask_to_do(s2),P6.addTask_to_do(s3);
-      f1.addPassenger(p1),f1.addPassenger(p2),f1.addPassenger(p3),
-            f2.addPassenger(p2),f2.addPassenger(p3),f2.addPassenger(p4),
-           f3.addPassenger(p3),f3.addPassenger(p4),f3.addPassenger(p5);
-    P1.addFlight(f1),P1.addFlight(f5),P1.addFlight(f8);
-    P2.addFlight(f3),P2.addFlight(f4);
-    P3.addFlight(f7),P3.addFlight(f2),P3.addFlight(f6);
-    company.addFlight(f1),company.addFlight(f2),company.addFlight(f3),company.addFlight(f4),company.addFlight(f5),company.addFlight(f6),company.addFlight(f7),company.addFlight(f8);
-    company.addPassenger(p1),company.addPassenger(p2),company.addPassenger(p3),company.addPassenger(p4),company.addPassenger(p5),company.addPassenger(p6),company.addPassenger(p7),company.addPassenger(p8),company.addPassenger(p9),company.addPassenger(p10);
-    company.addAirport(a1),company.addAirport(a2),company.addAirport(a3);
-    company.addPlane(P1),company.addPlane(P2),company.addPlane(P3),company.addPlane(P4),company.addPlane(P5),company.addPlane(P6);
-    /*//AEROPORTO
-    string file_airport = "../aeroporto.txt";
-    readAirports(company, file_airport);
-    cout << company.getAirports().size() << endl;*/
-    cout << "Bem-vindo a Agencia Voa Connosco! :)" << endl;
-
-    /*cout << "Escolhe um dos nossos aeroportos para poderes prosseguir: " << endl;
-    /*
-    //AEROPORTO
-    string file_airport = "../aeroporto.txt";
-    readAirports(company, file_airport);
-    cout << "Quantidade de Aeroportos = " << company.getAirports().size() << endl;
->>>>>>> 783d3da30df7a219707618c019cb15d3c28e64e4
-    for (auto airport: company.getAirports()){
-        cout << airport.getName() << " " << airport.getCity()<<endl;
-        cout << "Carrinho : c=" << airport.getCar().getC()<<", n="<<airport.getCar().getN()<<", m="<<airport.getCar().getM()<<endl;
-        cout << "Localizacoes de Transporte:"<<endl;
-        BSTItrIn<TTLocation> itr(airport.getLocations());
-        while(!itr.isAtEnd()) {
-            cout << itr.retrieve().name << ";" << itr.retrieve().type << ";" <<
-                 itr.retrieve().distance << ";" << itr.retrieve().schedule.size();
-            cout << endl;
-            itr.advance();
-        }
-    }
-    string op_airport, op_city;
-    getline(cin, op_airport);
-    Airport a1;
-    for (auto airport:company.getAirports()){
-        if (airport.getName() == op_airport)
-            a1 = airport;
-    }*/
-
-    //AVIÃO
-    /*
-    string name_file_plane = a1.getCity() + "plane.txt";
-    readPlanes(company, name_file_plane);
-    for (auto airport:company.getAirports()){
-        cout << airport.getName() << " " << airport.getCity();
-    }
-    for (auto plane:company.getPlanes()){
-        cout << plane.getLPlate() << " " << plane.getMaxOccupation();
-    }
-    for (auto flight:company.getFlights()){
-        cout << flight.getNumber() << " " << flight.getDate();
-    }
-    for (auto passenger:company.getPassengers()){
-        cout << passenger.getName() << " " << passenger.getLuggage();
-    } */
-
+    povoar(company);
     main_menu(company);
-
     return 0;
 }
