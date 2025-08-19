@@ -1,4 +1,4 @@
-# Console App for Airway Company Information Management
+# Console App for Airway Company Information Management (Final Grade: 14.88/20.00)
 
 This project consisted on the development of a simple app for consulting and managing information about an air company. It allows a user to list flights from an origin or to a destination, see available seats, buy a ticket, set their luggage up and manage occuring flights and maintenance/cleaning services in vehicles. It was developed for the course of Algorithms and Data Structures in the 2nd year of the Informatics Engineering and Computation at FEUP.
 
